@@ -8,8 +8,18 @@ class User(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
+    first_name = db.Column(db.VARCHAR(255), nullable=False)
+    last_name = db.Column(db.VARCHAR(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    img_url = db.Column(db.VARCHAR, nullable=False)
+
+    created_at = db.Column(db.DateTime)
+
+    cryptowallet = db.relationship(
+        "CryptoWallet",  uselist=False,
+        back_populates="user"
+    )
 
     @property
     def password(self):

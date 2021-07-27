@@ -5,4 +5,4 @@ from app.models import Transaction
 
 
 class SendFundsForm(FlaskForm):
-    
+    pass

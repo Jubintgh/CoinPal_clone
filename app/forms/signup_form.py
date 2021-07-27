@@ -29,7 +29,7 @@ def passwords_match(form, field):
 class SignUpForm(FlaskForm):
     username = StringField(
         'username', validators=[DataRequired(), username_exists])
-    email = StringField('email', validators=[DataRequired(), user_exists])
+    email = StringField('email', validators=[DataRequired(), Email(), user_exists])
     password = StringField('password', validators=[DataRequired()])
     password_check = StringField('password_check', validators=[DataRequired(), passwords_match])
     first_name = StringField('first_name', validators=[DataRequired()])

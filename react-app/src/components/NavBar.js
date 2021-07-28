@@ -40,7 +40,6 @@ const NavBar = () => {
       </ul>
     )
   } else {
-
     navContent = (
         <ul className="navbar">
           <li className="navbar__link">
@@ -50,19 +49,24 @@ const NavBar = () => {
           </li>
           <li className="navbar__link">
             <NavLink to={`/users/${user.id}/likes`} exact={true} activeClassName='active'>
-              Likes
+              Activity
             </NavLink>
           </li>
           <li className="navbar__link">
-            <NavLink to={`/users/${user.id}/matches`} exact={true} activeClassName='active'>
-              Matches
+            <NavLink to={`/my/wallet`} exact={true} activeClassName='active'>
+              Wallet
             </NavLink>
           </li>
           <li className="navbar__link">
+            <NavLink to={`/my/transactions`} exact={true} activeClassName='active'>
+              Send and Request
+            </NavLink>
+          </li>
+          {/* <li className="navbar__link">
             <NavLink to={`/users/${user.id}`} exact={true} activeClassName='active'>
               Profile
             </NavLink>
-          </li>
+          </li> */}
           <li className="navbar__link">
               <img alt="profile-pic" src={`${profImage}`} style={{height:'65px', width:'65px', 'borderRadius':'50%', margin: '5px', marginTop : '10px', objectFit: 'cover'}}/>
           </li>

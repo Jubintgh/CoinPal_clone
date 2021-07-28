@@ -13,13 +13,39 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     img_url = db.Column(db.VARCHAR, nullable=False)
-
     created_at = db.Column(db.DateTime)
 
-    cryptowallet = db.relationship(
-        "CryptoWallet",  uselist=False,
-        back_populates="user"
+    user_cryptowallet = db.relationship("CryptoWallet", uselist=False, back_populates="user")
+
+    user_friends = db.relationship(
+        "User", 
+        secondary="friends",
+        primaryjoin=("Friend.from_user_id == User.id"),
+        secondaryjoin=("Friend.to_user_id == User.id"),
+        backref=db.backref("friends", lazy="dynamic"),
+        lazy="dynamic"
     )
+
+    user_transactions = db.relationship(
+        "User", 
+        secondary="transactions",
+        primaryjoin=("Transaction.from_user_id == User.id"),
+        secondaryjoin=("Transaction.to_user_id == User.id"),
+        backref=db.backref("transactions", lazy="dynamic"),
+        lazy="dynamic"
+    )
+
+    messages = db.relationship("Message", back_populates="user")
+    
+    # user_cryptowallets = db.relationship(
+    #     "cryptowallets",  uselist=False,
+    #     backref="user"
+    # )
+
+    # messages = db.relationship(
+    #     "messages", uselist=False,
+    #     backref="user"
+    # )
 
     @property
     def password(self):

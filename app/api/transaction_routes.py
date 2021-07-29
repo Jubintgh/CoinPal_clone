@@ -32,6 +32,10 @@ def get_transactions(id):
     return {'transactions': [user_transaction.to_dict() for user_transaction in transactions_all]}
 
 
+@transaction_routes.route('/test', methods=['GET'])
+def test():
+    return {'test': current_user.is_authenticated}
+
 @transaction_routes.route('/<int:id>/type/<filter_t>', methods=['POST'])
 # @login_required
 def post_transactions(id, filter_t):
@@ -45,11 +49,29 @@ def post_transactions(id, filter_t):
     if form.validate_on_submit():
         if transaction_type == 'pay':
             from_user_id = int(form.data['from_user_id'])
-            to_user_id = int(form.data['to_user_id'])
+
+            """
+            find id by username vvvvv
+            """
+            other_user = form.data['to_username']
+            to_user_id = User.query.filter(User.username == other_user).first()
+            to_user_id = to_user_id.id
+            """
+            find id by username ^^^^
+            """
 
         elif transaction_type == 'request':
             to_user_id = int(form.data['from_user_id'])
-            from_user_id = int(form.data['to_user_id'])
+
+            """
+            find id by username vvvvv
+            """
+            other_user = form.data['to_username']
+            to_user_id = User.query.filter(User.username == other_user).first()
+            to_user_id = to_user_id.id
+            """
+            find id by username ^^^^
+            """
     
         new_transaction = Transaction(
             from_user_id,

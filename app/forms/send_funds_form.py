@@ -6,7 +6,7 @@ from app.models import Transaction
 
 
 class SendFundsForm(FlaskForm):
-    from_user_id = StringField('from_user', validators=[DataRequired(), username_exists])
-    to_user_id = StringField('to_user', validators=[DataRequired(), username_exists])
+    from_user_id = StringField('from_user', validators=[DataRequired()])
+    to_username = StringField('to_username', validators=[DataRequired()])
     amount = DecimalField('Amount', places=8, validators=[DataRequired()])
     crypto_type = StringField('crypto_type', validators=[DataRequired()])

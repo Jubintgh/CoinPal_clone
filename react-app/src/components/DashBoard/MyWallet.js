@@ -1,4 +1,4 @@
-import './wallet.css'
+import './Wallet.css'
 import { useSelector, useDispatch, connectAdvanced } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';

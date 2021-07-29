@@ -3,7 +3,7 @@ const SET_WALLET = 'session/SET_WALLET'
 const REMOVE_WALLET = 'session/REMOVE_WALLET'
 const UPDATE_WALLET = 'session/UPDATE_WALLET'
 
-//same as user id
+
 const setWallet = (userWallet) => ({
     type: SET_WALLET,
     payload: userWallet

@@ -31,15 +31,25 @@ def get_transactions(id):
     return {'transactions': [user_transaction.to_dict() for user_transaction in transactions]}
 
 
-@transaction_routes.route('/<int:id>/pay', methods=['POST'])
+@transaction_routes.route('/<int:id>/<tansaction_t>', methods=['POST'])
 # @login_required
-def post_transactions(id):
+def post_transactions(id, tansaction_t):
     """
     creates a new transaction record
     """
 
-    from_user_id = int(request.json['from_user_id'])
-    to_user_id = int(request.json['to_user_id'])
+    transaction_type = tansaction_t
+
+    if transaction_type == 'pay':
+        from_user_id = int(request.json['from_user_id'])
+        to_user_id = int(request.json['to_user_id'])
+
+    elif transaction_type == 'request':
+        to_user_id = int(request.json['from_user_id'])
+        from_user_id = int(request.json['to_user_id'])
+
+        from_user_id = int(request.json['from_user_id'])
+        to_user_id = int(request.json['to_user_id'])
     amount = Decimal(request.json['amount'])
     transaction_status = 0 #0 : pending 1:accepted 2: rejected
     crypto_type = request.json['crypto_type']

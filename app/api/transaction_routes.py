@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import User, Transaction, db
 from app.forms import SendFundsForm
 from decimal import Decimal
@@ -24,9 +24,12 @@ def get_transactions(id):
     returns a list of user transaction objects
     """
 
-    transactions = Transaction.query.filter(Transaction.from_user_id == id).all()
+    transactions_debit = Transaction.query.filter(Transaction.from_user_id == id).all()
+    transactions_credit = Transaction.query.filter(Transaction.to_user_id == id).all()
 
-    return {'transactions': [user_transaction.to_dict() for user_transaction in transactions]}
+    transactions_all = transactions_debit + transactions_credit
+
+    return {'transactions': [user_transaction.to_dict() for user_transaction in transactions_all]}
 
 
 @transaction_routes.route('/<int:id>/type/<filter_t>', methods=['POST'])

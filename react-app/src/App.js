@@ -8,6 +8,7 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
+import SendNrequest from './components/DashBoard/SendNrequest'
 import { authenticate } from './store/session';
 
 function App() {
@@ -31,6 +32,9 @@ function App() {
       <Switch>
         <Route path='/my/wallet' exact={true}>
           <MyWallet />
+        </Route>
+        <Route path='/my/sendNrequest' exact={true}>
+          <SendNrequest />
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />

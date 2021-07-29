@@ -26,27 +26,29 @@ class User(db.Model, UserMixin):
         lazy="dynamic"
     )
 
-    user_transactions = db.relationship(
-        "User", 
-        secondary="transactions",
-        primaryjoin=("Transaction.from_user_id == User.id"),
-        secondaryjoin=("Transaction.to_user_id == User.id"),
-        backref=db.backref("transactions", lazy="dynamic"),
-        lazy="dynamic"
+    # user_transactions = db.relationship(
+    #     "User", 
+    #     secondary="transactions",
+    #     primaryjoin=("Transaction.from_user_id == User.id"),
+    #     secondaryjoin=("Transaction.to_user_id == User.id"),
+    #     backref=db.backref("transactions", lazy="dynamic"),
+    #     lazy="dynamic"
+    # )
+
+    from_user_transactions = db.relationship(
+        "Transaction",
+        foreign_keys="Transaction.from_user_id",
+        backref="from_transactions"
+    )
+
+    to_user_transactions = db.relationship(
+        "Transaction",
+        foreign_keys="Transaction.to_user_id",
+        backref="to_transactions"
     )
 
     messages = db.relationship("Message", back_populates="user")
     
-    # user_cryptowallets = db.relationship(
-    #     "cryptowallets",  uselist=False,
-    #     backref="user"
-    # )
-
-    # messages = db.relationship(
-    #     "messages", uselist=False,
-    #     backref="user"
-    # )
-
     @property
     def password(self):
         return self.hashed_password

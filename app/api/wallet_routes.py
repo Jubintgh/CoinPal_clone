@@ -32,15 +32,12 @@ def get_balance(id):
     usd_coin_balance = user.user_cryptowallet.usd_coin_balance
     total_balance = bitcoin_balance + ethereum_balance + usd_coin_balance
 
-    total_json = {
+    return {
         "bitcoin_balance": str(bitcoin_balance),
         "ethereum_balance": str(ethereum_balance),
         "usd_coin_balance": str(usd_coin_balance),
         "total_balance": str(total_balance)
     }
-
-    return { 'wallet_balance': total_json}
-
 
 # @wallet_routes.route('/<int:id>', methods=['PUT'])
 # # @login_required

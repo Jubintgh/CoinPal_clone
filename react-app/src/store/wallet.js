@@ -18,8 +18,6 @@ const updateWallet = (userWallet) => ({
     payload: userWallet
 })
 
-const initialState = { wallet: null }
-
 export const getWallet = (userId) => async (dispatch) => {
     const response = await fetch(`/api/wallet/${userId}`, {
         headers: {
@@ -78,16 +76,21 @@ export const dropWallet = () => async (dispatch) => {
     }
 }
 
+const initialState = {wallet_balances : {
+    "bitcoin_balance": null,
+    "ethereum_balance": null,
+    "total_balance": null,
+    "usd_coin_balance":null
+}}
 
 export default function reducer(state= initialState, action){
     switch (action.type){
         case SET_WALLET:
-            const wallet = {}
-            return {wallet: action.payload}
+            return {wallet_balances: action.payload}
         case REMOVE_WALLET:
-            return {wallet: null}
+            return {wallet_balances: null}
         case UPDATE_WALLET:
-            return {wallet: action.payload}
+            return {wallet_balances: action.payload}
         default:
             return state
     }

@@ -113,7 +113,7 @@ nav {
     color: #280ad6;
 }
 
-/* Wallet page */
+/* Wallet page selector side*/
 
 .wallet-page {
     display: flex;
@@ -127,7 +127,7 @@ nav {
     justify-content: flex-start;
     justify-content: space-between;
     background-color: #F4F7FA;
-    width: 30vw;
+    width: 25vw;
     height: 100vw;
 }
 
@@ -151,8 +151,35 @@ nav {
     padding: 15px;
 }
 
+/* balance and information side */
 .wallet-rightbar{
-    
-
+    display: flex;
+    width: 100%;
+    position: relative;
+    background-color: wheat;
+    justify-content: center;
 }
 
+.currentstats{
+    position: absolute;
+    margin-top: 10vw;
+    font-size:20px;
+    width: 45vw;
+    height: 70vw;
+    background-color: whitesmoke;
+}
+
+.currcoin__log{
+    position: absolute;
+    box-sizing: border-box;
+    width: 30vw;
+    height: 10vw;
+    margin-top: 5vw;
+    margin-left: 8vw;
+}
+.currcoin__balance{
+    position: absolute;
+    width: inherit;
+    margin-top: 30vw;
+    margin-left: 22vw;
+}

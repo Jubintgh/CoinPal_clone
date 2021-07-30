@@ -3,18 +3,19 @@ from app.models import db, User
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+        user1 = User(
+            first_name='Demo', last_name='User', username='demouser',
+            email='demouser@mail.com', password='Password1!',
+            img_url="https://i.pinimg.com/originals/b7/ab/b6/b7abb604d6b6cfa8f4b8c3699842bea7.jpg"
+        )
+        user2 = User(
+            first_name='Demo1', last_name='User1', username='demouser1',
+            email='demouser1@mail.com', password='Password1!',
+            img_url="https://i.pinimg.com/originals/b7/ab/b6/b7abb604d6b6cfa8f4b8c3699842bea7.jpg"
+        )
 
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
-
-    db.session.commit()
+        db.session.add_all([user1, user2])
+        db.session.commit()
 
 
 # Uses a raw SQL query to TRUNCATE the users table.

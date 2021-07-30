@@ -3,7 +3,7 @@ const GET_TRANSACTIONS = 'transaction/GET_TRANSACTIONS';
 const SET_TRANSACTION = 'transaction/SET_TRANSACTION';
 const REMOVE_TRANSACTION = 'transaction/REMOVE_TRANSACTION';
 
-const getTransaction = (transactions) => ({
+const getTransactions = (transactions) => ({
     type: GET_TRANSACTIONS,
     payload: transactions
 })
@@ -18,7 +18,7 @@ const removeTransaction = (transactionId) => ({
     payload: transactionId
 })
 
-export const getTransactions = (userId) => async (dispatch) => {
+export const getAllTransactions = (userId) => async (dispatch) => {
     const response = await fetch(`/api/transactions/${userId}`, {
         headers: {
             'Content-Type': 'application/json'
@@ -29,8 +29,7 @@ export const getTransactions = (userId) => async (dispatch) => {
         if(data.error){
             return;
         }
-
-        dispatch(getTransaction(data.transactions))
+        dispatch(getTransactions(data.transactions))
     }
 }
 
@@ -103,12 +102,12 @@ export default function reducer(state = initialState, action){
     switch(action.type){
         case GET_TRANSACTIONS:
             return { 
-                ...action.payload
+                alltransactions:[...action.payload]
             }
         case SET_TRANSACTION:
             return { 
                 ...state,
-                alltransactions:[...action.payload]
+                alltransactions:[action.payload]
             }
         case REMOVE_TRANSACTION:
             newState = { ...state };

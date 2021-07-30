@@ -2,7 +2,7 @@ import './Activity.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getTransactions, deleteTransaction } from '../../store/transaction';
+import { getAllTransactions, deleteTransaction } from '../../store/transaction';
 
 const Activity = () => {
     const { user } = useSelector((state) => state.session);
@@ -14,7 +14,7 @@ const Activity = () => {
 
     //useEffets
     useEffect(() => {
-      dispatch(getTransactions(id));
+      dispatch(getAllTransactions(id));
     }, [dispatch, id])
     
     //useStates

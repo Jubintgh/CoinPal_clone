@@ -118,13 +118,12 @@ async def post_transactions(id, filter_t):
         transaction_status = 0, #0 : pending 1:accepted 2: rejected
         crypto_type = form.data['crypto_type']
     
-        new_transaction = Transaction(
-            from_user_id,
-            to_user_id,
-            amount,
-            transaction_status, #0 : pending 1:accepted 2: rejected
-            crypto_type
-        )
+        new_transaction.from_user_id = from_user_id
+        new_transaction.to_user_id = to_user_id
+        new_transaction.amount = amount
+        new_transaction.transaction_status = transaction_status #0 : pending 1:accepted 2: rejected
+        new_transaction.crypto_type = crypto_type
+        
 
         # processing transaction
         from_user_wallet = CryptoWallet.query.get(from_user_id)
@@ -145,7 +144,7 @@ async def post_transactions(id, filter_t):
     
     db.session.commit()
     new_transaction.transaction_status = 2
-
+    print(form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

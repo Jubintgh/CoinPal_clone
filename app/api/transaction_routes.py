@@ -19,7 +19,7 @@ def db_errors_to_error_messages(errtype, error):
 
 # transaction algorithm
 async def transact(amount, crypto_type, from_wallet, to_wallet):
-    pending_amount = amount[0]
+    pending_amount = amount
 
     if crypto_type == 'Bitcoin':
         if from_wallet.bitcoin_balance > pending_amount:
@@ -80,22 +80,26 @@ async def post_transactions(id, filter_t):
     creates a new transaction record
     """
     new_transaction = Transaction()
-
     transaction_type = filter_t
+
     form = SendFundsForm()
+
+
     form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data, "DATAAA")
     if form.validate_on_submit():
         if transaction_type == 'pay':
             from_user_id = int(form.data['from_user_id'])
-
+            
             """
-            find id by username vvvvv
+            find to user id by username vvvvv
             """
             other_user = form.data['to_username']
             to_user_id = User.query.filter(User.username == other_user).first()
             to_user_id = to_user_id.id
+            transaction_status = 0                              #0:pending 1:accepted 2:rejected 3:requested
             """
-            find id by username ^^^^
+            find to user id by username ^^^^
             """
 
         elif transaction_type == 'request':
@@ -105,17 +109,19 @@ async def post_transactions(id, filter_t):
             find id by username vvvvv
             """
             other_user = form.data['to_username']
-            to_user_id = User.query.filter(User.username == other_user).first()
-            to_user_id = to_user_id.id
+            from_user_id = User.query.filter(User.username == other_user).first()
+            from_user_id = from_user_id.id
+            transaction_status = 3                              #0:pending 1:accepted 2:rejected 3:requested
             """
             find id by username ^^^^
             """
+        else:
+            return { "errors": ["Something went wrong, please try again"]}
 
         """
         grab other transaction data
         """
-        amount = Decimal(form.data['amount']),
-        transaction_status = 0, #0 : pending 1:accepted 2: rejected
+        amount = Decimal(form.data['amount'])
         crypto_type = form.data['crypto_type']
     
         new_transaction.from_user_id = from_user_id
@@ -123,28 +129,31 @@ async def post_transactions(id, filter_t):
         new_transaction.amount = amount
         new_transaction.transaction_status = transaction_status #0 : pending 1:accepted 2: rejected
         new_transaction.crypto_type = crypto_type
-        
-
-        # processing transaction
-        from_user_wallet = CryptoWallet.query.get(from_user_id)
-        to_user_wallet = CryptoWallet.query.get(to_user_id)
 
         db.session.add(new_transaction)
 
-        # return {'test': str(from_user_wallet.bitcoin_balance),
-        #         'test2': str(amount[0])}
-        status = await transact(amount, crypto_type, from_user_wallet, to_user_wallet)
+        #For pending transactions
+        if transaction_status == 0:
+            # processing transaction
+            from_user_wallet = CryptoWallet.query.get(from_user_id)
+            to_user_wallet = CryptoWallet.query.get(to_user_id)
+            status = await transact(amount, crypto_type, from_user_wallet, to_user_wallet)
 
-        if status == 1:
-            new_transaction.transaction_status = 1
+            if status == 1:
+                new_transaction.transaction_status = 1
+                db.session.commit()
+                return {'transactions': [new_transaction.to_dict()]}
+            elif status == 2:
+                return {'errors': db_errors_to_error_messages('Balance', 'insufficient funds')}, 200
+
+        #For request type transactions
+        elif transaction_status == 3:
             db.session.commit()
+            print(new_transaction.to_dict(), "NEW TRANSACTION REQ")
             return {'transactions': [new_transaction.to_dict()]}
-        elif status == 2:
-            return {'errors': db_errors_to_error_messages('Balance', 'insufficient funds')}, 200
     
-    db.session.commit()
     new_transaction.transaction_status = 2
-    print(form.errors)
+    print(form.errors, "THESE ARE ERRORS")
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -165,16 +174,18 @@ async def post_transactions(id, filter_t):
     # return {'transactions': [user_transaction.to_dict() for user_transaction in all_transactions]}/
 
 
-# @transaction_routes.route('/<int:id>', methods=['DELETE'])
-# # @login_required
-# def get_transactions(id):
-#     """
-#     deletes an existing transaction record that belongs to the current logged in user
-#     """
+@transaction_routes.route('/<int:id>/delete', methods=['DELETE'])
+# @login_required
+def delete_transaction(id):
+    """
+    deletes an existing transaction record that belongs to the current logged in user
+    """
+    
+    transaction_id = request.json['transaction_id']
+    transaction = Transaction.query.get(transaction_id)
 
-#     transaction_id = request.json['transactionId']
-
-#     user = User.query.get(id)
-#     transaction = Transaction.query.get(transaction_id)
-
-#     return {'transaction': 'successfully deleted'}
+    if transaction.transaction_status == 3:
+        db.session.delete(transaction)
+        db.session.commit()
+        return {'success': transaction.id}
+    return {'transaction': 'something went wrong'}

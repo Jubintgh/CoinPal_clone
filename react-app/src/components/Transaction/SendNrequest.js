@@ -40,7 +40,7 @@ const MyWallet = () => {
         "amount": amount,
         "crypto_type": cryptoType
       }))
-
+      
       if (result){
         if(result.errors){
           let errs = Object.keys(result.errors)

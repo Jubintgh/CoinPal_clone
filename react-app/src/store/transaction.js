@@ -30,17 +30,16 @@ export const getTransactions = (userId) => async (dispatch) => {
 
 
 export const postTransaction = (userId, transaction) => async (dispatch) => {
-    console.log(transaction)
     const response = await fetch(`/api/transactions/${userId}/type/pay`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            "from_user_id": transaction.fromUserId,
-            "to_username": transaction.toUser,
+            "from_user_id": transaction.from_user_id,
+            "to_username": transaction.to_username,
             "amount": transaction.amount,
-            "crypto_type": transaction.cryptoType
+            "crypto_type": transaction.crypto_type
         })
     });
     if (response.ok){
@@ -53,20 +52,24 @@ export const postTransaction = (userId, transaction) => async (dispatch) => {
     }
 }
 
-// export const deleteTransaction = (userId, transactionId) => async (dispatch) => {
-//     const response = await fetch(`/api/transactions/${userId}/transactions/${transactionId}`, {
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     });
-//     if (response.ok){
-//         const data = await response.json();
-//         if(data.error){
-//             return;
-//         }
-//         dispatch(removeTransaction(data))
-//     }
-// }
+export const deleteTransaction = (userId, transactionId) => async (dispatch) => {
+    const response = await fetch(`/api/transactions/${userId}/transactions/${transactionId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: {
+            "transaction_id": transactionId
+        }
+    });
+    if (response.ok){
+        const data = await response.json();
+        if(data.error){
+            return;
+        }
+        dispatch(removeTransaction(data.success))
+    }
+}
 
 const initialState = {}
 
@@ -78,10 +81,10 @@ export default function reducer(state = initialState, action){
                 ...state,
                 ...action.payload
             }
-        // case REMOVE_TRANSACTION:
-        //     newState = { ...state };
-        //     delete newState[action.payload]
-        //     return newState
+        case REMOVE_TRANSACTION:
+            newState = { ...state };
+            delete newState[action.payload]
+            return newState
         default:
             return state
     }

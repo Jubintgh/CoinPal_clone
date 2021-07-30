@@ -1,9 +1,11 @@
+import asyncio
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import User, Transaction, CryptoWallet, db
 from app.forms import SendFundsForm
 from decimal import Decimal
 from .user_routes import validation_errors_to_error_messages
+
 
 transaction_routes = Blueprint('transactions' ,__name__)
 
@@ -16,7 +18,7 @@ def db_errors_to_error_messages(errtype, error):
     return errorMessages
 
 # transaction algorithm
-def transact(amount, crypto_type, from_wallet, to_wallet):
+async def transact(amount, crypto_type, from_wallet, to_wallet):
     pending_amount = amount[0]
 
     if crypto_type == 'Bitcoin':
@@ -37,7 +39,7 @@ def transact(amount, crypto_type, from_wallet, to_wallet):
 
         db.session.commit()
 
-    elif crypto_type == 'usdCoin':
+    elif crypto_type == 'USDCoin':
         if from_wallet.usd_coin_balance > pending_amount:
             from_wallet.usd_coin_balance = from_wallet.usd_coin_balance - pending_amount
             to_wallet.usd_coin_balance = to_wallet.usd_coin_balance + pending_amount
@@ -73,12 +75,13 @@ def test():
 
 @transaction_routes.route('/<int:id>/type/<filter_t>', methods=['POST'])
 # @login_required
-def post_transactions(id, filter_t):
+async def post_transactions(id, filter_t):
     """
     creates a new transaction record
     """
-    transaction_type = filter_t
+    new_transaction = Transaction()
 
+    transaction_type = filter_t
     form = SendFundsForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -128,10 +131,10 @@ def post_transactions(id, filter_t):
         to_user_wallet = CryptoWallet.query.get(to_user_id)
 
         db.session.add(new_transaction)
-        print(type(amount), "TYPPEE")
+
         # return {'test': str(from_user_wallet.bitcoin_balance),
         #         'test2': str(amount[0])}
-        status = transact(amount, crypto_type, from_user_wallet, to_user_wallet)
+        status = await transact(amount, crypto_type, from_user_wallet, to_user_wallet)
 
         if status == 1:
             new_transaction.transaction_status = 1

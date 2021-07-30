@@ -30,7 +30,9 @@ export const getTransactions = (userId) => async (dispatch) => {
 
 
 export const postTransaction = (userId, transaction) => async (dispatch) => {
+    console.log(transaction)
     const response = await fetch(`/api/transactions/${userId}/type/pay`, {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },

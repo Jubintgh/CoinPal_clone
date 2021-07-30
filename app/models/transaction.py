@@ -6,12 +6,12 @@ from .db import db
 class Transaction(db.Model):
     __tablename__ = 'transactions'
 
-    def __init__(self, from_user_id, to_user_id, amount, transaction_status, crypto_type):
-        self.from_user_id = from_user_id
-        self.to_user_id = to_user_id
-        self.amount = amount
-        self.transaction_status = transaction_status
-        self.crypto_type = crypto_type
+    # def __init__(self, from_user_id, to_user_id, amount, transaction_status, crypto_type):
+    #     self.from_user_id = from_user_id
+    #     self.to_user_id = to_user_id
+    #     self.amount = amount
+    #     self.transaction_status = transaction_status
+    #     self.crypto_type = crypto_type
 
     id = db.Column(db.Integer, primary_key=True)
     from_user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)

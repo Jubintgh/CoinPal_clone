@@ -23,10 +23,11 @@ const MyWallet = () => {
 
     
     //useStates
+    const [errors, setErrors] = useState([]);
     const [toUserName, settoUserName] = useState(null)
     const [amount, setAmount] = useState(null)
-    const [fromUserId, setFromUserId] = useState(null)
-    const [cryptoType, setCryptoType] = useState(null)
+    const [fromUserId, setFromUserId] = useState(String(id))
+    const [cryptoType, setCryptoType] = useState('Bitcoin')
     
     const onTransaction = async (e) => {
       e.preventDefault();
@@ -39,14 +40,22 @@ const MyWallet = () => {
         "amount": amount,
         "crypto_type": cryptoType
       }))
-      
-      if (result.data){
-        history.push('/');
-      }
+
+      if (result){
+        if(result.errors){
+          let errs = Object.keys(result.errors)
+          setErrors(errs)
+        } else {
+          history.push('/');
+        }
+      } 
     }
-  
+
     return (
         <form onSubmit={onTransaction}>
+            {errors && errors.forEach(err => (
+              <li>{err}</li>
+            ))}
             <p>{toUserName}</p>
             <div className="send-crypto">
                 <h3>Send Crypto!</h3>
@@ -57,9 +66,11 @@ const MyWallet = () => {
                 >Select Crypto
                     <option value='Bitcoin'>Bitcoin</option>
                     <option value='Ethereum'>Ethereum</option>
-                    <option value='usdCoin'>USD coin</option>
+                    <option value='USDCoin'>USD coin</option>
                 </select>
             </div>
+
+            <button>Send</button>
         </form>
     );
 }

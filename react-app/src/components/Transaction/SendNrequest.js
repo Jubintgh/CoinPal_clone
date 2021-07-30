@@ -30,7 +30,16 @@ const MyWallet = () => {
     
     const onTransaction = async (e) => {
       e.preventDefault();
-      const result = await dispatch(postTransaction)
+
+      setFromUserId(id)
+
+      const result = await dispatch(postTransaction(id, {
+        "from_user_id": fromUserId,
+        "to_username": toUserName,
+        "amount": amount,
+        "crypto_type": cryptoType
+      }))
+      
       if (result.data){
         history.push('/');
       }

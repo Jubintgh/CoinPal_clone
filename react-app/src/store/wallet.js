@@ -3,7 +3,7 @@ const SET_WALLET = 'session/SET_WALLET'
 const REMOVE_WALLET = 'session/REMOVE_WALLET'
 const UPDATE_WALLET = 'session/UPDATE_WALLET'
 
-//same as user id
+
 const setWallet = (userWallet) => ({
     type: SET_WALLET,
     payload: userWallet
@@ -18,10 +18,8 @@ const updateWallet = (userWallet) => ({
     payload: userWallet
 })
 
-const initialState = { wallet: null }
-
 export const getWallet = (userId) => async (dispatch) => {
-    const response = await fetch(`/api/wallet${userId}`, {
+    const response = await fetch(`/api/wallet/${userId}`, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -37,7 +35,7 @@ export const getWallet = (userId) => async (dispatch) => {
 
 export const reNewWallet = (userId, Balance) => async (dispatch) => {
 
-    const [bitcoinBalance, ethereumBalance, tetherBalance] = Balance
+    const [bitcoinBalance, ethereumBalance, usdCoinBalance] = Balance
 
     const response = await fetch(`/api/wallet${userId}`, {
         headers: {
@@ -46,7 +44,7 @@ export const reNewWallet = (userId, Balance) => async (dispatch) => {
         body: JSON.stringify({
             bitcoinBalance,
             ethereumBalance,
-            tetherBalance
+            usdCoinBalance
         })
     });
 
@@ -78,15 +76,21 @@ export const dropWallet = () => async (dispatch) => {
     }
 }
 
+const initialState = {wallet_balances : {
+    "bitcoin_balance": null,
+    "ethereum_balance": null,
+    "total_balance": null,
+    "usd_coin_balance":null
+}}
 
 export default function reducer(state= initialState, action){
     switch (action.type){
         case SET_WALLET:
-            return {wallet: action.payload}
+            return {wallet_balances: action.payload}
         case REMOVE_WALLET:
-            return {wallet: null}
+            return {wallet_balances: null}
         case UPDATE_WALLET:
-            return {wallet: action.payload}
+            return {wallet_balances: action.payload}
         default:
             return state
     }

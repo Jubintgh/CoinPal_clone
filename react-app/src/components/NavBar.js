@@ -11,6 +11,9 @@ const NavBar = () => {
   if(!user) {
     navContent = (
       <ul className='navbar'>
+        <li>
+          <img src='https://user-images.githubusercontent.com/73211975/127380259-8872d61e-851a-4aa5-8152-baec2618e00d.png' alt='logo' id='navbar__logo' />
+        </li>
         <li className='navbar__link'>
           <NavLink to='/' exact={true} activeClassName='active'>
             Home
@@ -37,9 +40,11 @@ const NavBar = () => {
       </ul>
     )
   } else {
-
     navContent = (
         <ul className="navbar">
+          <li>
+            <img src='https://user-images.githubusercontent.com/73211975/127380259-8872d61e-851a-4aa5-8152-baec2618e00d.png' alt='logo' id='navbar__logo' />
+          </li>
           <li className="navbar__link">
             <NavLink to='/discover' exact={true}  activeClassName='active'>
               Home
@@ -47,22 +52,27 @@ const NavBar = () => {
           </li>
           <li className="navbar__link">
             <NavLink to={`/users/${user.id}/likes`} exact={true} activeClassName='active'>
-              Likes
+              Activity
             </NavLink>
           </li>
           <li className="navbar__link">
-            <NavLink to={`/users/${user.id}/matches`} exact={true} activeClassName='active'>
-              Matches
+            <NavLink to={`/my/wallet`} exact={true} activeClassName='active'>
+              Wallet
             </NavLink>
           </li>
           <li className="navbar__link">
+            <NavLink to={`/my/SendNrequest`} exact={true} activeClassName='active'>
+              Send and Request
+            </NavLink>
+          </li>
+          {/* <li className="navbar__link">
             <NavLink to={`/users/${user.id}`} exact={true} activeClassName='active'>
               Profile
             </NavLink>
-          </li>
-          <li className="navbar__link">
+          </li> */}
+          {/* <li className="navbar__link">
               <img alt="profile-pic" src={`${profImage}`} style={{height:'65px', width:'65px', 'borderRadius':'50%', margin: '5px', marginTop : '10px', objectFit: 'cover'}}/>
-          </li>
+          </li> */}
           <li className="navbar__button">
             <LogoutButton />
           </li>
@@ -74,11 +84,9 @@ const NavBar = () => {
     <nav>
       { user? <div className="nav-logo">
           <NavLink id="navbar__brand-home" to='/discover' exact={true} activeClassName='active'>
-              <img src='https://user-images.githubusercontent.com/35717793/126367109-4954f04b-0cb7-4ca9-a25a-d18e6b7cb74a.png' alt='logo' id='navbar__logo' />
           </NavLink>
         </div> : <div className="nav-logo">
           <NavLink id="navbar__brand-home" to='/' exact={true} activeClassName='active'>
-              <img src='https://user-images.githubusercontent.com/35717793/126367109-4954f04b-0cb7-4ca9-a25a-d18e6b7cb74a.png' alt='logo' id='navbar__logo' />
           </NavLink>
         </div>}
       {navContent}

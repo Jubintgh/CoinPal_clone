@@ -3,10 +3,12 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
+import MyWallet from './components/DashBoard/MyWallet';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
+import SendNrequestForm from './components/Transaction/SendNrequest'
 import { authenticate } from './store/session';
 
 function App() {
@@ -28,6 +30,12 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
+        <Route path='/my/wallet' exact={true}>
+          <MyWallet />
+        </Route>
+        <Route path='/my/sendNrequest' exact={true}>
+          <SendNrequestForm />
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>

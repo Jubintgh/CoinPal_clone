@@ -13,8 +13,18 @@ def seed_users():
             email='demouser1@mail.com', password='Password1!',
             img_url="https://i.pinimg.com/originals/b7/ab/b6/b7abb604d6b6cfa8f4b8c3699842bea7.jpg"
         )
+        user3 = User(
+            first_name='Demo2', last_name='User2', username='demouser2',
+            email='demouser2@mail.com', password='Password1!',
+            img_url="https://i.pinimg.com/originals/b7/ab/b6/b7abb604d6b6cfa8f4b8c3699842bea7.jpg"
+        )
+        user4 = User(
+            first_name='Demo3', last_name='User3', username='demouser3',
+            email='demouser3@mail.com', password='Password1!',
+            img_url="https://i.pinimg.com/originals/b7/ab/b6/b7abb604d6b6cfa8f4b8c3699842bea7.jpg"
+        )
 
-        db.session.add_all([user1, user2])
+        db.session.add_all([user1, user2, user3, user4])
         db.session.commit()
 
 

@@ -180,7 +180,7 @@ def delete_transaction(id):
     transaction_id = request.json['transaction_id']
     transaction = Transaction.query.get(transaction_id)
 
-    if transaction.transaction_status == 3:
+    if transaction.from_user_id	== id and transaction.transaction_status == 3:
         db.session.delete(transaction)
         db.session.commit()
         return {'success': transaction.id}

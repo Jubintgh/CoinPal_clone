@@ -33,6 +33,28 @@ const Activity = () => {
       } 
     }
 
+    const rejectReq = async (id, transactionId) => {
+      const result = await dispatch(deleteTransaction(id,transactionId))
+      
+      if (result){
+        if(result.errors){
+          let errs = Object.keys(result.errors)
+          setErrors(errs)
+        } else {
+          history.push('/');
+        }
+      } 
+    }
+
+    const canCancel = (transaction) => {
+      if((transaction.transaction_status === 3) && (transaction.from_user_id === id)) return true
+      return false
+    }
+    const canReject = (transaction) => {
+      if((transaction.transaction_status === 3) && (transaction.to_user_id === id)) return true
+      return false
+    }
+
     return(
         <div>
             {
@@ -42,9 +64,9 @@ const Activity = () => {
                                 <div>
                                     <p className={'transact_from_user'}>{transact.from_user_id}</p>
                                     <p className={'transact_to_user'}>{transact.to_user_id}</p>
-                                    <p>TRANSACTION ID::::{transact.transaction_id}</p>
                                 </div>
-                            <button style={{visibility: transact.transaction_status === 3 ? 'visible': 'hidden'}} onClick={() => cancelReq(id, transact.transaction_id)}>cancel request</button>
+                            <button style={{visibility: canCancel(transact) ? 'visible': 'hidden'}} onClick={() => cancelReq(id, transact.transaction_id)}>cancel request</button>
+                            <button style={{visibility: canReject(transact) ? 'visible': 'hidden'}} onClick={() => rejectReq(id, transact.transaction_id)}>reject request</button>
                         </div>
                     )
                 })

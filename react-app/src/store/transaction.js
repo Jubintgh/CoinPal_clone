@@ -1,6 +1,12 @@
 //constants
+const GET_TRANSACTIONS = 'transaction/GET_TRANSACTIONS';
 const SET_TRANSACTION = 'transaction/SET_TRANSACTION';
 const REMOVE_TRANSACTION = 'transaction/REMOVE_TRANSACTION';
+
+const getTransaction = (transactions) => ({
+    type: GET_TRANSACTIONS,
+    payload: transactions
+})
 
 const setTransaction = (transaction) => ({
     type: SET_TRANSACTION,
@@ -24,7 +30,7 @@ export const getTransactions = (userId) => async (dispatch) => {
             return;
         }
 
-        dispatch(setTransaction(data.transactions))
+        dispatch(getTransaction(data.transactions))
     }
 }
 
@@ -52,6 +58,25 @@ export const postTransaction = (userId, transaction) => async (dispatch) => {
     }
 }
 
+export const rejectTransaction = (userId, transactionId) => async (dispatch) => {
+    const response = await fetch(`/api/transactions/${userId}/delete`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "transaction_id": transactionId
+        })
+    });
+    if (response.ok){
+        const data = await response.json();
+        if(data.error){
+            return;
+        }
+        dispatch(removeTransaction(data.success))
+    }
+}
+
 export const deleteTransaction = (userId, transactionId) => async (dispatch) => {
     const response = await fetch(`/api/transactions/${userId}/delete`, {
         method: 'DELETE',
@@ -76,6 +101,10 @@ const initialState = {}
 export default function reducer(state = initialState, action){
     let newState;
     switch(action.type){
+        case GET_TRANSACTIONS:
+            return { 
+                ...action.payload
+            }
         case SET_TRANSACTION:
             return { 
                 ...state,

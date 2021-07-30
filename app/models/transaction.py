@@ -24,6 +24,7 @@ class Transaction(db.Model):
 
     def to_dict(self):
         return {
+            'transaction_id': self.id,
             'from_user_id': self.from_user_id,
             'to_user_id': self.to_user_id,
             'amount': str(self.amount),

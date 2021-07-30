@@ -6,7 +6,7 @@ import { getTransactions, deleteTransaction } from '../../store/transaction';
 
 const Activity = () => {
     const { user } = useSelector((state) => state.session);
-    const transactions = useSelector(state => state.transactions)
+    const transactions = useSelector(state => state.transactions['alltransactions'])
     const id = Number(user.id);
 
     const history = useHistory();
@@ -19,14 +19,8 @@ const Activity = () => {
     
     //useStates
     const [errors, setErrors] = useState([]);
-    const [transactionId, settransactionId] = useState(null)
-    
 
-    const onTransaction = async (e) => {
-      e.preventDefault();
-
-      settransactionId(e.target.value)
-
+    const cancelReq = async (id, transactionId) => {
       const result = await dispatch(deleteTransaction(id,transactionId))
       
       if (result){
@@ -43,14 +37,14 @@ const Activity = () => {
         <div>
             {
                 transactions && transactions.map(transact => {
-                    console.log(transactions, "this is transactions")
                     return (
-                        <div key={transact.id} value={transact.id}>
+                        <div className="transaction__container" key={transact.transaction_id} value={transact.transaction_id}>
                                 <div>
                                     <p className={'transact_from_user'}>{transact.from_user_id}</p>
                                     <p className={'transact_to_user'}>{transact.to_user_id}</p>
+                                    <p>TRANSACTION ID::::{transact.transaction_id}</p>
                                 </div>
-                            <button onClick={() => onTransaction()}>delete</button>
+                            <button style={{visibility: transact.transaction_status === 3 ? 'visible': 'hidden'}} onClick={() => cancelReq(id, transact.transaction_id)}>cancel request</button>
                         </div>
                     )
                 })

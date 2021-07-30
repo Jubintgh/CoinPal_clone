@@ -51,7 +51,7 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li className="navbar__link">
-            <NavLink to={`/users/${user.id}/likes`} exact={true} activeClassName='active'>
+            <NavLink to={`/my/transaction/history`} exact={true} activeClassName='active'>
               Activity
             </NavLink>
           </li>

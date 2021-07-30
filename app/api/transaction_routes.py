@@ -69,10 +69,6 @@ def get_transactions(id):
     return {'transactions': [user_transaction.to_dict() for user_transaction in transactions_all]}
 
 
-@transaction_routes.route('/test', methods=['GET'])
-def test():
-    return {'test': current_user.is_authenticated}
-
 @transaction_routes.route('/<int:id>/type/<filter_t>', methods=['POST'])
 # @login_required
 async def post_transactions(id, filter_t):

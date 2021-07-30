@@ -53,14 +53,14 @@ export const postTransaction = (userId, transaction) => async (dispatch) => {
 }
 
 export const deleteTransaction = (userId, transactionId) => async (dispatch) => {
-    const response = await fetch(`/api/transactions/${userId}/transactions/${transactionId}`, {
+    const response = await fetch(`/api/transactions/${userId}/delete`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: {
+        body: JSON.stringify({
             "transaction_id": transactionId
-        }
+        })
     });
     if (response.ok){
         const data = await response.json();
@@ -79,7 +79,7 @@ export default function reducer(state = initialState, action){
         case SET_TRANSACTION:
             return { 
                 ...state,
-                ...action.payload
+                alltransactions:[...action.payload]
             }
         case REMOVE_TRANSACTION:
             newState = { ...state };

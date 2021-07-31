@@ -153,21 +153,22 @@ async def post_transactions(id, filter_t):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-# @transaction_routes.route('/<int:id>/pay', methods=['PUT'])
-# # @login_required
-# def get_transactions(id):
-#     """
-#     updates an existing transaction record
-#     """
+@transaction_routes.route('/<int:id>/reject', methods=['PUT'])
+# @login_required
+def update_transactions(id):
+    """
+    updates transaction status to rejected for an existing transaction request that is for the current user
+    """
+    
+    user_id = int(request.json['user_id'])
+    transaction_id = int(request.json['transaction_id'])
 
-#     user = User.query.get(id)
-#     transaction_id = request.json['transactionId']
-
-#     transaction = Transaction.query.get(transaction_id)
-
-#     transaction
-
-    # return {'transactions': [user_transaction.to_dict() for user_transaction in all_transactions]}/
+    transaction = Transaction.query.get(transaction_id)
+    if user_id == transaction.to_user_id and transaction.transaction_status == 3:
+        transaction.transaction_status = 2
+        db.session.commit()
+        return {'transactions': 'success'}
+    return {'transaction': 'something went wrong'}
 
 
 @transaction_routes.route('/<int:id>/delete', methods=['DELETE'])

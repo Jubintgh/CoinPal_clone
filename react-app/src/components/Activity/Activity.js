@@ -2,7 +2,7 @@ import './Activity.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getAllTransactions, deleteTransaction } from '../../store/transaction';
+import { getAllTransactions, deleteTransaction, rejectTransaction} from '../../store/transaction';
 
 const Activity = () => {
     const { user } = useSelector((state) => state.session);
@@ -12,17 +12,9 @@ const Activity = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    //useEffets
-    useEffect(() => {
-      dispatch(getAllTransactions(id));
-    }, [dispatch, id])
-    
-    //useStates
-    const [errors, setErrors] = useState([]);
-
     const cancelReq = async (id, transactionId) => {
       const result = await dispatch(deleteTransaction(id,transactionId))
-      
+    
       if (result){
         if(result.errors){
           let errs = Object.keys(result.errors)
@@ -34,7 +26,7 @@ const Activity = () => {
     }
 
     const rejectReq = async (id, transactionId) => {
-      const result = await dispatch(deleteTransaction(id,transactionId))
+      const result = await dispatch(rejectTransaction(id,transactionId))
       
       if (result){
         if(result.errors){
@@ -45,6 +37,13 @@ const Activity = () => {
         }
       } 
     }
+    //useEffets
+    useEffect(() => {
+      dispatch(getAllTransactions(id));
+    }, [dispatch, id])
+    
+    //useStates
+    const [errors, setErrors] = useState([]);
 
     const canCancel = (transaction) => {
       if((transaction.transaction_status === 3) && (transaction.from_user_id === id)) return true

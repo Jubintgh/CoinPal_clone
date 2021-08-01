@@ -35,7 +35,7 @@ export const getAllFriends = (userId) => async (dispatch) => {
         if(data.error){
             return;
         }
-        dispatch(getFriends(data.transactions))
+        dispatch(getFriends(data.friends))
     }
 }
 
@@ -57,9 +57,23 @@ export const postFriendship = (otherUserId) => async (dispatch) => {
     }
 }
 
-
-
-
+export const updateOneFriendship = (otherUserId, type) => async (dispatch) => {
+    const response = await fetch(`/<int:id>/${type}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            'other_user_id': otherUserId
+        })
+    })
+    if(response.ok){
+        const data = await response.json();
+        if(data.error){
+            return;
+        }
+        dispatch(setFriendship(data))
+    }
+}
 
 const initialState = {}
 
@@ -74,13 +88,13 @@ export default function reducer(state = initialState, action){
         case SET_FRIEND:
             return { 
                 ...state,
-                alltransactions: action.payload
+                friends_list: action.payload
             }
-        // case UPDATE_FRIEND:
-        //     return { 
-        //         ...state,
-        //         alltransactions:[action.payload]
-        //     }
+        case UPDATE_FRIEND:
+            return { 
+                ...state,
+                alltransactions:[action.payload]
+            }
         // case REMOVE_FRIEND:
         //     newState = { ...state };
         //     delete newState[action.payload]

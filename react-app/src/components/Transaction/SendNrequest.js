@@ -5,9 +5,6 @@ import { useEffect, useState } from 'react';
 import { getAllTransactions, postTransaction } from '../../store/transaction';
 
 const MyWallet = () => {
-    const { userId } = useParams();
-
-    
     const { user } = useSelector((state) => state.session);
 
 

@@ -23,8 +23,21 @@ def get_friends():
     """
     id = current_user.id
 
-    friends_list = Friend.query.filter((Friend.from_user_id == id) | (Friend.to_user_id == id)).all()
-    return {'friends': [friend.to_dict() for friend in friends_list]}
+    raw_friends_list = Friend.query.filter((Friend.from_user_id == id) | (Friend.to_user_id == id)).all()
+
+    friends_list = []
+    for friend in raw_friends_list:
+        add_friend = User.query.filter((User.id == friend.to_user_id)).first()
+        friends_list.append(add_friend)
+
+    return {'friends': [
+                        {
+                            "first_name" : friend.first_name, 
+                            "last_name" : friend.last_name, 
+                            "profile_img": friend.img_url, 
+                            "user_name": friend.username
+                        } 
+                        for friend in friends_list ]}
 
 @friend_routes.route('/', methods=['POST'])
 # @login_required

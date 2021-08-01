@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, DecimalField
 from wtforms.validators import DataRequired, Email, ValidationError
-from .signup_form import username_exists
 from app.models import Transaction
 
 

@@ -2,7 +2,7 @@ import './Transaction.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getTransactions, postTransaction } from '../../store/transaction';
+import { getAllTransactions, postTransaction } from '../../store/transaction';
 
 const MyWallet = () => {
     const { userId } = useParams();
@@ -17,7 +17,7 @@ const MyWallet = () => {
 
     //useEffets
     useEffect(() => {
-      dispatch(getTransactions(id));
+      dispatch(getAllTransactions(id));
     }, [dispatch, id])
 
 
@@ -40,7 +40,7 @@ const MyWallet = () => {
         "amount": amount,
         "crypto_type": cryptoType
       }))
-
+      
       if (result){
         if(result.errors){
           let errs = Object.keys(result.errors)

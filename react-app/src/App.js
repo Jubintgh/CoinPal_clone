@@ -9,6 +9,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import SendNrequestForm from './components/Transaction/SendNrequest'
+import Activity from './components/Activity/Activity'
 import { authenticate } from './store/session';
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
         </Route>
         <Route path='/my/sendNrequest' exact={true}>
           <SendNrequestForm />
+        </Route>
+        <Route path='/my/transaction/history' exact={true}>
+          <Activity />
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />

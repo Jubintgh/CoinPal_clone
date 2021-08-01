@@ -17,13 +17,27 @@ class User(db.Model, UserMixin):
 
     user_cryptowallet = db.relationship("CryptoWallet", uselist=False, back_populates="user")
 
-    user_friends = db.relationship(
-        "User", 
-        secondary="friends",
-        primaryjoin=("Friend.from_user_id == User.id"),
-        secondaryjoin=("Friend.to_user_id == User.id"),
-        backref=db.backref("friends", lazy="dynamic"),
-        lazy="dynamic"
+    # user_friends = db.relationship(
+    #     "User", 
+    #     secondary="friends",
+    #     primaryjoin=("Friend.from_user_id == User.id"),
+    #     secondaryjoin=("Friend.to_user_id == User.id"),
+    #     backref=db.backref("friends", lazy="dynamic"),
+    #     lazy="dynamic",
+    #     cascade="delete, merge, save-update"
+    # )
+
+    user_requests_from = db.relationship(
+        "Friend",
+        foreign_keys="Friend.from_user_id",
+        backref="from_requests",
+        cascade="delete, merge, save-update"
+    )
+    user_requests_to = db.relationship(
+        "Friend",
+        foreign_keys="Friend.to_user_id",
+        backref="to_requests",
+        cascade="delete, merge, save-update"
     )
 
     # user_transactions = db.relationship(
@@ -38,13 +52,15 @@ class User(db.Model, UserMixin):
     from_user_transactions = db.relationship(
         "Transaction",
         foreign_keys="Transaction.from_user_id",
-        backref="from_transactions"
+        backref="from_transactions",
+        cascade="merge, save-update"
     )
 
     to_user_transactions = db.relationship(
         "Transaction",
         foreign_keys="Transaction.to_user_id",
-        backref="to_transactions"
+        backref="to_transactions",
+        cascade="merge, save-update"
     )
 
     messages = db.relationship("Message", back_populates="user")

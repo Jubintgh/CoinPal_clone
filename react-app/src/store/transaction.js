@@ -58,7 +58,6 @@ export const postTransaction = (userId, transaction) => async (dispatch) => {
         if(data.error){
             return;
         }
-
         dispatch(setTransaction(data))
     }
 }
@@ -106,6 +105,7 @@ const initialState = {}
 
 export default function reducer(state = initialState, action){
     let newState;
+    
     switch(action.type){
         case GET_TRANSACTIONS:
             return { 

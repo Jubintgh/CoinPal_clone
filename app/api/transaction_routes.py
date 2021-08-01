@@ -80,7 +80,6 @@ async def post_transactions(id, filter_t):
 
     form = SendFundsForm()
 
-
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         if transaction_type == 'pay':

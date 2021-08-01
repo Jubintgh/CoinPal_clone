@@ -69,7 +69,7 @@ const MyWallet = () => {
                     <option value='USDCoin'>USD coin</option>
                 </select>
             </div>
-
+            
             <button>Send</button>
         </form>
     );

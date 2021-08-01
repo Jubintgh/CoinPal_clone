@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from .user_routes import login_required
 from app.models import User, CryptoWallet, db
 from app.forms import WalletAddFunds
-import json
+from flask_login import current_user
 from decimal import Decimal
 import decimal
 
@@ -24,7 +24,7 @@ def get_balance(id):
     """
     returns user's balance
     """
-    user = User.query.get(id)
+    user = User.query.get(current_user.id)
 
 
     bitcoin_balance = user.user_cryptowallet.bitcoin_balance

@@ -12,21 +12,25 @@ const Activity = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const [switcher, setSwitcher] = useState(false);
+
     const cancelReq = async (id, transactionId) => {
       const result = await dispatch(deleteTransaction(id,transactionId))
-    
+
+      setSwitcher((prev) => !prev)
+
       if (result){
         if(result.errors){
           let errs = Object.keys(result.errors)
           setErrors(errs)
-        } else {
-          history.push('/');
-        }
+        } 
       } 
     }
 
     const rejectReq = async (id, transactionId) => {
       const result = await dispatch(rejectTransaction(id,transactionId))
+
+      setSwitcher((prev) => !prev)
       
       if (result){
         if(result.errors){
@@ -40,7 +44,7 @@ const Activity = () => {
     //useEffets
     useEffect(() => {
       dispatch(getAllTransactions(id));
-    }, [dispatch, id])
+    }, [dispatch, id, switcher])
     
     //useStates
     const [errors, setErrors] = useState([]);
@@ -57,18 +61,18 @@ const Activity = () => {
     return(
         <div>
             {
-                transactions && transactions.map(transact => {
-                    return (
-                        <div className="transaction__container" key={transact.transaction_id} value={transact.transaction_id}>
-                                <div>
-                                    <p className={'transact_from_user'}>{transact.from_user_id}</p>
-                                    <p className={'transact_to_user'}>{transact.to_user_id}</p>
-                                </div>
-                            <button style={{visibility: canCancel(transact) ? 'visible': 'hidden'}} onClick={() => cancelReq(id, transact.transaction_id)}>cancel request</button>
-                            <button style={{visibility: canReject(transact) ? 'visible': 'hidden'}} onClick={() => rejectReq(id, transact.transaction_id)}>reject request</button>
-                        </div>
-                    )
-                })
+              transactions && transactions.map((transact, idx) => {
+                  return (
+                    <div className="transaction__container" key={idx} value={transact.transaction_id}>
+                            <div>
+                                <p className={'transact_from_user'}>{transact.from_user_id}</p>
+                                <p className={'transact_to_user'}>{transact.to_user_id}</p>
+                            </div>
+                        <button style={{visibility: canCancel(transact) ? 'visible': 'hidden'}} onClick={() => cancelReq(id, transact.transaction_id)}>cancel request</button>
+                        <button style={{visibility: canReject(transact) ? 'visible': 'hidden'}} onClick={() => rejectReq(id, transact.transaction_id)}>reject request</button>
+                    </div>
+                  )
+              })
             }
         </div>
     )

@@ -75,6 +75,24 @@ export const updateOneFriendship = (otherUserId, type) => async (dispatch) => {
     }
 }
 
+export const removeFriend = (otherUserId, type) => async (dispatch) => {
+    const response = await fetch(`/<int:id>/`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            'other_user_id': otherUserId
+        })
+    })
+    if(response.ok){
+        const data = await response.json();
+        if(data.error){
+            return;
+        }
+        dispatch(setFriendship(data))
+    }
+}
+
 const initialState = {}
 
 export default function reducer(state = initialState, action){

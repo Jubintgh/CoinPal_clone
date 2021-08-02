@@ -20,19 +20,31 @@ a {
     display: flex;
     margin: 5vw;
     width: inherit;
+    height: 20vw;
     background-color: aliceblue;
+}
+
+.signle_contact{
+    display: flex;
+    justify-content: center;
 }
 
 #profile_pic {
     height: 7vw;
     width: 7vw;
+    margin: 1vw;
     border-radius: 80px;
+    justify-self: flex-start;
 }
 
 .user_name {
-
+    justify-self: center;
+    margin-top: 5vw;
+    margin-left: 10vw;
+    height: 2vw;
 }
 
 .real_name {
-
+    margin-top: 3vw;
+    margin-left: 10vw;
 }

@@ -2,7 +2,7 @@ import './Contacts.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getAllFriends, postFriendship, } from '../../store/friend';
+import { getAllFriends, postFriendship, removeFriend} from '../../store/friend';
 
 const MyContacts = () => {
     const { user } = useSelector((state) => state.session);
@@ -56,11 +56,12 @@ const MyContacts = () => {
                 return (
                     <a href={`/user/${friend.user_name}`}>
                         <div className='profile__container' key={idx} value={friend.to_user_id}>
-                            <div>
+                            <div className='signle_contact'>
                                 {console.log(friend.profile_img)}
                                 <img id='profile_pic' src={friend.profile_img} alt="profile_pic" className=""/>
                                 <p className={'real_name'}>{friend.first_name} {friend.last_name}</p>
                                 <p className={'user_name'}>{friend.user_name}</p>
+                                <button onClick>Remove friend</button>
                             </div>
                         </div>
                     </a>

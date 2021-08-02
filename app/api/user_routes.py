@@ -23,10 +23,10 @@ def users():
     return {'users': [user.to_dict() for user in users]}
 
 
-@user_routes.route('/<int:id>')
-@login_required
-def user(id):
-    user = User.query.get(id)
+@user_routes.route('/<username>')
+# @login_required
+def user(username):
+    user = User.query.filter(User.username == username).first()
     return user.to_dict()
 
 @user_routes.route('/<int:id>', methods=['PUT'])

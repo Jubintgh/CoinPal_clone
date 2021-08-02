@@ -6,7 +6,9 @@ import { getAllFriends, postFriendship, removeFriend} from '../../store/friend';
 
 const MyContacts = () => {
     const { user } = useSelector((state) => state.session);
-    const friendsList = useSelector(state => state.friends['friends_list'])
+    let friendsList = useSelector(state => state.friends);
+    if (friendsList) friendsList= Object.values(friendsList)
+    
     const id = Number(user.id);
 
 
@@ -59,16 +61,15 @@ const MyContacts = () => {
               friendsList && friendsList.map((friend, idx) => {
                 return (
                     // <div href={`/user/${friend.user_name}`}>
-                        <div className='profile__container' key={idx} value={friend.user_name}>
-                            {console.log(friend.to_user_id)}
-                            <div className='signle_contact' >
-                                {console.log(friend.profile_img)}
-                                <img id='profile_pic' src={friend.profile_img} alt="profile_pic" className=""/>
-                                <p className={'real_name'}>{friend.first_name} {friend.last_name}</p>
-                                <p className={'user_name'}>{friend.user_name}</p>
-                                <button onClick={(e) => unfriend(e.target.value)}>Remove friend</button>
-                            </div>
+                    <div className='profile__container' key={idx}>
+
+                        <div className='signle_contact'>
+                            <img id='profile_pic' src={friend.profile_img} alt="profile_pic" className=""/>
+                            <p className={'real_name'}>{friend.first_name} {friend.last_name}</p>
+                            <p className={'user_name'}>{friend.user_name}</p>
+                            <button onClick={(e) => unfriend(friend.user_name)}>Remove friend</button>
                         </div>
+                    </div>
                     // </div>
                 )
               })

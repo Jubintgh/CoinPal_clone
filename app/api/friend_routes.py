@@ -23,7 +23,7 @@ def get_friends():
     """
     id = current_user.id
 
-    raw_friends_list = Friend.query.filter((Friend.from_user_id == id) | (Friend.to_user_id == id)).all()
+    raw_friends_list = Friend.query.filter((Friend.from_user_id == id)).all()
 
     friends_list = []
     for friend in raw_friends_list:
@@ -37,7 +37,7 @@ def get_friends():
                             "profile_img": friend.img_url, 
                             "user_name": friend.username
                         } 
-                        for friend in friends_list ]}
+                            for friend in friends_list ]}
 
 @friend_routes.route('/', methods=['POST'])
 # @login_required
@@ -46,8 +46,11 @@ def post_friend_req():
     creates a new pending instance of friendship
     """
     addresser_user_id = current_user.id
-    addresee_user_id = request.json['other_user_id']
+    # addresee_user_id = request.json['other_user_id']
 
+    other_user = request.json['to_username']
+    from_user_id = User.query.filter(User.username == other_user).first()
+    addresee_user_id = from_user_id.id
 
     new_friend_req = Friend(
         from_user_id = addresser_user_id,
@@ -60,15 +63,17 @@ def post_friend_req():
 
     return {'request': new_friend_req.to_dict()}
 
-@friend_routes.route('/<int:id>/<filter_t>', methods=['PUT'])
+@friend_routes.route('/<filter_t>', methods=['PUT'])
 # @login_required
-def update_friendship(id, filter_t):
+def update_friendship(filter_t):
     """
     updates an existing friendship status
     """
 
     addresser_user_id = current_user.id
-    addresee_user_id = request.json['other_user_id']
+    other_user = request.json['other_user_username']
+    to_user = User.query.filter(User.username == other_user).first()
+    addresee_user_id = to_user.id
 
     friend_instance = Friend.query.filter(and_(Friend.from_user_id == addresser_user_id, 
                                                Friend.to_user_id == addresee_user_id)).first()
@@ -89,12 +94,16 @@ def delete_friendship():
     deletes an existing friendship record
     """
     addresser_user_id = current_user.id
-    addresee_user_id = request.json['other_user_id']
+
+    other_user = request.json['to_username']
+    to_user = User.query.filter(User.username == other_user).first()
+    addresee_user_id = to_user.id
 
 
     friend_instance = Friend.query.filter(and_(Friend.from_user_id == addresser_user_id, 
                                                Friend.to_user_id == addresee_user_id)).first()
     
+    print(addresser_user_id, 'TOO')
     db.session.delete(friend_instance)
     db.session.commit()
     

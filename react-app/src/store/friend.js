@@ -24,7 +24,7 @@ const deleteFriend = (friendId) => ({
     payload: friendId
 })
 
-export const getAllFriends = (userId) => async (dispatch) => {
+export const getAllFriends = () => async (dispatch) => {
     const response = await fetch(`/api/friends/`, {
         headers: {
             'Content-Type': 'application/json'
@@ -39,13 +39,14 @@ export const getAllFriends = (userId) => async (dispatch) => {
     }
 }
 
-export const postFriendship = (otherUserId) => async (dispatch) => {
+export const postFriendship = (otherUserName) => async (dispatch) => {
     const response = await fetch(`/api/friends/`, {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            'other_user_id': otherUserId
+            'to_username': otherUserName
         })
     })
     if(response.ok){
@@ -57,14 +58,14 @@ export const postFriendship = (otherUserId) => async (dispatch) => {
     }
 }
 
-export const updateOneFriendship = (otherUserId, type) => async (dispatch) => {
-    const response = await fetch(`/api/friends/<int:id>/${type}`, {
+export const updateOneFriendship = (otherUserUserName, type) => async (dispatch) => {
+    const response = await fetch(`/api/friends/${type}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            'other_user_id': otherUserId
+            'other_user_username': otherUserUserName
         })
     })
     if(response.ok){
@@ -76,15 +77,14 @@ export const updateOneFriendship = (otherUserId, type) => async (dispatch) => {
     }
 }
 
-export const removeFriend = (otherUserId) => async (dispatch) => {
-    console.log(otherUserId)
+export const removeFriend = (otherUserName) => async (dispatch) => {
     const response = await fetch(`/api/friends/`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            'other_user_id': otherUserId
+            'to_username': otherUserName
         })
     })
     if(response.ok){
@@ -103,23 +103,32 @@ export default function reducer(state = initialState, action){
     
     switch(action.type){
         case GET_FRIENDS:
-            return { 
-                friends_list:[...action.payload]
-            }
+            newState = action.payload.reduce((friend, el) => {
+                friend[el.user_name] = el;
+                return friend;
+            }, {})
+            return newState
+
         case SET_FRIEND:
-            return { 
+            newState = {
                 ...state,
-                friends_list: action.payload
             }
+            newState[action.payload.user_name] = action.payload
+            return newState
+   
         case UPDATE_FRIEND:
-            return { 
+            newState = {
                 ...state,
-                alltransactions:[action.payload]
             }
-        // case REMOVE_FRIEND:
-        //     newState = { ...state };
-        //     delete newState[action.payload]
-        //     return newState
+            newState[action.payload.user_name] = action.payload
+            return newState
+
+        case REMOVE_FRIEND:
+            newState = { ...state };
+
+            delete newState[action.payload.user_name]
+            return newState
+
         default:
             return state
     }

@@ -45,8 +45,7 @@ def post_friend_req():
     """
     creates a new pending instance of friendship
     """
-    # addresser_user_id = current_user.id
-    addresser_user_id = 5
+    addresser_user_id = current_user.id
     addresee_user_id = request.json['other_user_id']
 
 
@@ -74,7 +73,6 @@ def update_friendship(id, filter_t):
     friend_instance = Friend.query.filter(and_(Friend.from_user_id == addresser_user_id, 
                                                Friend.to_user_id == addresee_user_id)).first()
 
-
     if filter_t == 'accept':
         friend_instance.status = 1
 
@@ -84,16 +82,15 @@ def update_friendship(id, filter_t):
     db.session.commit()
     return {'friend': friend_instance.to_dict()}
 
-
-@friend_routes.route('/<int:id>', methods=['DELETE'])
+@friend_routes.route('/', methods=['DELETE'])
 # @login_required
-def delete_friendship(id):
+def delete_friendship():
     """
     deletes an existing friendship record
     """
-
-    addresser_user_id = id
+    addresser_user_id = current_user.id
     addresee_user_id = request.json['other_user_id']
+
 
     friend_instance = Friend.query.filter(and_(Friend.from_user_id == addresser_user_id, 
                                                Friend.to_user_id == addresee_user_id)).first()

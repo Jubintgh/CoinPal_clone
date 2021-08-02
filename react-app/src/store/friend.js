@@ -19,7 +19,7 @@ const updateFriendship = (friend) => ({
     payload: friend
 })
 
-const removeTransaction = (friendId) => ({
+const deleteFriend = (friendId) => ({
     type: REMOVE_FRIEND,
     payload: friendId
 })
@@ -58,7 +58,8 @@ export const postFriendship = (otherUserId) => async (dispatch) => {
 }
 
 export const updateOneFriendship = (otherUserId, type) => async (dispatch) => {
-    const response = await fetch(`/<int:id>/${type}`, {
+    const response = await fetch(`/api/friends/<int:id>/${type}`, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -75,8 +76,10 @@ export const updateOneFriendship = (otherUserId, type) => async (dispatch) => {
     }
 }
 
-export const removeFriend = (otherUserId, type) => async (dispatch) => {
-    const response = await fetch(`/<int:id>/`, {
+export const removeFriend = (otherUserId) => async (dispatch) => {
+    console.log(otherUserId)
+    const response = await fetch(`/api/friends/`, {
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -89,7 +92,7 @@ export const removeFriend = (otherUserId, type) => async (dispatch) => {
         if(data.error){
             return;
         }
-        dispatch(setFriendship(data))
+        dispatch(deleteFriend(data))
     }
 }
 

@@ -38,7 +38,7 @@ def get_friends():
                                                    Friend.status == 0)).all() #gets friend request instances
     friends_requests = []
     for friend in raw_friend_requests:
-        add_friend_req = User.query.filter((User.id == friend.to_user_id)).first() #gets user instances
+        add_friend_req = User.query.filter((User.id == friend.from_user_id)).first() #gets user instances
         friends_requests.append(add_friend_req)
 
     return {'friends': [

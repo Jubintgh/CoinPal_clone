@@ -8,6 +8,7 @@ const MyContacts = () => {
     const { user } = useSelector((state) => state.session);
 
     let friendsList = useSelector(state => Object.values(state.friends));
+    let friendReqList = useSelector(state => state.friends.friendrequests)
     
     const id = Number(user.id);
 

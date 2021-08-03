@@ -1,5 +1,6 @@
 //constant
 const GET_FRIENDS = 'friend/GET_FRIENDS';
+const GET_FRIEND_REQUESTS = 'friend/GET_FRIEND_REQUESTS'
 const SET_FRIEND = 'friend/SET_FRIEND';
 const UPDATE_FRIEND = 'friend/UPDATE_FRIEND';
 const REMOVE_FRIEND = 'friend/REMOVE_FRIEND';
@@ -7,6 +8,11 @@ const REMOVE_FRIEND = 'friend/REMOVE_FRIEND';
 const getFriends = (friends) => ({
     type: GET_FRIENDS,
     payload: friends
+})
+
+const getFriendReqs = (friendReqs) => ({
+    type: GET_FRIEND_REQUESTS,
+    payload: friendReqs
 })
 
 const setFriendship = (friend) => ({
@@ -36,6 +42,7 @@ export const getAllFriends = () => async (dispatch) => {
             return;
         }
         dispatch(getFriends(data.friends))
+        dispatch(getFriendReqs(data.friend_requests))
     }
 }
 
@@ -103,22 +110,29 @@ export default function reducer(state = initialState, action){
     
     switch(action.type){
         case GET_FRIENDS:
+            newState = {...state}
             newState = action.payload.reduce((friend, el) => {
                 friend[el.user_name] = el;
                 return friend;
             }, {})
             return newState
 
+        case GET_FRIEND_REQUESTS:
+            newState = {...state,
+                        friendrequests:[...action.payload]
+            }
+            return newState
+
         case SET_FRIEND:
             newState = {
-                ...state,
+                ...state
             }
             newState[action.payload.user_name] = action.payload
             return newState
    
         case UPDATE_FRIEND:
             newState = {
-                ...state,
+                ...state
             }
             newState[action.payload.user_name] = action.payload
             return newState
@@ -128,7 +142,6 @@ export default function reducer(state = initialState, action){
             for(let friend in state){
                 if(friend !== action.payload.username) newState[friend] = state[friend]
             }
-            // delete newState[action.payload.user_name]
             return newState
 
         default:

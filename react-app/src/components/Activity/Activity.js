@@ -12,6 +12,8 @@ const Activity = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    //useStates
+    const [errors, setErrors] = useState([]);
     const [switcher, setSwitcher] = useState(false);
 
     const cancelReq = async (id, transactionId) => {
@@ -46,8 +48,6 @@ const Activity = () => {
       dispatch(getAllTransactions(id));
     }, [dispatch, id, switcher])
     
-    //useStates
-    const [errors, setErrors] = useState([]);
 
     const canCancel = (transaction) => {
       if((transaction.transaction_status === 3) && (transaction.from_user_id === id)) return true
@@ -60,18 +60,23 @@ const Activity = () => {
 
     return(
         <div>
-            {
-              transactions && transactions.map((transact, idx) => {
+          {errors && errors.forEach(err => {
+            <li>{err}</li>
+          })}
+            { transactions && transactions.map((transact, idx) => {
                   return (
-                    <div className="transaction__container" key={idx} value={transact.transaction_id}>
-                            <div>
-                                <p className={'transact_from_user'}>{transact.from_user_id}</p>
-                                <p className={'transact_to_user'}>{transact.to_user_id}</p>
-                                <p>{transact.amount}</p>
-                                <p>{transact.transaction_status}</p>
-                            </div>
-                        <button style={{visibility: canCancel(transact) ? 'visible': 'hidden'}} onClick={() => cancelReq(id, transact.transaction_id)}>cancel request</button>
-                        <button style={{visibility: canReject(transact) ? 'visible': 'hidden'}} onClick={() => rejectReq(id, transact.transaction_id)}>reject request</button>
+                    <div className="Activity__main">
+                      <div className="transaction__container" key={idx} value={transact.transaction_id}>
+                          <p className='transaction__status'>{transact.transaction_status === 0 ? 'Pending': transact.transaction_status === 1 ? 'Completed' : transact.transaction_status === 2 ? 'Rejected' : transact.transaction_status === 3 ? 'Request' : 'Loading...'}</p>
+                              <div>
+                                  <p className={'transact_from_user'}>From: {transact.from_user_id}</p>
+                                  <p className={'transact_to_user'}>To: {transact.to_user_id}</p>
+                                  <p className={'transact_amount'}>Amount: {transact.amount}</p>
+                                  <p className={'transact_type'}>Crypto: {transact.crypto_type}</p>
+                              </div>
+                          <button style={{visibility: canCancel(transact) ? 'visible': 'hidden'}} onClick={() => cancelReq(id, transact.transaction_id)}>cancel request</button>
+                          <button style={{visibility: canReject(transact) ? 'visible': 'hidden'}} onClick={() => rejectReq(id, transact.transaction_id)}>reject request</button>
+                      </div>
                     </div>
                   )
               })

@@ -66,7 +66,7 @@ def get_transactions(id):
 
     transactions_all = transactions_debit + transactions_credit
 
-    return {'transactions': [user_transaction.to_dict() for user_transaction in transactions_all]}
+    return {'transactions': [user_transaction.front_end_to_dict() for user_transaction in transactions_all]}
 
 
 @transaction_routes.route('/<int:id>/type/<filter_t>', methods=['POST'])
@@ -139,14 +139,14 @@ async def post_transactions(id, filter_t):
             if status == 1:
                 new_transaction.transaction_status = 1
                 db.session.commit()
-                return {'transactions': [new_transaction.to_dict()]}
+                return new_transaction.front_end_to_dict()
             elif status == 2:
                 return {'errors': db_errors_to_error_messages('Balance', 'insufficient funds')}, 200
 
         #For request type transactions
         elif transaction_status == 3:
             db.session.commit()
-            return {'transactions': [new_transaction.to_dict()]}
+            return {'transactions': [new_transaction.front_end_to_dict()]}
     
     new_transaction.transaction_status = 2
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

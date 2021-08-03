@@ -30,6 +30,7 @@ dnspython = "==2.1.0"
 idna = "==3.2"
 async = "*"
 asyncio = "*"
+requests = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"

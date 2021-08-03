@@ -1,3 +1,4 @@
+import requests
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Friend, User, db
@@ -23,12 +24,22 @@ def get_friends():
     """
     id = current_user.id
 
-    raw_friends_list = Friend.query.filter((Friend.from_user_id == id)).all()
-
+    ## friends
+    raw_friends_list = Friend.query.filter(and_((Friend.from_user_id == id),
+                                                (Friend.status == 1))).all() #gets friend instances
     friends_list = []
     for friend in raw_friends_list:
-        add_friend = User.query.filter((User.id == friend.to_user_id)).first()
+        add_friend = User.query.filter((User.id == friend.to_user_id)).first() #gets user instances
         friends_list.append(add_friend)
+
+
+    ## requests
+    raw_friend_requests = Friend.query.filter(and_(Friend.to_user_id == id,
+                                                   Friend.status == 0)).all() #gets friend request instances
+    friends_requests = []
+    for friend in raw_friend_requests:
+        add_friend_req = User.query.filter((User.id == friend.to_user_id)).first() #gets user instances
+        friends_requests.append(add_friend_req)
 
     return {'friends': [
                         {
@@ -36,8 +47,15 @@ def get_friends():
                             "last_name" : friend.last_name, 
                             "profile_img": friend.img_url, 
                             "user_name": friend.username
-                        } 
-                            for friend in friends_list ]}
+                        } for friend in friends_list ],
+            'friend_requests': [
+                        {
+                            "first_name" : friend.first_name, 
+                            "last_name" : friend.last_name, 
+                            "profile_img": friend.img_url, 
+                            "user_name": friend.username
+                        } for friend in  friends_requests ]
+            }
 
 @friend_routes.route('/', methods=['POST'])
 # @login_required
@@ -80,6 +98,8 @@ def update_friendship(filter_t):
 
     if filter_t == 'accept':
         friend_instance.status = 1
+        accepted_friend = request.post('/api/friends/', data = {'to_username': other_user})
+        accepted_friend.status = 1
 
     elif filter_t == 'block':
         friend_instance.status = 0
@@ -103,7 +123,8 @@ def delete_friendship():
     friend_instance = Friend.query.filter(and_(Friend.from_user_id == addresser_user_id, 
                                                Friend.to_user_id == addresee_user_id)).first()
     
-    
+    print(addresser_user_id, 'ADDRESSEEE')
+    print(addresee_user_id, 'ADDRESSERRR')
     db.session.delete(friend_instance)
     db.session.commit()
     

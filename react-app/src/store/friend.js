@@ -72,7 +72,7 @@ export const updateOneFriendship = (otherUserUserName, type) => async (dispatch)
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            'other_user_username': otherUserUserName
+            'to_username': otherUserUserName
         })
     })
     if(response.ok){
@@ -104,8 +104,8 @@ export const removeFriend = (otherUserName) => async (dispatch) => {
 }
 
 const initialState = {
-    "friendsList": null,
-    "friendsReqs": null
+    "friendsList": [],
+    "friendsReqs": []
 }
 
 export default function reducer(state = initialState, action){
@@ -137,14 +137,14 @@ export default function reducer(state = initialState, action){
             return newState
    
         case UPDATE_FRIEND:
-            newState = {
-                ...state
-            }
+            newState = {}
             newState.friendsList[action.payload.user_name] = action.payload
             return newState
 
         case REMOVE_FRIEND:
-            newState = {};
+            newState = initialState;
+            newState.friendsReqs = state.friendsReqs 
+            
             for(let friend in state.friendsList){
                 if(friend !== action.payload.username) newState.friendsList[friend] = state.friendsList[friend]
             }

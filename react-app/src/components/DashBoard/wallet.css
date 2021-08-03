@@ -54,7 +54,7 @@
     background-color: whitesmoke;
 }
 
-.currcoin__log{
+.currcoin__logo{
     position: absolute;
     box-sizing: border-box;
     width: 30vw;
@@ -66,5 +66,5 @@
     position: absolute;
     width: inherit;
     margin-top: 30vw;
-    margin-left: 22vw;
+    margin-left: 15vw;
 }

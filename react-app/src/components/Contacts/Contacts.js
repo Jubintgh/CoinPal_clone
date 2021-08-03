@@ -2,15 +2,15 @@ import './Contacts.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getAllFriends, postFriendship, removeFriend} from '../../store/friend';
+import { getAllFriends, postFriendship, updateOneFriendship,removeFriend} from '../../store/friend';
 
 const MyContacts = () => {
     const { user } = useSelector((state) => state.session);
 
-    let friendsList = useSelector(state => Object.values(state.friends));
-    console.log(friendsList)
-    let friendReqList = useSelector(state => state.friends.friendrequests)
-    
+    let friendsList = useSelector(state => Object.values(state.friends.friendsList));
+
+    let friendReqList = useSelector(state => Object.values(state.friends.friendsReqs));
+
     const id = Number(user.id);
 
     const history = useHistory();
@@ -18,7 +18,6 @@ const MyContacts = () => {
     
     //useEffets
     useEffect(() => {
-      console.log(id)
       dispatch(getAllFriends(id, 'asdasdasd'));
     }, [dispatch, id])
 
@@ -51,12 +50,38 @@ const MyContacts = () => {
     //   } 
     // }
 
-    const unfriend = async (otherUserId) => {
+    const unFriend = async (otherUserId) => {
         await dispatch(removeFriend(otherUserId))
+    }
+
+    const acceptFriend = async (userName) => {
+        await dispatch(updateOneFriendship(userName, 'accept'))
+        // await dispatch(postFriendship(userName))
     }
 
     return (
         <div id='contacts_page'>
+            <div className='contact_request_container'>
+                {
+                    friendReqList && friendReqList.map((user, idx) => {
+                        return (
+                            // <div href={`/user/${friend.user_name}`}>
+                            <div className='contacts_container' key={idx}>
+        
+                                <div className='signle_contact'>
+                                    <img id='profile_pic' src={user.profile_img} alt="profile_pic" className=""/>
+                                    <p className={'real_name'}>{user.first_name} {user.last_name}</p>
+                                    <p className={'user_name'}>{user.user_name}</p>
+                                    <button onClick={(e) => acceptFriend(user.user_name)}>accept friend request</button>
+                                </div>
+                            </div>
+                            // </div>
+                        )
+                    })
+                }
+            </div>
+
+
             <h5>Contacts</h5>
             <div className='contacts_container'>
             {
@@ -69,7 +94,7 @@ const MyContacts = () => {
                             <img id='profile_pic' src={friend.profile_img} alt="profile_pic" className=""/>
                             <p className={'real_name'}>{friend.first_name} {friend.last_name}</p>
                             <p className={'user_name'}>{friend.user_name}</p>
-                            <button onClick={(e) => unfriend(friend.user_name)}>Remove friend</button>
+                            <button onClick={(e) => unFriend(friend.user_name)}>Remove friend</button>
                         </div>
                     </div>
                     // </div>

@@ -59,22 +59,34 @@ def get_friends():
 
 @friend_routes.route('/', methods=['POST'])
 # @login_required
-def post_friend_req():
+def post_friend_req(is_accept=False):
     """
     creates a new pending instance of friendship
     """
     addresser_user_id = current_user.id
     # addresee_user_id = request.json['other_user_id']
 
-    other_user = request.json['to_username']
-    from_user_id = User.query.filter(User.username == other_user).first()
-    addresee_user_id = from_user_id.id
+    if is_accept == False:
+        other_user = request.json['to_username']
+        from_user_id = User.query.filter(User.username == other_user).first()
+        addresee_user_id = from_user_id.id
 
-    new_friend_req = Friend(
-        from_user_id = addresser_user_id,
-        to_user_id = addresee_user_id,
-        status = None
-    )
+        new_friend_req = Friend(
+            from_user_id = addresser_user_id,
+            to_user_id = addresee_user_id,
+            status = None
+        )
+
+    elif is_accept == True:
+        other_user = request.json['to_username']
+        from_user_id = User.query.filter(User.username == other_user).first()
+        addresee_user_id = from_user_id.id
+
+        new_friend_req = Friend(
+            from_user_id = addresser_user_id,
+            to_user_id = addresee_user_id,
+            status = 1
+        )
 
     db.session.add(new_friend_req)
     db.session.commit()
@@ -88,20 +100,25 @@ def update_friendship(filter_t):
     updates an existing friendship status
     """
 
-    addresser_user_id = current_user.id
-    other_user = request.json['other_user_username']
-    to_user = User.query.filter(User.username == other_user).first()
-    addresee_user_id = to_user.id
-
-    friend_instance = Friend.query.filter(and_(Friend.from_user_id == addresser_user_id, 
-                                               Friend.to_user_id == addresee_user_id)).first()
-
     if filter_t == 'accept':
+        addresee_user_id = current_user.id
+        other_user = request.json['to_username']
+        to_user = User.query.filter(User.username == other_user).first()
+        addresser_user_id = to_user.id
+
+        friend_instance = Friend.query.filter(and_(Friend.from_user_id == addresser_user_id, 
+                                                Friend.to_user_id == addresee_user_id)).first()
         friend_instance.status = 1
-        accepted_friend = request.post('/api/friends/', data = {'to_username': other_user})
-        accepted_friend.status = 1
+        post_friend_req(is_accept=True)
 
     elif filter_t == 'block':
+        addresser_user_id = current_user.id
+        other_user = request.json['to_username']
+        to_user = User.query.filter(User.username == other_user).first()
+        addresee_user_id = to_user.id
+
+        friend_instance = Friend.query.filter(and_(Friend.from_user_id == addresser_user_id, 
+                                                Friend.to_user_id == addresee_user_id)).first()
         friend_instance.status = 0
 
     db.session.commit()
@@ -122,9 +139,7 @@ def delete_friendship():
 
     friend_instance = Friend.query.filter(and_(Friend.from_user_id == addresser_user_id, 
                                                Friend.to_user_id == addresee_user_id)).first()
-    
-    print(addresser_user_id, 'ADDRESSEEE')
-    print(addresee_user_id, 'ADDRESSERRR')
+
     db.session.delete(friend_instance)
     db.session.commit()
     

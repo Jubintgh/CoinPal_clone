@@ -46,10 +46,9 @@ const MyWallet = () => {
 
             <div className="wallet-rightbar">
                 <div className="currentstats">
-                    <img alt="logo" className="currcoin__log" src={currCoin["logo"]}/>
+                    <img alt="logo" className="currcoin__logo" src={currCoin["logo"]}/>
                         <div className="currcoin__balance">CoinPal balance
-                            <p>{currCoin.coin === 'Bitcoin' ? bitcoinBalance : currCoin.coin === 'Ethereum' ? ethereumBalance : currCoin.coin === 'USD-Coin' ? usdCoinBalance : currCoin === 'Loading...'}$</p>
-                            <p>Available</p>
+                            <p>{currCoin.coin === 'Bitcoin' ? bitcoinBalance + ' BitCoin available' : currCoin.coin === 'Ethereum' ? ethereumBalance + ' ETH available' : currCoin.coin === 'USD-Coin' ? usdCoinBalance + ' USD-Coin available' : currCoin === 'Loading...'}</p>
                         </div>
                     <button>Send Crypto</button>
                     <button>Add a crypto</button>

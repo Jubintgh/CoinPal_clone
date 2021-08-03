@@ -103,7 +103,10 @@ export const removeFriend = (otherUserName) => async (dispatch) => {
     }
 }
 
-const initialState = {}
+const initialState = {
+    "friendsList": null,
+    "friendsReqs": null
+}
 
 export default function reducer(state = initialState, action){
     let newState;
@@ -111,36 +114,39 @@ export default function reducer(state = initialState, action){
     switch(action.type){
         case GET_FRIENDS:
             newState = {...state}
-            newState = action.payload.reduce((friend, el) => {
+            newState.friendsList = action.payload.reduce((friend, el) => {
                 friend[el.user_name] = el;
                 return friend;
             }, {})
             return newState
 
         case GET_FRIEND_REQUESTS:
-            newState = {...state,
-                        friendrequests:[...action.payload]
-            }
+            newState = {...state}
+
+            newState.friendsReqs = action.payload.reduce((friend, el) => {
+                friend[el.user_name] = el;
+                return friend;
+            }, {})
             return newState
 
         case SET_FRIEND:
             newState = {
                 ...state
             }
-            newState[action.payload.user_name] = action.payload
+            newState.friendsList[action.payload.user_name] = action.payload
             return newState
    
         case UPDATE_FRIEND:
             newState = {
                 ...state
             }
-            newState[action.payload.user_name] = action.payload
+            newState.friendsList[action.payload.user_name] = action.payload
             return newState
 
         case REMOVE_FRIEND:
             newState = {};
-            for(let friend in state){
-                if(friend !== action.payload.username) newState[friend] = state[friend]
+            for(let friend in state.friendsList){
+                if(friend !== action.payload.username) newState.friendsList[friend] = state.friendsList[friend]
             }
             return newState
 

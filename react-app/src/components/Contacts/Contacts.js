@@ -7,7 +7,7 @@ import { getAllFriends, postFriendship, removeFriend} from '../../store/friend';
 const MyContacts = () => {
     const { user } = useSelector((state) => state.session);
 
-    let friendsList = useSelector(state => Object.values(state.friends));
+    let friendsList = useSelector(state => Object.values(state.friends.friendsList));
     let friendReqList = useSelector(state => state.friends.friendrequests)
     
     const id = Number(user.id);

@@ -42,7 +42,7 @@ def upgrade():
     op.create_table('friends',
     sa.Column('from_user_id', sa.Integer(), nullable=False),
     sa.Column('to_user_id', sa.Integer(), nullable=False),
-    sa.Column('status', sa.Boolean(), nullable=False),
+    sa.Column('status', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['from_user_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['to_user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('from_user_id', 'to_user_id')

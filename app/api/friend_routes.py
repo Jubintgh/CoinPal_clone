@@ -103,8 +103,8 @@ def delete_friendship():
     friend_instance = Friend.query.filter(and_(Friend.from_user_id == addresser_user_id, 
                                                Friend.to_user_id == addresee_user_id)).first()
     
-    print(addresser_user_id, 'TOO')
+    
     db.session.delete(friend_instance)
     db.session.commit()
     
-    return {'friend': friend_instance.to_dict()}
+    return to_user.to_dict()

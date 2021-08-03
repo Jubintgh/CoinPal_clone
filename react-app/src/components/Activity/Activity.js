@@ -67,6 +67,8 @@ const Activity = () => {
                             <div>
                                 <p className={'transact_from_user'}>{transact.from_user_id}</p>
                                 <p className={'transact_to_user'}>{transact.to_user_id}</p>
+                                <p>{transact.amount}</p>
+                                <p>{transact.transaction_status}</p>
                             </div>
                         <button style={{visibility: canCancel(transact) ? 'visible': 'hidden'}} onClick={() => cancelReq(id, transact.transaction_id)}>cancel request</button>
                         <button style={{visibility: canReject(transact) ? 'visible': 'hidden'}} onClick={() => rejectReq(id, transact.transaction_id)}>reject request</button>

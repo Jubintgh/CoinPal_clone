@@ -124,9 +124,11 @@ export default function reducer(state = initialState, action){
             return newState
 
         case REMOVE_FRIEND:
-            newState = { ...state };
-
-            delete newState[action.payload.user_name]
+            newState = {};
+            for(let friend in state){
+                if(friend !== action.payload.username) newState[friend] = state[friend]
+            }
+            // delete newState[action.payload.user_name]
             return newState
 
         default:

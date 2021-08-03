@@ -6,16 +6,16 @@ from app.models import CryptoWallet, db
 # Adds a demo user, you can add other users here if you want
 def seed_wallets():
         wallet5 = CryptoWallet(
-            user_id=5
+            user_id=1
         )
         wallet6 = CryptoWallet(
-            user_id=6
+            user_id=2
         )
         wallet7 = CryptoWallet(
-            user_id=7
+            user_id=3
         )
         wallet8 = CryptoWallet(
-            user_id=8
+            user_id=4
         )
 
 

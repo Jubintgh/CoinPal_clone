@@ -3,18 +3,18 @@ from app.models import db, Friend
 
 def seed_friends():
     friend1 = Friend(
-        from_user_id=5,
-        to_user_id=6,
+        from_user_id=1,
+        to_user_id=2,
         status=1
     )
     friend2 = Friend(
-        from_user_id=7,
-        to_user_id=5,
+        from_user_id=1,
+        to_user_id=3,
         status=1
     )
     friend3 = Friend(
-        from_user_id=8,
-        to_user_id=5,
+        from_user_id=1,
+        to_user_id=4,
         status=1
     )
 

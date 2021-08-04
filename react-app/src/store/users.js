@@ -26,6 +26,7 @@ export const getOneUser = (userName) => async (dispatch) => {
   if (res.ok) {
     const user = await res.json();
     dispatch(setOneUser(user));
+    return user
   }
 };
 

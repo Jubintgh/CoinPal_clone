@@ -18,7 +18,7 @@ const MyContacts = () => {
     
     //useEffets
     useEffect(() => {
-      dispatch(getAllFriends(id, 'asdasdasd'));
+      dispatch(getAllFriends(id));
     }, [dispatch, id])
 
     //useStates
@@ -52,15 +52,17 @@ const MyContacts = () => {
 
     const unFriend = async (otherUserId) => {
         await dispatch(removeFriend(otherUserId))
+        dispatch(getAllFriends(id))
     }
 
     const acceptFriend = async (userName) => {
         await dispatch(updateOneFriendship(userName, 'accept'))
-        // await dispatch(postFriendship(userName))
+        dispatch(getAllFriends(id))
     }
 
     const rejectFriend = async (userName) => {
-        await dispatch(removeFriend(userName, 'accept'))
+        await dispatch(removeFriend(userName))
+        dispatch(getAllFriends(id))
         // await dispatch(postFriendship(userName))
     }
 

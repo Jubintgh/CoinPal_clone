@@ -1,5 +1,6 @@
 import requests
 from flask import Blueprint, request
+from sqlalchemy.sql.expression import null
 from flask_login import login_required, current_user
 from app.models import Friend, User, db
 from sqlalchemy import and_
@@ -32,10 +33,17 @@ def get_friends():
         add_friend = User.query.filter((User.id == friend.to_user_id)).first() #gets user instances
         friends_list.append(add_friend)
 
+    #requesting
+    raw_friend_user_requests = Friend.query.filter(and_((Friend.from_user_id == id),
+                                                        (Friend.status == 0))).all() #gets friend request instances from current user
+    friend_user_requests = []
+    for friend in raw_friend_user_requests:
+        add_friend = User.query.filter((User.id == friend.to_user_id)).first() #gets user instances
+        friend_user_requests.append(add_friend)
 
-    ## requests
+    ## requested
     raw_friend_requests = Friend.query.filter(and_(Friend.to_user_id == id,
-                                                   Friend.status == 0)).all() #gets friend request instances
+                                                   Friend.status == 0)).all() #gets friend request instances to current user
     friends_requests = []
     for friend in raw_friend_requests:
         add_friend_req = User.query.filter((User.id == friend.from_user_id)).first() #gets user instances
@@ -54,8 +62,12 @@ def get_friends():
                             "last_name" : friend.last_name, 
                             "profile_img": friend.img_url, 
                             "user_name": friend.username
-                        } for friend in  friends_requests ]
-            }
+                        } for friend in  friends_requests ],
+            'curr_friend_requests': [
+                        {
+                            "user_name": friend.username
+                        } for friend in  friend_user_requests ]
+        }
 
 @friend_routes.route('/', methods=['POST'])
 # @login_required
@@ -142,8 +154,8 @@ def delete_friendship():
     friend_instance2 = Friend.query.filter(and_(Friend.from_user_id == addresee_user_id, 
                                             Friend.to_user_id == addresser_user_id)).first()
 
-    db.session.delete(friend_instance1)
-    db.session.delete(friend_instance2)
+    db.session.delete(friend_instance1) if friend_instance1 else null
+    db.session.delete(friend_instance2) if friend_instance2 else null
     db.session.commit()
     
     return to_user.to_dict()

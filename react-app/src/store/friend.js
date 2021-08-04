@@ -1,6 +1,7 @@
 //constant
 const GET_FRIENDS = 'friend/GET_FRIENDS';
-const GET_FRIEND_REQUESTS = 'friend/GET_FRIEND_REQUESTS'
+const GET_FRIEND_REQUESTS = 'friend/GET_FRIEND_REQUESTS';
+const GET_PENDING_REQUESTS = 'friend/GET_PENDING_REQUESTS';
 const SET_FRIEND = 'friend/SET_FRIEND';
 const UPDATE_FRIEND = 'friend/UPDATE_FRIEND';
 const REMOVE_FRIEND = 'friend/REMOVE_FRIEND';
@@ -13,6 +14,11 @@ const getFriends = (friends) => ({
 const getFriendReqs = (friendReqs) => ({
     type: GET_FRIEND_REQUESTS,
     payload: friendReqs
+})
+
+const getFriendPends = (friendPends) => ({
+    type: GET_PENDING_REQUESTS,
+    payload: friendPends
 })
 
 const setFriendship = (friend) => ({
@@ -42,6 +48,7 @@ export const getAllFriends = () => async (dispatch) => {
             return;
         }
         dispatch(getFriends(data.friends))
+        dispatch(getFriendPends(data.curr_friend_requests))
         dispatch(getFriendReqs(data.friend_requests))
     }
 }
@@ -81,6 +88,7 @@ export const updateOneFriendship = (otherUserUserName, type) => async (dispatch)
             return;
         }
         dispatch(setFriendship(data))
+        // dispatch(updateFriendship(data))
     }
 }
 
@@ -105,7 +113,8 @@ export const removeFriend = (otherUserName) => async (dispatch) => {
 
 const initialState = {
     "friendsList": [],
-    "friendsReqs": []
+    "friendsReqs": [],
+    "friendsPends": []
 }
 
 export default function reducer(state = initialState, action){
@@ -124,6 +133,15 @@ export default function reducer(state = initialState, action){
             newState = {...state}
 
             newState.friendsReqs = action.payload.reduce((friend, el) => {
+                friend[el.user_name] = el;
+                return friend;
+            }, {})
+            return newState
+
+        case GET_PENDING_REQUESTS:
+            newState = {...state}
+
+            newState.friendsPends = action.payload.reduce((friend, el) => {
                 friend[el.user_name] = el;
                 return friend;
             }, {})

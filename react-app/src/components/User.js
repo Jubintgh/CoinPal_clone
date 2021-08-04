@@ -5,34 +5,42 @@ import { getAllFriends, postFriendship, updateOneFriendship ,removeFriend} from 
 
 function User() {
   const [user, setUser] = useState({});
-  const { userName }  = useParams();
+  const { username }  = useParams();
   const dispatch = useDispatch();
 
   const currUser = useSelector((state) => state.session.user);
-  let friendsList = useSelector(state => state.friends);
+  let friendsList = useSelector(state => state.friends.friendsList);
+  let pendingReqs = useSelector(state => state.friends.friendsPends);
 
   const id = Number(currUser.id);
 
   useEffect(() => {
-    if (!userName) {
+    if (!username) {
       return(
         <h1>Username Does not exist!</h1>
       );
     }
     (async () => {
-      const response = await fetch(`/api/users/${userName}`);
+      const response = await fetch(`/api/users/${username}`);
       const user = await response.json();
       setUser(user);
       dispatch(getAllFriends(id));
     })();
-    }, [dispatch, userName]);
+    }, [dispatch, username]);
 
   if (!user) {
     return null;
   }
 
-  const isFriend = (userName) => {
-    if(friendsList[userName]){
+  const isFriend = (username) => {
+    if(friendsList[username]){
+      return true
+    }
+    return false
+  }
+
+  const requestedFriend = (userName) => {
+    if(userName in pendingReqs){
       return true
     }
     return false
@@ -40,10 +48,12 @@ function User() {
 
   const addFriend = async (userName) => {
     await dispatch(postFriendship(userName))
+    dispatch(getAllFriends(id));
   }
 
   const unfriend = async (otherUserId) => {
     await dispatch(removeFriend(otherUserId))
+    dispatch(getAllFriends(id));
   }
 
   const blockUser = async (otherUserId) => {
@@ -56,7 +66,7 @@ function User() {
             <img id='profile_pic' src={user.img} alt="profile_pic" className=""/>
             <p className={'real_name'}>{user.first_name} {user.last_name}</p>
             <p className={'user_name'}>{user.username}</p>
-            <button onClick={e => isFriend(user.username) ? unfriend(user.username) : addFriend(user.username)}>{isFriend(user.username) ? 'Remove friend' : 'Add as friend'}</button>
+            {requestedFriend(user.username) ? <button disabled={true}>Pending request</button> : <button onClick={e => isFriend(user.username) ? unfriend(user.username) : addFriend(user.username)}>{isFriend(user.username) ? 'Remove friend' : 'Add as friend'}</button>}
             {/* <button onClick={e => blockUser(user.username)}>block</button> */}
         </div>
     </div>

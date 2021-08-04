@@ -10,6 +10,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import SendNrequestForm from './components/Transaction/SendNrequest'
 import Activity from './components/Activity/Activity'
+import MyContacts from './components/Contacts/Contacts';
 import { authenticate } from './store/session';
 
 function App() {
@@ -31,6 +32,12 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
+        <Route path='/login' exact={true}>
+          <LoginForm />
+        </Route>
+        <Route path='/sign-up' exact={true}>
+          <SignUpForm />
+        </Route>
         <Route path='/my/wallet' exact={true}>
           <MyWallet />
         </Route>
@@ -40,14 +47,11 @@ function App() {
         <Route path='/my/transaction/history' exact={true}>
           <Activity />
         </Route>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
+        <Route path='/my/contacts' exact={true}>
+          <MyContacts />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+          <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />

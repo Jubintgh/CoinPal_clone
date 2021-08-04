@@ -55,10 +55,9 @@ export const postTransaction = (userId, transaction) => async (dispatch) => {
     });
     if (response.ok){
         const data = await response.json();
-        if(data.error){
-            return;
+        if(data.errors){
+            return data;
         }
-
         dispatch(setTransaction(data))
     }
 }
@@ -106,6 +105,7 @@ const initialState = {}
 
 export default function reducer(state = initialState, action){
     let newState;
+    
     switch(action.type){
         case GET_TRANSACTIONS:
             return { 
@@ -114,7 +114,7 @@ export default function reducer(state = initialState, action){
         case SET_TRANSACTION:
             return { 
                 ...state,
-                alltransactions: action.payload
+                alltransactions:[action.payload]
             }
         case UPDATE_TRANSACTION:
             return { 

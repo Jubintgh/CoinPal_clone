@@ -1,3 +1,17 @@
+.Activity__main{
+    display : flex;
+    justify-content: center;
+
+}
+
 .transaction__container{
-    border-bottom: solid black;
+    display : flex;
+    margin: 1vw;
+    border:1px solid lightgrey;
+    background-color: whitesmoke;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    flex-direction: column;
+    width: 80vw;
+    justify-content: flex-start;
 }

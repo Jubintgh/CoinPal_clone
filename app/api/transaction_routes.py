@@ -7,7 +7,7 @@ from decimal import Decimal
 from .user_routes import validation_errors_to_error_messages
 
 
-transaction_routes = Blueprint('transactions' ,__name__)
+transaction_routes = Blueprint('transactions', __name__)
 
 def db_errors_to_error_messages(errtype, error):
     """
@@ -66,7 +66,7 @@ def get_transactions(id):
 
     transactions_all = transactions_debit + transactions_credit
 
-    return {'transactions': [user_transaction.to_dict() for user_transaction in transactions_all]}
+    return {'transactions': [user_transaction.front_end_to_dict() for user_transaction in transactions_all]}
 
 
 @transaction_routes.route('/<int:id>/type/<filter_t>', methods=['POST'])
@@ -80,12 +80,11 @@ async def post_transactions(id, filter_t):
 
     form = SendFundsForm()
 
-
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data, "DATAAA")
     if form.validate_on_submit():
         if transaction_type == 'pay':
-            from_user_id = int(form.data['from_user_id'])
+            # from_user_id = int(form.data['from_user_id'])
+            from_user_id = current_user.id
             
             """
             find to user id by username vvvvv
@@ -99,7 +98,8 @@ async def post_transactions(id, filter_t):
             """
 
         elif transaction_type == 'request':
-            to_user_id = int(form.data['from_user_id'])
+            # to_user_id = int(form.data['from_user_id'])
+            to_user_id = current_user.id
 
             """
             find id by username vvvvv
@@ -111,6 +111,7 @@ async def post_transactions(id, filter_t):
             """
             find id by username ^^^^
             """
+
         else:
             return { "errors": ["Something went wrong, please try again"]}
 
@@ -138,18 +139,16 @@ async def post_transactions(id, filter_t):
             if status == 1:
                 new_transaction.transaction_status = 1
                 db.session.commit()
-                return {'transactions': [new_transaction.to_dict()]}
+                return new_transaction.front_end_to_dict()
             elif status == 2:
                 return {'errors': db_errors_to_error_messages('Balance', 'insufficient funds')}, 200
 
         #For request type transactions
         elif transaction_status == 3:
             db.session.commit()
-            print(new_transaction.to_dict(), "NEW TRANSACTION REQ")
-            return {'transactions': [new_transaction.to_dict()]}
+            return {'transactions': [new_transaction.front_end_to_dict()]}
     
     new_transaction.transaction_status = 2
-    print(form.errors, "THESE ARE ERRORS")
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -167,7 +166,7 @@ def update_transactions(id):
     if user_id == transaction.to_user_id and transaction.transaction_status == 3:
         transaction.transaction_status = 2
         db.session.commit()
-        return {'transactions': 'success'}
+        return {'transactions': [transaction.to_dict()]}
     return {'transaction': 'something went wrong'}
 
 

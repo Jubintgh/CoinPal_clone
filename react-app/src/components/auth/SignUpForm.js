@@ -9,16 +9,16 @@ const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [imgUrl, setImgUrl] = useState('')
+  const [first_name, setFirstName] = useState('')
+  const [last_name, setLastName] = useState('')
+  const [img_url, setImgUrl] = useState('')
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(username, email, password, first_name, last_name, img_url));
       if (data) {
         setErrors(data)
       }
@@ -105,7 +105,7 @@ const SignUpForm = () => {
           type='text'
           name='first_name'
           onChange={updateFirstName}
-          value={firstName}
+          value={first_name}
           required={true}
         ></input>
       </div>
@@ -115,7 +115,7 @@ const SignUpForm = () => {
           type='text'
           name='last_name'
           onChange={updateLastName}
-          value={lastName}
+          value={last_name}
           required={true}
         ></input>
       </div>
@@ -125,7 +125,7 @@ const SignUpForm = () => {
           type='text'
           name='img_url'
           onChange={updateImgUrl}
-          value={imgUrl}
+          value={img_url}
           required={true}
         ></input>
       </div>

@@ -2,32 +2,32 @@ from app.models import db, Transaction
 
 def seed_transactions():
     transaction1 = Transaction(
-        from_user_id = 5,
-        to_user_id = 6,
+        from_user_id = 1,
+        to_user_id = 2,
         amount= 2400,
         transaction_status=0,
         crypto_type='Ether'
     )
 
     transaction2 = Transaction(
-        from_user_id = 5,
-        to_user_id = 7,
+        from_user_id = 1,
+        to_user_id = 3,
         amount= 1400,
         transaction_status=0,
         crypto_type='Bitcoin'
     )
 
     transaction3 = Transaction(
-        from_user_id = 6,
-        to_user_id = 5,
+        from_user_id = 3,
+        to_user_id = 1,
         amount= 4400,
         transaction_status=0,
         crypto_type='Ether'
     )
 
     transaction4 = Transaction(
-        from_user_id = 8,
-        to_user_id = 5,
+        from_user_id = 2,
+        to_user_id = 1,
         amount= 5400,
         transaction_status=0,
         crypto_type='Ether'

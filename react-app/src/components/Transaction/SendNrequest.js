@@ -5,11 +5,7 @@ import { useEffect, useState } from 'react';
 import { getAllTransactions, postTransaction } from '../../store/transaction';
 
 const MyWallet = () => {
-    const { userId } = useParams();
-
-    
     const { user } = useSelector((state) => state.session);
-
 
     const id = Number(user.id);
     const history = useHistory();
@@ -17,10 +13,8 @@ const MyWallet = () => {
 
     //useEffets
     useEffect(() => {
-      dispatch(getAllTransactions(id));
+      getAllTransactions(id);
     }, [dispatch, id])
-
-
     
     //useStates
     const [errors, setErrors] = useState([]);
@@ -40,23 +34,24 @@ const MyWallet = () => {
         "amount": amount,
         "crypto_type": cryptoType
       }))
-      
       if (result){
         if(result.errors){
-          let errs = Object.keys(result.errors)
+          let errs = Object.values(result.errors)
           setErrors(errs)
+          return
         } else {
           history.push('/');
         }
-      } 
+      }
     }
 
     return (
         <form onSubmit={onTransaction}>
-            {errors && errors.forEach(err => (
-              <li>{err}</li>
+            <div>
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
             ))}
-            <p>{toUserName}</p>
+            </div>
             <div className="send-crypto">
                 <h3>Send Crypto!</h3>
                 <input onChange={e => settoUserName(e.target.value)} placeholder='enter @username'/>
@@ -69,8 +64,8 @@ const MyWallet = () => {
                     <option value='USDCoin'>USD coin</option>
                 </select>
             </div>
-
-            <button>Send</button>
+            
+            <button type='submit'>Send</button>
         </form>
     );
 }

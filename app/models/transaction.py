@@ -1,5 +1,5 @@
 from .db import db
-
+from .user import User
 
 
 
@@ -27,6 +27,22 @@ class Transaction(db.Model):
             'transaction_id': self.id,
             'from_user_id': self.from_user_id,
             'to_user_id': self.to_user_id,
+            'amount': str(self.amount),
+            'transaction_status': self.transaction_status,
+            'crypto_type': self.crypto_type
+        }
+
+    def front_end_to_dict(self):
+
+        to_user_username = User.query.get(self.to_user_id)
+        to_user_username = to_user_username.username
+        from_user_username = User.query.get(self.from_user_id)
+        from_user_username = from_user_username.username
+        
+        return{
+            'transaction_id': self.id,
+            'from_user_id': from_user_username,
+            'to_user_id': to_user_username,
             'amount': str(self.amount),
             'transaction_status': self.transaction_status,
             'crypto_type': self.crypto_type

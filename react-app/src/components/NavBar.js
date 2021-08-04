@@ -46,8 +46,8 @@ const NavBar = () => {
             <img src='https://user-images.githubusercontent.com/73211975/127380259-8872d61e-851a-4aa5-8152-baec2618e00d.png' alt='logo' id='navbar__logo' />
           </li>
           <li className="navbar__link">
-            <NavLink to='/discover' exact={true}  activeClassName='active'>
-              Home
+            <NavLink to='/my/contacts' exact={true}  activeClassName='active'>
+              Contacts
             </NavLink>
           </li>
           <li className="navbar__link">

@@ -59,6 +59,11 @@ const MyContacts = () => {
         // await dispatch(postFriendship(userName))
     }
 
+    const rejectFriend = async (userName) => {
+        await dispatch(removeFriend(userName, 'accept'))
+        // await dispatch(postFriendship(userName))
+    }
+
     return (
         <div id='contacts_page'>
             <div className='contact_request_container'>
@@ -73,6 +78,7 @@ const MyContacts = () => {
                                     <p className={'real_name'}>{user.first_name} {user.last_name}</p>
                                     <p className={'user_name'}>{user.user_name}</p>
                                     <button onClick={(e) => acceptFriend(user.user_name)}>accept friend request</button>
+                                    <button onClick={(e) => rejectFriend(user.user_name)}>reject friend request</button>
                                 </div>
                             </div>
                             // </div>
@@ -82,8 +88,8 @@ const MyContacts = () => {
             </div>
 
 
-            <h5>Contacts</h5>
             <div className='contacts_container'>
+            <h5>Contacts</h5>
             {
               friendsList && friendsList.map((friend, idx) => {
                 return (

@@ -29,15 +29,16 @@ const MyWallet = () => {
 
             <div className="wallet-leftbar">
                 <ul className="wallet_leftbar--coinholder">
-                    <input className="wallet_leftbar--coinselector" type="image" alt="ethereum_logo" src="https://user-images.githubusercontent.com/73211975/127550815-431bd4d7-d17f-4740-8b83-2e0b07092dbe.png" value='Bitcoin' onClick={e => setCurrCoin({
+                    <input className="wallet_leftbar--logo" type="image" alt="wallet_logo" src="https://user-images.githubusercontent.com/73211975/128096175-c7a6480a-8aec-45d8-bb2c-357c1f509976.png" value='Bitcoin'/>
+                    <input className="wallet_leftbar--coinselector" type="image" alt="Bitcoin_logo" src="https://user-images.githubusercontent.com/73211975/127550815-431bd4d7-d17f-4740-8b83-2e0b07092dbe.png" value='Bitcoin' onClick={e => setCurrCoin({
                         "coin": e.target.value,
                         "logo": "https://user-images.githubusercontent.com/73211975/127550815-431bd4d7-d17f-4740-8b83-2e0b07092dbe.png"
                         })}/>
-                    <input className="wallet_leftbar--coinselector" type="image" alt="ethereum_logo" src="https://user-images.githubusercontent.com/73211975/127550925-a3e2eb4e-8c52-4af3-81cf-e696bd176175.png" value='Ethereum' onClick={e => setCurrCoin({
+                    <input className="wallet_leftbar--coinselector" type="image" alt="Ethereum_logo" src="https://user-images.githubusercontent.com/73211975/127550925-a3e2eb4e-8c52-4af3-81cf-e696bd176175.png" value='Ethereum' onClick={e => setCurrCoin({
                         "coin": e.target.value,
                         "logo": "https://user-images.githubusercontent.com/73211975/127550925-a3e2eb4e-8c52-4af3-81cf-e696bd176175.png"
                         })}/>
-                    <input className="wallet_leftbar--coinselector" type="image" alt="ethereum_logo" src="https://user-images.githubusercontent.com/73211975/127550886-172c26da-addb-4eac-8e73-ea0c0d89aad7.png" value='USD-Coin' onClick={e => setCurrCoin({
+                    <input className="wallet_leftbar--coinselector" type="image" alt="USD-Coin_logo" src="https://user-images.githubusercontent.com/73211975/127550886-172c26da-addb-4eac-8e73-ea0c0d89aad7.png" value='USD-Coin' onClick={e => setCurrCoin({
                         "coin": e.target.value,
                         "logo": "https://user-images.githubusercontent.com/73211975/127550886-172c26da-addb-4eac-8e73-ea0c0d89aad7.png"
                         })}/>

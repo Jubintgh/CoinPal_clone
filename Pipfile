@@ -9,7 +9,7 @@ gunicorn = "==20.1.0"
 itsdangerous = "==2.0.1"
 python-dotenv = "==0.14.0"
 six = "==1.15.0"
-Flask = {extras = ["async"], version = "*"}
+Flask = {version = "==2.0.1", extras = ["async"]}
 Flask-Cors = "==3.0.8"
 Flask-SQLAlchemy = "==2.5.1"
 Flask-WTF = "==0.15.1"
@@ -28,9 +28,10 @@ Mako = "==1.1.4"
 email-validator = "==1.1.3"
 dnspython = "==2.1.0"
 idna = "==3.2"
-async = "*"
-asyncio = "*"
+async = "==0.6.2"
+asyncio = "==3.4.3"
 requests = "*"
+asgiref = "==3.4.1"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"

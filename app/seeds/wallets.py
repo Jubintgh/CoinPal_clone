@@ -5,22 +5,28 @@ from app.models import CryptoWallet, db
 
 # Adds a demo user, you can add other users here if you want
 def seed_wallets():
-        wallet5 = CryptoWallet(
+        wallet1 = CryptoWallet(
             user_id=1
         )
-        wallet6 = CryptoWallet(
+        wallet2 = CryptoWallet(
             user_id=2
         )
-        wallet7 = CryptoWallet(
+        wallet3 = CryptoWallet(
             user_id=3
         )
-        wallet8 = CryptoWallet(
+        wallet4 = CryptoWallet(
             user_id=4
+        )
+        wallet5 = CryptoWallet(
+            user_id=5
+        )
+        wallet6 = CryptoWallet(
+            user_id=6
         )
 
 
 
-        db.session.add_all([wallet5, wallet6, wallet7, wallet8])
+        db.session.add_all([wallet1, wallet2, wallet3, wallet4, wallet5, wallet6])
         db.session.commit()
 
 

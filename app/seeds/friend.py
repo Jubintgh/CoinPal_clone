@@ -38,7 +38,7 @@ def seed_friends():
         status=0
     )
 
-    db.session.add_all([friend1, friend2, friend3])
+    db.session.add_all([friend1, friend2, friend3, friend4, friend5, friend6])
     db.session.commit()
 
 

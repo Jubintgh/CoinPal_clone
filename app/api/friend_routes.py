@@ -137,10 +137,13 @@ def delete_friendship():
     addresee_user_id = to_user.id
 
 
-    friend_instance = Friend.query.filter(and_(Friend.from_user_id == addresser_user_id, 
+    friend_instance1 = Friend.query.filter(and_(Friend.from_user_id == addresser_user_id, 
                                                Friend.to_user_id == addresee_user_id)).first()
+    friend_instance2 = Friend.query.filter(and_(Friend.from_user_id == addresee_user_id, 
+                                            Friend.to_user_id == addresser_user_id)).first()
 
-    db.session.delete(friend_instance)
+    db.session.delete(friend_instance1)
+    db.session.delete(friend_instance2)
     db.session.commit()
     
     return to_user.to_dict()

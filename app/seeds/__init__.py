@@ -13,10 +13,9 @@ seed_commands = AppGroup('seed')
 @seed_commands.command('all')
 def seed():
     seed_users()
-    seed_transactions()
     seed_wallets()
     seed_friends()
-
+    seed_transactions()
     # Add other seed functions here
 
 

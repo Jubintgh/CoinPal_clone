@@ -23,6 +23,9 @@ const SignUpForm = () => {
         setErrors(data)
       }
     }
+    else {
+      setErrors(['passwords don\'t match'])
+    }
   };
 
   const updateUsername = (e) => {
@@ -57,7 +60,7 @@ const SignUpForm = () => {
 
   return (
     <form onSubmit={onSignUp}>
-      <div>
+      <div className="errors__class">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}

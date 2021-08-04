@@ -144,12 +144,9 @@ export default function reducer(state = initialState, action){
         case REMOVE_FRIEND:
             newState = initialState;
             newState = {...state }
-            console.log(newState.friendsList[action.payload.username], "THIS IS DELETED")
+
             delete newState.friendsList[action.payload.username]
-            
-            // for(let friend in state.friendsList){
-            //     if(friend !== action.payload.username) newState.friendsList[friend] = state.friendsList[friend]
-            // }
+
             return newState
 
         default:

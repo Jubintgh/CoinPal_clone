@@ -100,9 +100,11 @@ const MyContacts = () => {
 
                         <div className='signle_contact'>
                             <img id='profile_pic' src={friend.profile_img} alt="profile_pic" className=""/>
-                            <p className={'real_name'}>{friend.first_name} {friend.last_name}</p>
-                            <p className={'user_name'}>{friend.user_name}</p>
-                            <button onClick={(e) => unFriend(friend.user_name)}>Remove friend</button>
+                                <div className='name_username_container'>
+                                    <p className={'real_name'}>{friend.first_name} {friend.last_name}</p>
+                                    <p className={'user_name'}>@{friend.user_name}</p>
+                                </div>
+                            <button className={'unfriend_button'} onClick={(e) => unFriend(friend.user_name)}>Remove this contact</button>
                         </div>
                     </div>
                     // </div>
@@ -116,4 +118,3 @@ const MyContacts = () => {
   
   
 export default MyContacts;
-  

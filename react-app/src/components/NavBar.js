@@ -65,14 +65,6 @@ const NavBar = () => {
               Send and Request
             </NavLink>
           </li>
-          {/* <li className="navbar__link">
-            <NavLink to={`/users/${user.id}`} exact={true} activeClassName='active'>
-              Profile
-            </NavLink>
-          </li> */}
-          {/* <li className="navbar__link">
-              <img alt="profile-pic" src={`${profImage}`} style={{height:'65px', width:'65px', 'borderRadius':'50%', margin: '5px', marginTop : '10px', objectFit: 'cover'}}/>
-          </li> */}
           <li className="navbar__button">
             <LogoutButton />
           </li>
@@ -80,10 +72,9 @@ const NavBar = () => {
     )
   }
   return (
-    // ask Tony about this tomorrow
     <nav>
       { user? <div className="nav-logo">
-          <NavLink id="navbar__brand-home" to='/discover' exact={true} activeClassName='active'>
+          <NavLink id="navbar__brand-home" to='/' exact={true} activeClassName='active'>
           </NavLink>
         </div> : <div className="nav-logo">
           <NavLink id="navbar__brand-home" to='/' exact={true} activeClassName='active'>

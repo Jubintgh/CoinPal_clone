@@ -8,7 +8,7 @@ const MyWallet = () => {
   const { user } = useSelector((state) => state.session);
 
   const id = Number(user.id);
-  const history = useHistory();
+  let history = useHistory();
   const dispatch = useDispatch();
 
   //useEffets
@@ -35,13 +35,23 @@ const MyWallet = () => {
       "amount": amount,
       "crypto_type": cryptoType
     }))
+
     if (result){
       if(result.errors){
+        setErrors([])
         let errs = Object.values(result.errors)
         setErrors(errs)
         return
       } else {
-        history.push('/');
+        history.push('/my/transaction/history')
+        // return(
+          // <>
+          //   <div>Your transaction was submitted! please check the activity for updates</div>
+          //   <h4>{result.from_user_id}</h4>
+          //   <h4>{result.to_user_id}</h4>
+          //   <button href={'/my/SendNrequest'}>back</button>
+          // </>
+        // )
       }
     }
   }

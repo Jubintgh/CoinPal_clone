@@ -58,7 +58,8 @@ export const postTransaction = (type ,userId, transaction) => async (dispatch) =
         if(data.errors){
             return data;
         }
-        dispatch(setTransaction(data))
+        await dispatch(setTransaction(data))
+        return data
     }
 }
 

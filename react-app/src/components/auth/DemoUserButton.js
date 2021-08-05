@@ -12,8 +12,8 @@ const DemoUserButton = () => {
 
   const onDemoSignIn = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
-    history.push('/discover');
+    await dispatch(login(email, password));
+    history.push('/');
   };
 
   return <button onClick={onDemoSignIn}>Demo User</button>;

@@ -1,6 +1,6 @@
 import './Activity.css'
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, useHistory, Link } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getAllTransactions, deleteTransaction, rejectTransaction} from '../../store/transaction';
 
@@ -10,7 +10,6 @@ const Activity = () => {
     const currUsername = useSelector(state => state.session.user.username) 
     const id = Number(user.id);
 
-    const history = useHistory();
     const dispatch = useDispatch();
 
     //useStates
@@ -31,18 +30,18 @@ const Activity = () => {
     }
 
     const rejectReq = async (id, transactionId) => {
-      const result = await dispatch(rejectTransaction(id,transactionId))
-
-      setSwitcher((prev) => !prev)
+      await dispatch(rejectTransaction(id,transactionId))
+      dispatch(getAllTransactions)
+      // setSwitcher((prev) => !prev)
       
-      if (result){
-        if(result.errors){
-          let errs = Object.keys(result.errors)
-          setErrors(errs)
-        } else {
-          history.push('/');
-        }
-      } 
+      // if (result){
+      //   if(result.errors){
+      //     let errs = Object.keys(result.errors)
+      //     setErrors(errs)
+      //   } else {
+      //     history.push('/');
+      //   }
+      // } 
     }
 
     const numToMonth = (num) => {
@@ -76,7 +75,6 @@ const Activity = () => {
     
 
     const canCancel = (transaction) => {
-      console.log(currUsername)
       if((transaction.transaction_status === 3) && (transaction.from_username === currUsername)) return true
       return false
     }
@@ -93,9 +91,9 @@ const Activity = () => {
           })}
             { transactions && transactions.map((transact, idx) => {
                   return (
-                    <div className="Activity__main">
+                    <div key={idx} className="Activity__main">
                       <img className='transaction_logo' alt='logo' src={transactionStatLogo(transact.transaction_status)}/>
-                      <div className="transaction__container" key={idx} value={transact.transaction_id}>
+                      <div className="transaction__container" value={transact.transaction_id}>
                           <p className='transaction__status'>{transact.transaction_status === 0 ? 'Pending': transact.transaction_status === 1 ? 'Completed' : transact.transaction_status === 2 ? 'Rejected' : transact.transaction_status === 3 ? 'Request' : 'Loading...'}</p>
                               <div>
                                   <p className={'transact_from_user'}>From: {transact.from_username}</p>

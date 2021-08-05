@@ -166,7 +166,7 @@ def update_transactions(id):
     if user_id == transaction.to_user_id and transaction.transaction_status == 3:
         transaction.transaction_status = 2
         db.session.commit()
-        return {'transactions': [transaction.to_dict()]}
+        return transaction.front_end_to_dict()
     return {'transaction': 'something went wrong'}
 
 

@@ -1,6 +1,6 @@
 import './Wallet.css'
-import { useSelector, useDispatch, connectAdvanced } from 'react-redux';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+// import { useParams, useHistory, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getWallet } from '../../store/wallet';
 
@@ -11,7 +11,7 @@ const MyWallet = () => {
     const usdCoinBalance = useSelector((state) => state.wallet.wallet_balances.usd_coin_balance);
 
     const dispatch = useDispatch();
-    const history = useHistory();
+    // const history = useHistory();
     const id = Number(user.id);
 
     //useStates

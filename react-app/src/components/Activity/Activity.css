@@ -21,6 +21,8 @@
 
 .transaction__container{
     display : flex;
+    box-sizing: border-box;
+    position: relative;
     flex-direction: column;
     margin-left: 5vw;
     margin-right: 5vw;

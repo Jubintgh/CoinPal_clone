@@ -1,8 +1,8 @@
 import './Contacts.css'
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, useHistory, Link } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getAllFriends, postFriendship, updateOneFriendship,removeFriend} from '../../store/friend';
+import { getAllFriends, updateOneFriendship,removeFriend} from '../../store/friend';
 
 const MyContacts = () => {
     const { user } = useSelector((state) => state.session);
@@ -13,7 +13,7 @@ const MyContacts = () => {
 
     const id = Number(user.id);
 
-    const history = useHistory();
+    // const history = useHistory();
     const dispatch = useDispatch();
     
     //useEffets
@@ -22,7 +22,7 @@ const MyContacts = () => {
     }, [dispatch, id])
 
     //useStates
-    const [errors, setErrors] = useState([]);
+    // const [errors, setErrors] = useState([]);
     const [ReqDisplay, setReqDisplay] = useState(false)
     // const [toUserName, settoUserName] = useState(null)
     // const [amount, setAmount] = useState(null)

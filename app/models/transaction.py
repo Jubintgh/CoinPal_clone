@@ -41,8 +41,8 @@ class Transaction(db.Model):
         
         return{
             'transaction_id': self.id,
-            'from_user_id': from_user_username,
-            'to_user_id': to_user_username,
+            'from_username': from_user_username,
+            'to_username': to_user_username,
             'amount': str(self.amount),
             'transaction_status': self.transaction_status,
             'crypto_type': self.crypto_type

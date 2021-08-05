@@ -52,11 +52,11 @@ const Activity = () => {
 
     const canCancel = (transaction) => {
       console.log(currUsername)
-      if((transaction.transaction_status === 3) && (transaction.from_user_id === currUsername)) return true
+      if((transaction.transaction_status === 3) && (transaction.from_username === currUsername)) return true
       return false
     }
     const canReject = (transaction) => {
-      if((transaction.transaction_status === 3) && (transaction.to_user_id === currUsername)) return true
+      if((transaction.transaction_status === 3) && (transaction.to_username === currUsername)) return true
       return false
     }
 
@@ -71,8 +71,8 @@ const Activity = () => {
                       <div className="transaction__container" key={idx} value={transact.transaction_id}>
                           <p className='transaction__status'>{transact.transaction_status === 0 ? 'Pending': transact.transaction_status === 1 ? 'Completed' : transact.transaction_status === 2 ? 'Rejected' : transact.transaction_status === 3 ? 'Request' : 'Loading...'}</p>
                               <div>
-                                  <p className={'transact_from_user'}>From: {transact.from_user_id}</p>
-                                  <p className={'transact_to_user'}>To: {transact.to_user_id}</p>
+                                  <p className={'transact_from_user'}>From: {transact.from_username}</p>
+                                  <p className={'transact_to_user'}>To: {transact.to_username}</p>
                                   <p className={'transact_amount'}>Amount: {transact.amount}</p>
                                   <p className={'transact_type'}>Crypto: {transact.crypto_type}</p>
                               </div>

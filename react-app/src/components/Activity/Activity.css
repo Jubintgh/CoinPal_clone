@@ -38,3 +38,15 @@
     width: 2vw;
     height: 2vw;
 }
+
+.Activity_button{
+    background-color: Transparent;
+    border: none;
+    cursor:pointer;
+    align-self: center;
+    font-weight: bold;
+}
+
+.Activity_button:hover{
+    color: #da2222;
+}

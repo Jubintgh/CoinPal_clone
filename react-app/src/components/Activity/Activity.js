@@ -102,8 +102,11 @@ const Activity = () => {
                                   <p className={'transact_type'}>Crypto: {transact.crypto_type}</p>
                                   <p className={'transact_type'}>time: {`${numToMonth(transact.date.month)} ${transact.date.day} ${transact.date.year}` }</p>
                               </div>
-                          <button style={{visibility: canCancel(transact) ? 'visible': 'hidden'}} onClick={() => cancelReq(id, transact.transaction_id)}>cancel request</button>
-                          <button style={{visibility: canReject(transact) ? 'visible': 'hidden'}} onClick={() => rejectReq(id, transact.transaction_id)}>reject request</button>
+                          
+                          {
+                          canCancel(transact) ? <button className='Activity_button' style={{visibility: canCancel(transact) ? 'visible': 'hidden'}} onClick={() => cancelReq(id, transact.transaction_id)}>cancel request</button> :
+                          canReject(transact) ? <button className='Activity_button' style={{visibility: canReject(transact) ? 'visible': 'hidden'}} onClick={() => rejectReq(id, transact.transaction_id)}>reject request</button> 
+                          : <p/>}
                       </div>
                     </div>
                   )

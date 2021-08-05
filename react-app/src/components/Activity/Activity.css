@@ -17,6 +17,7 @@
     justify-content: center;
     background-color: white;
     width: 50vw;
+    height: 20vh;
 }
 
 .transaction__container{
@@ -27,7 +28,8 @@
     margin-left: 5vw;
     margin-right: 5vw;
     flex-wrap: wrap;
-    height: 10vw;
+    height: fit-content;
+    min-height: 10rem;
     background-color: white;
     border-bottom: dotted gray 0.5px;
     width: 80vw;

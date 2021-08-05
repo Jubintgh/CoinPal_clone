@@ -92,7 +92,7 @@ const Activity = () => {
             { transactions && transactions.map((transact, idx) => {
                   return (
                     <div key={idx} className="Activity__main">
-                      <img className='transaction_logo' alt='logo' src={transactionStatLogo(transact.transaction_status)}/>
+                      <div><img className='transaction_logo' alt='logo' src={transactionStatLogo(transact.transaction_status)}/></div>
                       <div className="transaction__container" value={transact.transaction_id}>
                           <p className='transaction__status'>{transact.transaction_status === 0 ? 'Pending': transact.transaction_status === 1 ? 'Completed' : transact.transaction_status === 2 ? 'Rejected' : transact.transaction_status === 3 ? 'Request' : 'Loading...'}</p>
                               <div>

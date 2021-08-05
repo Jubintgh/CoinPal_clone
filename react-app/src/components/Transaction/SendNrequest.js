@@ -22,7 +22,7 @@ const MyWallet = () => {
   const [amount, setAmount] = useState(null)
   const [fromUserId, setFromUserId] = useState(String(id))
   const [cryptoType, setCryptoType] = useState('Bitcoin')
-  const [type, setType] =useState('request')
+  const [type, setType] =useState('pay')
   
   const onTransaction = async (e) => {
     e.preventDefault();
@@ -72,7 +72,7 @@ const MyWallet = () => {
                 onChange={e => setType(e.target.value)}
               >Select Transaction
                   <option value='request'>request</option>
-                  <option value='pay'>pay</option>
+                  <option value='pay' selected>pay</option>
               </select>
             <button className="fund__input" type='submit'>Send</button>
           </div>

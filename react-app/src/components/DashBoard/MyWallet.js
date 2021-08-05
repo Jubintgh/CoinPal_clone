@@ -50,9 +50,9 @@ const MyWallet = () => {
                     <img alt="logo" className="currcoin__logo" src={currCoin["logo"]}/>
                         <div className="currcoin__balance">CoinPal balance
                             <p>{currCoin.coin === 'Bitcoin' ? bitcoinBalance + ' BitCoin available' : currCoin.coin === 'Ethereum' ? ethereumBalance + ' ETH available' : currCoin.coin === 'USD-Coin' ? usdCoinBalance + ' USD-Coin available' : currCoin === 'Loading...'}</p>
+                            <a href='/my/SendNrequest'>Send Crypto</a> 
+                            {/* <a href='/my/SendNrequest'>Add a crypto</a> */}
                         </div>
-                    <button>Send Crypto</button>
-                    <button>Add a crypto</button>
                 </div>
             </div>
 

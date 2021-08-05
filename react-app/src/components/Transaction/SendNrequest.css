@@ -6,7 +6,7 @@
 .send-crypto{
     display: flex;
     align-self: center;
-    margin: 10vw;
+    margin: 5vw;
     width: 50vw;
     height: 50vw;
     flex-direction: column;

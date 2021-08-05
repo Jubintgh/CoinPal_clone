@@ -1,0 +1,28 @@
+.transaction__form{
+    display: flex;
+    flex-direction: column;
+    background-color: #F4F7FA;
+}
+.send-crypto{
+    display: flex;
+    align-self: center;
+    margin: 10vw;
+    width: 50vw;
+    height: 50vw;
+    flex-direction: column;
+    background-color: white;
+}
+
+.user__name{
+    margin: 2vw;
+    height: 2vw;
+}
+
+.fund__input{
+    margin: 2vw;
+    height: 2vw;
+}
+
+.fund__field{
+    margin: 1em;
+}

@@ -1,4 +1,4 @@
-import './Transaction.css'
+import './SendNrequest.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -47,32 +47,36 @@ const MyWallet = () => {
   }
 
   return (
-      <form onSubmit={onTransaction}>
+      <form className='transaction__form' onSubmit={onTransaction}>
           <div>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
           </div>
           <div className="send-crypto">
-              <h3>Send Crypto!</h3>
-              <input onChange={e => settoUserName(e.target.value)} placeholder='enter @username'/>
-              <input onChange={e => setAmount(e.target.value)} placeholder='enter value'/>
+              <h3 className="fund__field">Send Crypto!</h3>
+              <input className="user__name" onChange={e => settoUserName(e.target.value)} placeholder='enter @username'/>
+              <input className="fund__input" onChange={e => setAmount(e.target.value)} placeholder='enter value'/>
+              <p className="fund__field">Select Crypto type</p>
               <select
+                className="fund__input"
                 onChange={e => setCryptoType(e.target.value)}
               >Select Crypto
                   <option value='Bitcoin'>Bitcoin</option>
                   <option value='Ethereum'>Ethereum</option>
                   <option value='USDCoin'>USD coin</option>
               </select>
+              <p className="fund__field">Transaction type</p>
               <select
+                className="fund__input"
                 onChange={e => setType(e.target.value)}
-              >Select Crypto
+              >Select Transaction
                   <option value='request'>request</option>
                   <option value='pay'>pay</option>
               </select>
+            <button className="fund__input" type='submit'>Send</button>
           </div>
           
-          <button type='submit'>Send</button>
       </form>
   );
 }

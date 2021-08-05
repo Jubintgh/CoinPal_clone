@@ -82,35 +82,18 @@ async def post_transactions(id, filter_t):
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+
+        from_user_id = current_user.id
+        other_user = form.data['to_username']
+        to_user_id = User.query.filter(User.username == other_user).first()
+        to_user_id = to_user_id.id
+
         if transaction_type == 'pay':
-            # from_user_id = int(form.data['from_user_id'])
-            from_user_id = current_user.id
-            
-            """
-            find to user id by username vvvvv
-            """
-            other_user = form.data['to_username']
-            to_user_id = User.query.filter(User.username == other_user).first()
-            to_user_id = to_user_id.id
             transaction_status = 0                              #0:pending 1:accepted 2:rejected 3:requested
-            """
-            find to user id by username ^^^^
-            """
+
 
         elif transaction_type == 'request':
-            # to_user_id = int(form.data['from_user_id'])
-            to_user_id = current_user.id
-
-            """
-            find id by username vvvvv
-            """
-            other_user = form.data['to_username']
-            from_user_id = User.query.filter(User.username == other_user).first()
-            from_user_id = from_user_id.id
             transaction_status = 3                              #0:pending 1:accepted 2:rejected 3:requested
-            """
-            find id by username ^^^^
-            """
 
         else:
             return { "errors": ["Something went wrong, please try again"]}

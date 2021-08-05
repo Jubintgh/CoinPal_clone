@@ -53,8 +53,22 @@ def seed_transactions():
         transaction_status=3,
         crypto_type='Bitcoin'
     )
+    transaction7 = Transaction(
+        from_user_id = 1,
+        to_user_id = 3,
+        amount= 5.213,
+        transaction_status=3,
+        crypto_type='Bitcoin'
+    )
+    transaction8 = Transaction(
+        from_user_id = 1,
+        to_user_id = 2,
+        amount= 15.213,
+        transaction_status=3,
+        crypto_type='Ethereum'
+    )
 
-    db.session.add_all([transaction1, transaction2, transaction3, transaction4, transaction5, transaction6])
+    db.session.add_all([transaction1, transaction2, transaction3, transaction4, transaction5, transaction6, transaction7, transaction8])
     db.session.commit()
 
 

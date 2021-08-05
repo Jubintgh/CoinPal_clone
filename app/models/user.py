@@ -17,16 +17,6 @@ class User(db.Model, UserMixin):
 
     user_cryptowallet = db.relationship("CryptoWallet", uselist=False, back_populates="user")
 
-    # user_friends = db.relationship(
-    #     "User", 
-    #     secondary="friends",
-    #     primaryjoin=("Friend.from_user_id == User.id"),
-    #     secondaryjoin=("Friend.to_user_id == User.id"),
-    #     backref=db.backref("friends", lazy="dynamic"),
-    #     lazy="dynamic",
-    #     cascade="delete, merge, save-update"
-    # )
-
     user_requests_from = db.relationship(
         "Friend",
         foreign_keys="Friend.from_user_id",
@@ -39,15 +29,6 @@ class User(db.Model, UserMixin):
         backref="to_requests",
         cascade="delete, merge, save-update"
     )
-
-    # user_transactions = db.relationship(
-    #     "User", 
-    #     secondary="transactions",
-    #     primaryjoin=("Transaction.from_user_id == User.id"),
-    #     secondaryjoin=("Transaction.to_user_id == User.id"),
-    #     backref=db.backref("transactions", lazy="dynamic"),
-    #     lazy="dynamic"
-    # )
 
     from_user_transactions = db.relationship(
         "Transaction",

@@ -23,6 +23,7 @@ const MyContacts = () => {
 
     //useStates
     const [errors, setErrors] = useState([]);
+    const [ReqDisplay, setReqDisplay] = useState(false)
     // const [toUserName, settoUserName] = useState(null)
     // const [amount, setAmount] = useState(null)
     // const [fromUserId, setFromUserId] = useState(String(id))
@@ -68,34 +69,36 @@ const MyContacts = () => {
 
     return (
         <div id='contacts_page'>
-            <div className='contact_request_container'>
-                {
-                    friendReqList && friendReqList.map((user, idx) => {
+            <div id='contact__navbar'>
+                <button onClick={e => setReqDisplay(!ReqDisplay)} className='friend_req_button'>requests</button>
+            </div>
+            <div className='contacts_container'>
+            {ReqDisplay && <div className='contact_request_container'>
+                { friendReqList && friendReqList.map((user, idx) => {
                         return (
-                            // <div href={`/user/${friend.user_name}`}>
-                            <div className='contacts_container' key={idx}>
-        
-                                <div className='signle_contact'>
-                                    <img id='profile_pic' src={user.profile_img} alt="profile_pic" className=""/>
+                            <div className='profile__container' key={idx}>
+
+                            <div className='signle_contact'>
+                            <img id='profile_pic' src={user.profile_img} alt="profile_pic" className=""/>
+                                <div className='name_username_container'>
                                     <p className={'real_name'}>{user.first_name} {user.last_name}</p>
-                                    <p className={'user_name'}>{user.user_name}</p>
+                                    <p className={'user_name'}>@{user.user_name}</p>
+                                </div>
                                     <button onClick={(e) => acceptFriend(user.user_name)}>accept friend request</button>
                                     <button onClick={(e) => rejectFriend(user.user_name)}>reject friend request</button>
                                 </div>
                             </div>
-                            // </div>
                         )
                     })
                 }
+                </div>}
             </div>
-
 
             <div className='contacts_container'>
             <h5>Contacts</h5>
             {
               friendsList && friendsList.map((friend, idx) => {
                 return (
-                    // <div href={`/user/${friend.user_name}`}>
                     <div className='profile__container' key={idx}>
 
                         <div className='signle_contact'>
@@ -107,7 +110,6 @@ const MyContacts = () => {
                             <button className={'unfriend_button'} onClick={(e) => unFriend(friend.user_name)}>Remove this contact</button>
                         </div>
                     </div>
-                    // </div>
                 )
               })
             }

@@ -6,6 +6,15 @@ a {
     background-color: #F4F7FA;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+}
+
+#contact__navbar{
+    display: flex;
+    position: relative;
+    background-color: white;
+    height:5vw;
+    margin-bottom: 2vw;
 }
 
 .name_username_container{
@@ -18,6 +27,7 @@ a {
     position: relative;
     background-color: white;
     box-sizing: border-box;
+    align-self: center;
 }
 
 .profile__container {
@@ -41,23 +51,36 @@ a {
     margin: 1vw;
     border-radius: 80px;
     justify-self: flex-start;
+    align-self: center;
+    box-shadow: 1px 1px 1px #aaaaaa;
 }
 
 .user_name {
-    justify-self: center;
     color: gray;
+    margin-left: 2vw;
 }
 
 .real_name {
     margin-top: 3vw;
+    margin-left: 1vw;
 }
 .unfriend_button{
     align-self: flex-end;
     background-color: Transparent;
     border: none;
     cursor:pointer;
+    align-self: center;
 }
 
 .unfriend_button:hover{
-    color: black;
+    color: #169bd7;
+}
+
+.friend_req_button{
+    align-self: flex-end;
+    background-color: Transparent;
+    border: none;
+    cursor:pointer;
+    align-self: center;
+    margin-left: 20vw;
 }

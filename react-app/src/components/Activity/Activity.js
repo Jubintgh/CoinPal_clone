@@ -7,6 +7,7 @@ import { getAllTransactions, deleteTransaction, rejectTransaction} from '../../s
 const Activity = () => {
     const { user } = useSelector((state) => state.session);
     const transactions = useSelector(state => state.transactions['alltransactions'])
+    const currUsername = useSelector(state => state.session.user.username) 
     const id = Number(user.id);
 
     const history = useHistory();
@@ -50,11 +51,12 @@ const Activity = () => {
     
 
     const canCancel = (transaction) => {
-      if((transaction.transaction_status === 3) && (transaction.from_user_id === id)) return true
+      console.log(currUsername)
+      if((transaction.transaction_status === 3) && (transaction.from_user_id === currUsername)) return true
       return false
     }
     const canReject = (transaction) => {
-      if((transaction.transaction_status === 3) && (transaction.to_user_id === id)) return true
+      if((transaction.transaction_status === 3) && (transaction.to_user_id === currUsername)) return true
       return false
     }
 

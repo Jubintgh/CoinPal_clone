@@ -129,7 +129,7 @@ async def post_transactions(id, filter_t):
         #For request type transactions
         elif transaction_status == 3:
             db.session.commit()
-            return {'transactions': [new_transaction.front_end_to_dict()]}
+            return new_transaction.front_end_to_dict()
     
     new_transaction.transaction_status = 2
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

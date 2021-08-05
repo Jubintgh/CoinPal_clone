@@ -22,7 +22,7 @@ const MyWallet = () => {
   const [amount, setAmount] = useState(null)
   const [fromUserId, setFromUserId] = useState(String(id))
   const [cryptoType, setCryptoType] = useState('Bitcoin')
-  const [type, setType] =useState('pay')
+  const [type, setType] =useState('request')
   
   const onTransaction = async (e) => {
     e.preventDefault();

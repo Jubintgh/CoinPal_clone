@@ -32,16 +32,6 @@ const Activity = () => {
     const rejectReq = async (id, transactionId) => {
       await dispatch(rejectTransaction(id,transactionId))
       dispatch(getAllTransactions)
-      // setSwitcher((prev) => !prev)
-      
-      // if (result){
-      //   if(result.errors){
-      //     let errs = Object.keys(result.errors)
-      //     setErrors(errs)
-      //   } else {
-      //     history.push('/');
-      //   }
-      // } 
     }
 
     const numToMonth = (num) => {
@@ -92,21 +82,30 @@ const Activity = () => {
             { transactions && transactions.map((transact, idx) => {
                   return (
                     <div key={idx} className="Activity__main">
-                      <div><img className='transaction_logo' alt='logo' src={transactionStatLogo(transact.transaction_status)}/></div>
+                      <img className='transaction_logo' alt='logo' src={transactionStatLogo(transact.transaction_status)}/>
+                      <p className='transaction__status'>{transact.transaction_status === 0 ? 'Pending': transact.transaction_status === 1 ? 'Completed' : transact.transaction_status === 2 ? 'Rejected' : transact.transaction_status === 3 ? 'Request' : 'Loading...'}</p>
                       <div className="transaction__container" value={transact.transaction_id}>
-                          <p className='transaction__status'>{transact.transaction_status === 0 ? 'Pending': transact.transaction_status === 1 ? 'Completed' : transact.transaction_status === 2 ? 'Rejected' : transact.transaction_status === 3 ? 'Request' : 'Loading...'}</p>
                               <div>
                                   <p className={'transact_from_user'}>From: {transact.from_username}</p>
                                   <p className={'transact_to_user'}>To: {transact.to_username}</p>
-                                  <p className={'transact_amount'}>Amount: {transact.amount}</p>
-                                  <p className={'transact_type'}>Crypto: {transact.crypto_type}</p>
-                                  <p className={'transact_type'}>time: {`${numToMonth(transact.date.month)} ${transact.date.day} ${transact.date.year}` }</p>
                               </div>
-                          
                           {
-                          canCancel(transact) ? <button className='Activity_button' style={{visibility: canCancel(transact) ? 'visible': 'hidden'}} onClick={() => cancelReq(id, transact.transaction_id)}>cancel request</button> :
-                          canReject(transact) ? <button className='Activity_button' style={{visibility: canReject(transact) ? 'visible': 'hidden'}} onClick={() => rejectReq(id, transact.transaction_id)}>reject request</button> 
+                            canCancel(transact) ? 
+                            <div className='buttons_container'>
+                            <button className='Activity_button' style={{visibility: canCancel(transact) ? 'visible': 'hidden'}} onClick={() => cancelReq(id, transact.transaction_id)}>Cancel</button> 
+                            </div>
+                            :
+                            canReject(transact) ? 
+                            <div className='buttons_container'>
+                              <button className='Activity_button' style={{visibility: canReject(transact) ? 'visible': 'hidden'}} onClick={() => rejectReq(id, transact.transaction_id)}>Reject</button>
+                              <button className='Activity_button' style={{visibility: canReject(transact) ? 'visible': 'hidden'}} onClick={() => window.location.href='/my/SendNrequest'}>Pay</button> 
+                            </div>
                           : <p/>}
+                      </div>
+                      <div className='amount__container'>
+                            <p className={'transact_type'}>time: {`${numToMonth(transact.date.month)} ${transact.date.day} ${transact.date.year}` }</p>
+                            <p className={'transact_amount'}>Amount: {transact.amount}</p>
+                            <p className={'transact_type'}>Crypto: {transact.crypto_type}</p>
                       </div>
                     </div>
                   )

@@ -17,7 +17,14 @@
     justify-content: center;
     background-color: white;
     width: 50vw;
-    height: 20vh;
+    height: 24vh;
+    border-bottom: thin dotted gray;
+    margin-bottom: 1vh;
+    overflow: auto;
+}
+
+.amount__container{
+    width: 30vw;
 }
 
 .transaction__container{
@@ -27,28 +34,42 @@
     flex-direction: column;
     margin-left: 5vw;
     margin-right: 5vw;
-    flex-wrap: wrap;
+    flex-wrap: row wrap;
     height: fit-content;
     min-height: 10rem;
     background-color: white;
-    border-bottom: dotted gray 0.5px;
     width: 80vw;
     justify-content: flex-start;
 }
 
 .transaction_logo{
+    align-self: center;
+    margin-left: 1vw;
     width: 2vw;
     height: 2vw;
 }
 
+.transaction__status{
+    justify-self: center;
+    color: #169bd7;
+    font-weight: 3;
+}
+
+.buttons_container{
+    margin-top: 9vh;
+}
+
 .Activity_button{
-    background-color: Transparent;
+    background-color: #169bd7;
     border: none;
     cursor:pointer;
     align-self: center;
     font-weight: bold;
+    padding: 1px;
+    width: 10vw;
+    height: 4vh;
 }
 
 .Activity_button:hover{
-    color: #da2222;
+    background-color:rgba(255, 255, 255, 0.589);
 }

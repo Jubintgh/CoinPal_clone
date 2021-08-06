@@ -61,11 +61,6 @@ nav {
     line-height: 80px;
 }
 
-.navbar__link a:hover,a:active { 
-    color: #fff;
-    background-color: rgba(251, 252, 255, 0.39)
-}
-
 .navbar__link a::before {
     content: "";
     position: absolute;

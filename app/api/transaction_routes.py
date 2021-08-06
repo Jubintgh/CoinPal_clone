@@ -85,18 +85,22 @@ async def post_transactions(id, filter_t):
 
         from_user_id = current_user.id
         other_user = form.data['to_username']
-        to_user_id = User.query.filter(User.username == other_user).first()
-        to_user_id = to_user_id.id
+
+        to_user = User.query.filter(User.username == other_user).first()
+        if not to_user:
+            return {'errors': db_errors_to_error_messages('Username', 'Not Found')}, 406
+
+
+        to_user_id = to_user.id
 
         if transaction_type == 'pay':
             transaction_status = 0                              #0:pending 1:accepted 2:rejected 3:requested
-
 
         elif transaction_type == 'request':
             transaction_status = 3                              #0:pending 1:accepted 2:rejected 3:requested
 
         else:
-            return { "errors": ["Something went wrong, please try again"]}
+            return {'errors': db_errors_to_error_messages('Bad Request', 'Please try again')}, 400
 
         """
         grab other transaction data
@@ -124,7 +128,7 @@ async def post_transactions(id, filter_t):
                 db.session.commit()
                 return new_transaction.front_end_to_dict()
             elif status == 2:
-                return {'errors': db_errors_to_error_messages('Balance', 'insufficient funds')}, 200
+                return {'errors': db_errors_to_error_messages('Balance', 'insufficient funds')}, 400
 
         #For request type transactions
         elif transaction_status == 3:
@@ -150,7 +154,7 @@ def update_transactions(id):
         transaction.transaction_status = 2
         db.session.commit()
         return transaction.front_end_to_dict()
-    return {'transaction': 'something went wrong'}
+    return {'errors': 'something went wrong'}
 
 
 @transaction_routes.route('/<int:id>/delete', methods=['DELETE'])

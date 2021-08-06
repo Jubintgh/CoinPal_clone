@@ -60,6 +60,10 @@ export const postTransaction = (type ,userId, transaction) => async (dispatch) =
         }
         await dispatch(setTransaction(data))
         return data
+    } else {
+        const data = await response.json();
+        console.log(data)
+        return data
     }
 }
 

@@ -84,8 +84,8 @@ const MyContacts = () => {
                                     <p className={'real_name'}>{user.first_name} {user.last_name}</p>
                                     <p className={'user_name'}>@{user.user_name}</p>
                                 </div>
-                                    <button onClick={(e) => acceptFriend(user.user_name)}>accept friend request</button>
-                                    <button onClick={(e) => rejectFriend(user.user_name)}>reject friend request</button>
+                                    <button className={'accept_button'} onClick={(e) => acceptFriend(user.user_name)}>accept friend request</button>
+                                    <button className={'accept_button'} onClick={(e) => rejectFriend(user.user_name)}>reject friend request</button>
                                 </div>
                             </div>
                         )

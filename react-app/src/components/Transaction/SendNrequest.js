@@ -35,7 +35,9 @@ const MyWallet = () => {
       "amount": amount,
       "crypto_type": cryptoType
     }))
-
+    if(!result){
+        setErrors('Balance Insufficient')
+    }
     if (result){
       if(result.errors){
         setErrors([])
@@ -44,14 +46,6 @@ const MyWallet = () => {
         return
       } else {
         history.push('/my/transaction/history')
-        // return(
-          // <>
-          //   <div>Your transaction was submitted! please check the activity for updates</div>
-          //   <h4>{result.from_user_id}</h4>
-          //   <h4>{result.to_user_id}</h4>
-          //   <button href={'/my/SendNrequest'}>back</button>
-          // </>
-        // )
       }
     }
   }
@@ -60,13 +54,13 @@ const MyWallet = () => {
       <form className='transaction__form' onSubmit={onTransaction}>
           <div>
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <div className='errors__class' key={ind}>{error}</div>
           ))}
           </div>
-          <div className="send-crypto">
-              <h3 className="fund__field">Send Crypto!</h3>
-              <input className="user__name" onChange={e => settoUserName(e.target.value)} placeholder='enter @username'/>
-              <input className="fund__input" onChange={e => setAmount(e.target.value)} placeholder='enter value'/>
+          <div className='send-crypto'>
+              <h3 className='fund__field'>Send Crypto!</h3>
+              <input type='text' className="user__name" onChange={e => settoUserName(e.target.value)} placeholder='enter @username'/>
+              <input type='number' className="fund__input" onChange={e => setAmount(e.target.value)} placeholder='enter value'/>
               <p className="fund__field">Select Crypto type</p>
               <select
                 className="fund__input"
@@ -79,10 +73,11 @@ const MyWallet = () => {
               <p className="fund__field">Transaction type</p>
               <select
                 className="fund__input"
+                defaultValue={'pay'}
                 onChange={e => setType(e.target.value)}
               >Select Transaction
                   <option value='request'>request</option>
-                  <option value='pay' selected>pay</option>
+                  <option value='pay'>pay</option>
               </select>
             <button className="fund__input" type='submit'>Send</button>
           </div>

@@ -11,6 +11,7 @@ import User from './components/User';
 import SendNrequestForm from './components/Transaction/SendNrequest'
 import Activity from './components/Activity/Activity'
 import MyContacts from './components/Contacts/Contacts';
+import Footer from './components/Footer/Footer';
 import { authenticate } from './store/session';
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
           <h1>My Home Page</h1>
         </ProtectedRoute>
       </Switch>
+      <Footer/>
     </BrowserRouter>
   );
 }

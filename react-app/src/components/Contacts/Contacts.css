@@ -14,7 +14,7 @@ a {
     position: relative;
     background-color: white;
     height:5vw;
-    margin-bottom: 2vw;
+    margin-bottom: 1vh;
 }
 
 .name_username_container{
@@ -28,6 +28,7 @@ a {
     background-color: white;
     box-sizing: border-box;
     align-self: center;
+    margin: 1vh;
 }
 
 .profile__container {
@@ -83,4 +84,12 @@ a {
     cursor:pointer;
     align-self: center;
     margin-left: 20vw;
+}
+
+.accept_button{
+    height: 3vh;
+    background-color: transparent;
+    background-color: #169bd7;
+    border-style: none;
+    margin: 1px;
 }

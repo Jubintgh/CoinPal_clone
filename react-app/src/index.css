@@ -1,15 +1,16 @@
 /* TODO Add site wide styles */
 * {
-    font-family: PayPalSansSmall-Regular,sans-serif; 
+    font-family: PayPalSansSmall-Regular,sans-serif;
+    font-weight: 300;
 }
 nav {
     display: flex;
-    justify-content: space-between;
-    height: 80px;
+    justify-content: flex-start;
+    align-items: center;
+    height: 10vh;
     width: 100%;
-    font-size: 16px;
-    margin-top: 0;
-    background-color: #0B67B4;
+    font-size: 1.4vw;
+    background-image: linear-gradient(to right, #169bd7 , #0B67B4);
 }
 
 .navbar {
@@ -32,32 +33,30 @@ nav {
 
 #navbar__logo{
     display: flex;
-    width: 100px;
-    /* padding: 0 100px; */
-    justify-content: flex-start;
-    align-items: flex-end;
-    line-height: 80px;
-    justify-content: flex-start;
-    align-items: flex-start;
+    width: 1vh;
+    height: 5vh;
+    justify-self: center;
+    align-self: center;
 }
 
 .nav-logo a:active{
     background:none !important;
 }
 
-.navbar__link a:visited {    
+.navbar__link a:visited {   
     color: #fff;
 }
 
 .navbar__link a { 
     position: relative;
     transition: 900ms;
+    font-size: 1.1vw;
+    font-weight: 300;
     animation: ease-in-out;   
     color: #fff;
     text-decoration: none;
-    /* background-color: #3A3B40; */
     border-radius: 3px;
-    margin: 0 5px;
+    margin: 10vw 7vw;
     cursor: pointer;
     line-height: 80px;
 }
@@ -75,7 +74,7 @@ nav {
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: #ffffff;
+    background-color: #161010;
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
@@ -86,33 +85,18 @@ nav {
 
 .navbar__button button {
     outline: none;
-    display: block;
-    border: solid 1px #ffffff;
+    margin: 4vh;
     color: #ffffff;
     font-size: 1rem;
-    font-weight: 500;
-    line-height: 1;
-    border-radius: 30px;
-    background: #020202;
+    font-weight: 300;
+    border: none;
+    background: none;
     cursor: pointer;
-    transition: all 0.3s linear;
-    margin: 5px;
 }
 
-.navbar__button button:focus {
-    background-color: #ffffff;
-    color: #020202;
-}
-  
-.navbar__button button:active {
-    background: #020202;
-    color: #ffffff;
-    border: solid 1px #ffffff;
-}
-  
 .navbar__button button:hover {
-    background-color: #00258b;
-    color: #280ad6;
+    background-color: #f3f3f3;
+    color: #0a95d6;
 }
 
 .errors__class{

@@ -95,6 +95,17 @@ nav {
 }
 
 .errors__class{
+    margin-top: 5vh;
+    margin-left: 42%;
     color: red;
+}
+
+.logged_in_profile{
+    height: 3vw;
+    width: 3vw;
+    margin: 1vw;
+    border-radius: 80px;
+    justify-self: center;
+    align-self: center;
 }
 /* Wallet page selector side */

@@ -68,6 +68,9 @@ const NavBar = () => {
           <li className="navbar__button">
             <LogoutButton />
           </li>
+          <li>
+            <img className="logged_in_profile" src={user.img} alt='profile-pic'/>
+          </li>
         </ul>
     )
   }

@@ -70,22 +70,23 @@ const MyContacts = () => {
     return (
         <div id='contacts_page'>
             <div id='contact__navbar'>
-                <button onClick={e => setReqDisplay(!ReqDisplay)} className='friend_req_button'>requests</button>
+                <button onClick={e => setReqDisplay(!ReqDisplay)} className='friend_req_button'>friend requests</button>
+                <button onClick={e => setReqDisplay(!ReqDisplay)} className='friend_req_button'>friends list</button>
             </div>
             <div className='contacts_container'>
             {ReqDisplay && <div className='contact_request_container'>
                 { friendReqList && friendReqList.map((user, idx) => {
                         return (
-                            <div className='profile__container' key={idx}>
+                            <div className='req_profile__container' key={idx}>
 
-                            <div className='signle_contact'>
-                            <img id='profile_pic' src={user.profile_img} alt="profile_pic" className=""/>
+                            <div className='req_signle_contact'>
+                            <img id='req_profile_pic' src={user.profile_img} alt="profile_pic" className=""/>
                                 <div className='name_username_container'>
-                                    <p className={'real_name'}>{user.first_name} {user.last_name}</p>
-                                    <p className={'user_name'}>@{user.user_name}</p>
+                                    <p className={'req_real_name'}>{user.first_name} {user.last_name}</p>
+                                    <p className={'req_user_name'}>@{user.user_name}</p>
                                 </div>
-                                    <button className={'accept_button'} onClick={(e) => acceptFriend(user.user_name)}>accept friend request</button>
-                                    <button className={'accept_button'} onClick={(e) => rejectFriend(user.user_name)}>reject friend request</button>
+                                    <button className={'accept_button'} onClick={(e) => acceptFriend(user.user_name)}>accept</button>
+                                    <button className={'accept_button'} onClick={(e) => rejectFriend(user.user_name)}>reject</button>
                                 </div>
                             </div>
                         )

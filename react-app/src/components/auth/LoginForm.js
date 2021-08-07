@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -32,7 +33,7 @@ const LoginForm = () => {
   }
 
   return (
-    <form className={"login-page"} onSubmit={onLogin}>
+    <form className={"login_page"} onSubmit={onLogin}>
       <div >
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
@@ -64,9 +65,9 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
       </div>
-        <button className="login-btn" type='submit'>Login</button>
+        <button className="login_btn" type='submit'>Login</button>
         <span>or</span>
-        <button className="signup-btn" onclick={e => window.location.replace('/sign-up')}>Sign Up</button>
+        <button className="signup_btn" onClick={() => window.location.href='/sign-up'}>Sign Up </button>
       </div>
     </form>
   );

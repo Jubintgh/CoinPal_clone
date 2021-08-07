@@ -1,0 +1,36 @@
+.form-container{
+    display: flex;
+    justify-content: center;
+}
+.signup-page{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background: url('https://user-images.githubusercontent.com/73211975/128579949-f12b031b-60ef-4488-b5ac-c3188ab3afa4.jpeg');
+    background-color: #4983e0;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    align-items:flex-start;
+    justify-content: center;
+    align-content: center;
+}
+
+input {
+    width: 200px;
+    padding: 1% 2%;
+    margin: 2%;
+    float: center;
+    flex-wrap: wrap;
+  }
+  .signup-btn{
+    margin: 5%;
+    background-color: #00c575;
+    height: 50px;
+    width: 100px;
+    border-style: none;
+  }
+
+  .signup-btn:hover{
+    background-color: #068552;
+  }

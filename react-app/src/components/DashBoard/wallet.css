@@ -4,6 +4,7 @@
     display: flex;
     box-sizing: border-box;
     border-radius: 10px;
+    height: fit-content;
 }
 
 .wallet-leftbar {
@@ -13,7 +14,7 @@
     justify-content: space-between;
     background-color: #F4F7FA;
     width: 25vw;
-    height: 100vw;
+    height: auto;
 }
 
 .wallet_leftbar--logo{
@@ -25,6 +26,7 @@
 
 .wallet_leftbar--coinholder{
     display: flex;
+    margin-bottom: 40vh;
     box-sizing: border-box;
     list-style-type: none;
     flex-direction: column;
@@ -54,27 +56,42 @@
 }
 
 .currentstats{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
     position: absolute;
     margin-top: 0vw;
     margin-right: 16.8vw;
     font-size:20px;
     width: 55vw;
-    height: 70vw;
+    height: 60vw;
     background-color: #FFFFFF;
 }
 
 .currcoin__logo{
+    margin-top: 2vw;
     position: absolute;
     box-sizing: border-box;
-    width: 30vw;
     height: 10vw;
-    margin-top: 5vw;
-    margin-left: 8vw;
+    width: auto;
 }
 
 .currcoin__balance{
     position: absolute;
-    width: inherit;
-    margin-top: 30vw;
-    margin-left: 15vw;
+    text-align: center;
+    margin: 10vw;
+    padding: 5vw;
+    align-self: center;
+    justify-self: center;
+}
+
+.amount{
+    font-weight: 2;
+    margin-bottom: 4vh;
+}
+
+.extras{
+    font-weight: 0;
+    color: gray;
+    border-bottom: thin dotted;
 }

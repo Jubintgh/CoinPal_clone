@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getAllTransactions, postTransaction } from '../../store/transaction';
+import Activity from '../Activity/Activity';
 
 const MyWallet = () => {
   const { user } = useSelector((state) => state.session);
@@ -22,7 +23,8 @@ const MyWallet = () => {
   const [amount, setAmount] = useState(null)
   const [fromUserId, setFromUserId] = useState(String(id))
   const [cryptoType, setCryptoType] = useState('Bitcoin')
-  const [type, setType] =useState('pay')
+  const [type, setType] = useState('pay')
+  const [status, setStatus] = useState(null) 
   
   const onTransaction = async (e) => {
     e.preventDefault();
@@ -50,8 +52,8 @@ const MyWallet = () => {
     }
   }
 
-  return (
-      <form className='transaction__form' onSubmit={onTransaction}>
+  return (     
+        <form className='transaction__form' onSubmit={onTransaction}>
           <div>
           {errors.map((error, ind) => (
             <div className='errors__class' key={ind}>{error}</div>
@@ -59,8 +61,8 @@ const MyWallet = () => {
           </div>
           <div className='send-crypto'>
               <h3 className='fund__field'>Send Crypto!</h3>
-              <input type='text' className="user__name" onChange={e => settoUserName(e.target.value)} placeholder='enter @username'/>
-              <input type='number' className="fund__input" onChange={e => setAmount(e.target.value)} placeholder='enter value'/>
+              <input type='text' className="user__name" onChange={e => settoUserName(e.target.value)} placeholder='enter @username' required/>
+              <input type='decimal' className="fund__input" onChange={e => setAmount(e.target.value)} placeholder='enter value' required/>
               <p className="fund__field">Select Crypto type</p>
               <select
                 className="fund__input"
@@ -79,6 +81,7 @@ const MyWallet = () => {
                   <option value='request'>request</option>
                   <option value='pay'>pay</option>
               </select>
+              {console.log(errors)}
             <button className="fund__input" type='submit'>Send</button>
           </div>
           

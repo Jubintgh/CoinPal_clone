@@ -20,6 +20,11 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li className='navbar__link'>
+          <NavLink to='/users' exact={true} activeClassName='active'>
+            Users
+          </NavLink>
+        </li>
+        <li className='navbar__link'>
           <NavLink to='/login' exact={true} activeClassName='active'>
             Login
           </NavLink>
@@ -27,11 +32,6 @@ const NavBar = () => {
         <li className='navbar__link'>
           <NavLink to='/sign-up' exact={true} activeClassName='active'>
             Sign Up
-          </NavLink>
-        </li>
-        <li className='navbar__link'>
-          <NavLink to='/users' exact={true} activeClassName='active'>
-            Users
           </NavLink>
         </li>
         <li className="navbar__button">
@@ -67,6 +67,9 @@ const NavBar = () => {
           </li>
           <li className="navbar__button">
             <LogoutButton />
+          </li>
+          <li>
+            <img className="logged_in_profile" src={user.img} alt='profile-pic'/>
           </li>
         </ul>
     )

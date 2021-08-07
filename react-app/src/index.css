@@ -61,11 +61,6 @@ nav {
     line-height: 80px;
 }
 
-.navbar__link a:hover,a:active { 
-    color: #fff;
-    background-color: rgba(251, 252, 255, 0.39)
-}
-
 .navbar__link a::before {
     content: "";
     position: absolute;
@@ -100,6 +95,19 @@ nav {
 }
 
 .errors__class{
+    margin-top: 5vh;
+    margin-left: 42%;
     color: red;
 }
+
+.logged_in_profile{
+    height: 3vw;
+    width: 3vw;
+    margin: 1vw;
+    border-radius: 80px;
+    justify-self: center;
+    align-self: center;
+}
 /* Wallet page selector side */
+
+

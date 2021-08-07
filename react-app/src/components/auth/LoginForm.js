@@ -1,3 +1,4 @@
+import './Login.css'
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -31,32 +32,41 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
+    <form className={"login-page"} onSubmit={onLogin}>
       <div >
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
-      <div>
-        <label htmlFor='email'>Email</label>
+
+      <img id='navbar__logo' src='https://user-images.githubusercontent.com/73211975/127380259-8872d61e-851a-4aa5-8152-baec2618e00d.png' alt='logo' />
+
+      <div className='login__container'>
+      <div className='field_container'>
+        <label className='login_label' htmlFor='email'>Email</label>
         <input
           name='email'
           type='text'
+          className='login_input'
           placeholder='Email'
           value={email}
           onChange={updateEmail}
         />
       </div>
-      <div>
-        <label htmlFor='password'>Password</label>
+      <div className='field_container'>
+        <label className='login_label' htmlFor='password'>Password</label>
         <input
           name='password'
           type='password'
+          className='login_input'
           placeholder='Password'
           value={password}
           onChange={updatePassword}
         />
-        <button type='submit'>Login</button>
+      </div>
+        <button className="login-btn" type='submit'>Login</button>
+        <span>or</span>
+        <button className="signup-btn" onclick={e => window.location.replace('/sign-up')}>Sign Up</button>
       </div>
     </form>
   );

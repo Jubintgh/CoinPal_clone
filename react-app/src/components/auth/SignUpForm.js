@@ -68,7 +68,7 @@ const SignUpForm = () => {
         ))}
       </div>
       <div>
-        <label>User Name</label>
+        <label className='signup_input'>User Name</label>
         <input
           type='text'
           name='username'
@@ -77,7 +77,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>Email</label>
+        <label className='signup_input'>Email</label>
         <input
           type='text'
           name='email'
@@ -86,26 +86,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>Password</label>
-        <input
-          type='password'
-          name='password'
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type='password'
-          name='repeat_password'
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <div>
-        <label>First Name</label>
+        <label className='signup_input'>First Name</label>
         <input
           type='text'
           name='first_name'
@@ -115,7 +96,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>Last Name</label>
+        <label className='signup_input'>Last Name</label>
         <input
           type='text'
           name='last_name'
@@ -125,12 +106,31 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>Profile picture URL</label>
+        <label className='signup_input'>Profile picture URL</label>
         <input
           type='text'
           name='img_url'
           onChange={updateImgUrl}
           value={img_url}
+          required={true}
+        ></input>
+      </div>
+      <div>
+        <label className='signup_input'>Password</label>
+        <input
+          type='password'
+          name='password'
+          onChange={updatePassword}
+          value={password}
+        ></input>
+      </div>
+      <div>
+        <label className='signup_input'>Repeat Password</label>
+        <input
+          type='password'
+          name='repeat_password'
+          onChange={updateRepeatPassword}
+          value={repeatPassword}
           required={true}
         ></input>
       </div>

@@ -16,21 +16,27 @@
     align-content: center;
 }
 
-input {
-    width: 200px;
-    padding: 1% 2%;
-    margin: 2%;
-    float: center;
-    flex-wrap: wrap;
-  }
-  .signup-btn{
-    margin: 5%;
-    background-color: #00c575;
-    height: 50px;
-    width: 100px;
-    border-style: none;
-  }
+.signup_input{
+    color: white;
+}
 
-  .signup-btn:hover{
-    background-color: #068552;
-  }
+input {
+    justify-self: center;
+    height: 4vh;
+    width: 30vw;
+    border-radius: 5px;
+    border-style: none;
+    color: black;
+}
+.signup-btn{
+    margin: 5%;
+    background-color: #159CD7;
+    height: 40px;
+    width: 50vw;
+    border-radius: 5px;
+    border-style: none;
+}
+
+.signup-btn:hover{
+    background-color: #0D68B4;
+}

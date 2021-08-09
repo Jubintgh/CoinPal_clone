@@ -30,8 +30,11 @@ dnspython = "==2.1.0"
 idna = "==3.2"
 async = "==0.6.2"
 asyncio = "==3.4.3"
-requests = "*"
+requests = "==2.26.0"
 asgiref = "==3.4.1"
+certifi = "==2021.5.30"
+charset-normalizer = "==2.0.4"
+urllib3 = "==1.26.6"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"

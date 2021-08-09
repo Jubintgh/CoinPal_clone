@@ -1,10 +1,11 @@
 .form-container{
     display: flex;
+    height: 100vh;
     justify-content: center;
 }
 .signup-page{
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
     display: flex;
     background: url('https://user-images.githubusercontent.com/73211975/128579949-f12b031b-60ef-4488-b5ac-c3188ab3afa4.jpeg');
     background-color: #4983e0;

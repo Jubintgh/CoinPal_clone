@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 // import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getAllFriends, updateOneFriendship,removeFriend} from '../../store/friend';
+import {getOneUser} from '../../store/users'
+import { Redirect } from 'react-router';
 
 const MyContacts = () => {
     const { user } = useSelector((state) => state.session);
@@ -24,7 +26,7 @@ const MyContacts = () => {
     //useStates
     // const [errors, setErrors] = useState([]);
     const [ReqDisplay, setReqDisplay] = useState(false)
-    // const [toUserName, settoUserName] = useState(null)
+    const [SearchDisplay, setSearchDisplay] = useState(false)
     // const [amount, setAmount] = useState(null)
     // const [fromUserId, setFromUserId] = useState(String(id))
     // const [cryptoType, setCryptoType] = useState('Bitcoin')
@@ -51,6 +53,7 @@ const MyContacts = () => {
     //   } 
     // }
 
+
     const unFriend = async (otherUserId) => {
         await dispatch(removeFriend(otherUserId))
         dispatch(getAllFriends(id))
@@ -71,10 +74,11 @@ const MyContacts = () => {
         <div id='contacts_page'>
             <div id='contact__navbar'>
                 <button onClick={e => setReqDisplay(!ReqDisplay)} className='friend_req_button'>friend requests</button>
-                <button onClick={e => setReqDisplay(!ReqDisplay)} className='friend_req_button'>friends list</button>
+                {/* <button onClick={e => setSearchDisplay(!SearchDisplay)} className='friend_req_button'>search users</button> */}
             </div>
             <div className='contacts_container'>
-            {ReqDisplay && <div className='contact_request_container'>
+            {
+                ReqDisplay && <div className='contact_request_container'>
                 { friendReqList && friendReqList.map((user, idx) => {
                         return (
                             <div className='req_profile__container' key={idx}>
@@ -92,7 +96,12 @@ const MyContacts = () => {
                         )
                     })
                 }
-                </div>}
+                </div>}  
+                {/* {
+                    SearchDisplay && <div className='search__bar'>
+                        Search Users: <input className='search__input' onClick={e => searchUser(e.target.value)}/> <button>search</button> 
+                    </div>
+                } */}
             </div>
 
             <div className='contacts_container'>

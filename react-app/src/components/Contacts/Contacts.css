@@ -164,3 +164,14 @@ a {
     background-color: white;
     color: white;
 }
+
+.search__bar{
+    margin-top: 0%;
+    width: 95vw;
+}
+
+.search__input{
+    width: 70vw;
+    height: 7px;
+    border: thin solid black;
+}

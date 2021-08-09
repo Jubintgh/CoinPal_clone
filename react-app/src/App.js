@@ -42,18 +42,18 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <Route path='/my/wallet' exact={true}>
+        <ProtectedRoute path='/my/wallet' exact={true}>
           <MyWallet />
-        </Route>
-        <Route path='/my/sendNrequest' exact={true}>
+        </ProtectedRoute>
+        <ProtectedRoute path='/my/sendNrequest' exact={true}>
           <SendNrequestForm />
-        </Route>
-        <Route path='/my/transaction/history' exact={true}>
+        </ProtectedRoute>
+        <ProtectedRoute path='/my/transaction/history' exact={true}>
           <Activity />
-        </Route>
-        <Route path='/my/contacts' exact={true}>
+        </ProtectedRoute>
+        <ProtectedRoute path='/my/contacts' exact={true}>
           <MyContacts />
-        </Route>
+        </ProtectedRoute>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList />
         </ProtectedRoute>

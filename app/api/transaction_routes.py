@@ -55,7 +55,7 @@ async def transact(amount, crypto_type, from_wallet, to_wallet):
 
 
 @transaction_routes.route('/<int:id>')
-# @login_required
+@login_required
 def get_transactions(id):
     """
     returns a list of user transaction objects
@@ -70,7 +70,7 @@ def get_transactions(id):
 
 
 @transaction_routes.route('/<int:id>/type/<filter_t>', methods=['POST'])
-# @login_required
+@login_required
 async def post_transactions(id, filter_t):
     """
     creates a new transaction record
@@ -140,7 +140,7 @@ async def post_transactions(id, filter_t):
 
 
 @transaction_routes.route('/<int:id>/reject', methods=['PUT'])
-# @login_required
+@login_required
 def update_transactions(id):
     """
     updates transaction status to rejected for an existing transaction request that is for the current user
@@ -158,7 +158,7 @@ def update_transactions(id):
 
 
 @transaction_routes.route('/<int:id>/delete', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_transaction(id):
     """
     deletes an existing transaction record that belongs to the current logged in user

@@ -3,8 +3,6 @@ from .user_routes import login_required
 from app.models import User, CryptoWallet, db
 from app.forms import WalletAddFunds
 from flask_login import current_user
-from decimal import Decimal
-import decimal
 
 wallet_routes = Blueprint('wallet', __name__)
 
@@ -19,7 +17,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 @wallet_routes.route('/<int:id>')
-# @login_required
+@login_required
 def get_balance(id):
     """
     returns user's balance

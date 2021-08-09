@@ -18,7 +18,7 @@ def db_errors_to_error_messages(errtype, error):
     return errorMessages
 
 @friend_routes.route('/')
-# @login_required
+@login_required
 def get_friends():
     """
     returns a list of user's friends
@@ -70,7 +70,7 @@ def get_friends():
         }
 
 @friend_routes.route('/', methods=['POST'])
-# @login_required
+@login_required
 def post_friend_req(is_accept=False):
     """
     creates a new pending instance of friendship
@@ -106,7 +106,7 @@ def post_friend_req(is_accept=False):
     return {'request': new_friend_req.to_dict()}
 
 @friend_routes.route('/<filter_t>', methods=['PUT'])
-# @login_required
+@login_required
 def update_friendship(filter_t):
     """
     updates an existing friendship status
@@ -137,7 +137,7 @@ def update_friendship(filter_t):
     return {'friend': friend_instance.to_dict()}
 
 @friend_routes.route('/', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_friendship():
     """
     deletes an existing friendship record

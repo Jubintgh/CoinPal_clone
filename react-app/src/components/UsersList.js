@@ -16,6 +16,7 @@ function UsersList() {
   const userComponents = users.map((user) => {
     return (
       <li key={user.id}>
+        <img className='logged_in_profile' src={user.img} alt='profile-pic'/>
         <NavLink to={`/users/${user.username}`}>{user.username}</NavLink>
       </li>
     );

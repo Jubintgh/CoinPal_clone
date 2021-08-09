@@ -24,7 +24,7 @@ def users():
 
 
 @user_routes.route('/<username>')
-# @login_required
+@login_required
 def user(username):
     user = User.query.filter(User.username == username).first()
     print(user.username, "USERNAMEE")

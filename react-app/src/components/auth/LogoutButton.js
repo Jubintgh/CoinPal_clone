@@ -9,7 +9,6 @@ const LogoutButton = () => {
 
   const onLogout = async (e) => {
     history.push('/');
-    console.log("BEING HIT")
     await dispatch(logout());
   };
 

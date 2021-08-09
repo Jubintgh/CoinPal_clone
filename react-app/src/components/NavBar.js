@@ -14,16 +14,11 @@ const NavBar = () => {
         <li id='navbar__logo'>
           <img src='https://user-images.githubusercontent.com/73211975/127380259-8872d61e-851a-4aa5-8152-baec2618e00d.png' alt='logo' />
         </li>
-        <li className='navbar__link'>
+        {/* <li className='navbar__link'>
           <NavLink to='/' exact={true} activeClassName='active'>
             Home
           </NavLink>
-        </li>
-        <li className='navbar__link'>
-          <NavLink to='/users' exact={true} activeClassName='active'>
-            Users
-          </NavLink>
-        </li>
+        </li> */}
         <li className='navbar__link'>
           <NavLink to='/login' exact={true} activeClassName='active'>
             Login
@@ -50,6 +45,11 @@ const NavBar = () => {
               Contacts
             </NavLink>
           </li>
+          <li className='navbar__link'>
+          <NavLink to='/users' exact={true} activeClassName='active'>
+            Users
+          </NavLink>
+        </li>
           <li className="navbar__link">
             <NavLink to={`/my/transaction/history`} exact={true} activeClassName='active'>
               Activity

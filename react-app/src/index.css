@@ -30,6 +30,7 @@ nav {
     float: right;
     margin-left: 10px;
     width: max-content;
+    align-items: center;
     justify-content: space-between;
     margin-top: 0;
     margin-bottom: 0;
@@ -60,14 +61,14 @@ nav {
 
 .navbar__link a { 
     position: relative;
-    transition: 900ms;
-    font-size: 1.1vw;
+    transition: 500ms;
+    font-size: 1vw;
     font-weight: 300;
     animation: ease-in-out;   
     color: #fff;
     text-decoration: none;
-    border-radius: 3px;
-    margin: 10vw 7vw;
+    border-radius: 2.8px;
+    margin: 10vw 6vw;
     cursor: pointer;
     line-height: 80px;
 }

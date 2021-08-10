@@ -70,7 +70,7 @@ def get_transactions(id):
 
 
 @transaction_routes.route('/<int:id>/type/<filter_t>', methods=['POST'])
-@login_required
+# @login_required
 async def post_transactions(id, filter_t):
     """
     creates a new transaction record

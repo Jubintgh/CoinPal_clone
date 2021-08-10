@@ -2,7 +2,7 @@ import datetime
 from typing import DefaultDict
 from .db import db
 from .user import User
-from enum import Enum
+from .crypto_wallet import CryptoWallet
 
 
 class Transaction(db.Model):

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import { createWallet } from '../../store/wallet';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -20,6 +21,7 @@ const SignUpForm = () => {
     e.preventDefault();
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password, first_name, last_name, img_url));
+
       if (data) {
         setErrors(data)
       }
@@ -36,15 +38,15 @@ const SignUpForm = () => {
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
-
+  
   const updatePassword = (e) => {
     setPassword(e.target.value);
   };
-
+  
   const updateRepeatPassword = (e) => {
     setRepeatPassword(e.target.value);
   };
-
+  
   const updateFirstName = (e) => {
     setFirstName(e.target.value)
   }
@@ -83,6 +85,7 @@ const SignUpForm = () => {
           name='email'
           onChange={updateEmail}
           value={email}
+          required={true}
         ></input>
       </div>
       <div>

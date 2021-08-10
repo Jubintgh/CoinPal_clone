@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, CryptoWallet, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -60,6 +60,7 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data['first_name'], 'oissja')
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
@@ -71,6 +72,11 @@ def sign_up():
         )
         db.session.add(user)
         db.session.commit()
+
+        new_user_wallet = CryptoWallet(user_id = user.id, ethereum_balance=20,bitcoin_balance=20,usd_coin_balance=20)
+        db.session.add(new_user_wallet)
+        db.session.commit()
+
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

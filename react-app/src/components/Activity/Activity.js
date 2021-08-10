@@ -79,7 +79,7 @@ const Activity = () => {
           {errors && errors.forEach(err => {
             <li className='errors__class'>{err}</li>
           })}
-            { transactions && transactions.map((transact, idx) => {
+            {transactions && transactions.map((transact, idx) => {
                   return (
                     <div key={idx} className="Activity__main">
                       <img className='transaction_logo' alt='logo' src={transactionStatLogo(transact.transaction_status)}/>
@@ -112,6 +112,7 @@ const Activity = () => {
               })
             }
         </div>
+        <h6>No more transactions</h6>
       </div>
     )
 }

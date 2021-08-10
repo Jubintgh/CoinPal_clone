@@ -44,7 +44,7 @@ class User(db.Model, UserMixin):
         cascade="merge, save-update"
     )
 
-    messages = db.relationship("Message", back_populates="user")
+    messages = db.relationship("Message", back_populates="user", cascade="delete, merge, save-update")
     
     @property
     def password(self):

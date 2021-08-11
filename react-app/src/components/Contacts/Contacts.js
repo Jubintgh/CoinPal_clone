@@ -78,7 +78,7 @@ const MyContacts = () => {
             <div className='req_contacts_container'>
             {
                 ReqDisplay && <div className='contact_request_container'>
-                <h5 className='title'>Friend Requests</h5>
+                <div id='title_holder'><h5 className='title'>Friend Requests</h5></div>
                 { friendReqList && friendReqList.map((user, idx) => {
                     
                     return (

@@ -2,10 +2,18 @@ a {
     text-decoration: none;
 }
 
+#title_holder{
+    display: flex;
+    width: inherit;
+    width: 100%;
+    border-bottom: solid thin rgb(136, 136, 161);
+}
+
 .title{
     justify-self: center;
     align-self: center;
     font-weight: bold;
+    margin-left: 14vw;
 }
 
 #contacts_page {
@@ -89,7 +97,9 @@ a {
 }
 .unfriend_button{
     align-self: flex-end;
-    background-color: Transparent;
+    background-color: #f5aaa0;
+    height: 2.5vh;
+    border-radius: 5px;
     border: none;
     cursor:pointer;
     align-self: center;
@@ -131,6 +141,7 @@ a {
     flex-direction: column;
     position: relative;
     background-color: white;
+    box-shadow: 1px 15px 20px gray;
     box-sizing: border-box;
     align-self: center;
 }
@@ -140,6 +151,7 @@ a {
     width: 40vw;
     box-sizing: border-box;
     border: solid white 1vw;
+    border-radius: 15px;
     background-color: white;
 }
 
@@ -179,13 +191,14 @@ a {
     background-color: transparent;
     color: white;
     background-color: #169ad7a6;
+    border-radius: 5px;
     border-style: none;
     margin-top: 5vh;
-    margin: 1px;
+    margin-right: 20px;
 }
 
-.accept_button :hover{
-    background-color: white;
+.accept_button:hover{
+    background-color: #6db6d8a6;
     color: white;
 }
 

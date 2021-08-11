@@ -11,6 +11,7 @@ import User from './components/User';
 import SendNrequestForm from './components/Transaction/SendNrequest'
 import Activity from './components/Activity/Activity'
 import MyContacts from './components/Contacts/Contacts';
+import Home from './components/Home/Home'
 import Footer from './components/Footer/Footer';
 import { authenticate } from './store/session';
 
@@ -42,6 +43,9 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
+        <Route path='/' exact={true} >
+          <Home/>
+        </Route>
         <ProtectedRoute path='/my/wallet' exact={true}>
           <MyWallet />
         </ProtectedRoute>
@@ -56,9 +60,6 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <MyWallet/>
         </ProtectedRoute>
       </Switch>
       <Footer/>

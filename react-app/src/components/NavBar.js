@@ -11,9 +11,9 @@ const NavBar = () => {
   if(!user) {
     navContent = (
       <ul className='navbar'>
-        <li id='navbar__logo'>
+        <NavLink id='navbar__logo' to='/'>
           <img src='https://user-images.githubusercontent.com/73211975/127380259-8872d61e-851a-4aa5-8152-baec2618e00d.png' alt='logo' />
-        </li>
+        </NavLink>
         {/* <li className='navbar__link'>
           <NavLink to='/' exact={true} activeClassName='active'>
             Home
@@ -37,9 +37,10 @@ const NavBar = () => {
   } else {
     navContent = (
         <ul className="navbar">
-          <li id='navbar__logo'>
+
+          <NavLink id='navbar__logo' to='/'>
             <img src='https://user-images.githubusercontent.com/73211975/127380259-8872d61e-851a-4aa5-8152-baec2618e00d.png' alt='logo'/>
-          </li>
+          </NavLink>
           <li className="navbar__link">
             <NavLink to='/my/contacts' exact={true}  activeClassName='active'>
               Contacts

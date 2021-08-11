@@ -48,21 +48,21 @@ const MyWallet = () => {
             <div className="wallet-rightbar">
                 <div className="currentstats">
                     <img alt="logo" className="currcoin__logo" src={currCoin["logo"]}/>
-                        <div className="currcoin__balance">balance
-                            <p className='amount'>{currCoin.coin === 'Bitcoin' ? bitcoinBalance + ' BitCoin available' : currCoin.coin === 'Ethereum' ? ethereumBalance + ' ETH available' : currCoin.coin === 'USD-Coin' ? usdCoinBalance + ' USD-Coin available' : currCoin === 'Loading...'}</p>
-                            <p className='extras'>
-                            CoinPal works with a balance
-                            No kidding! You can still use CoinPal to shop or send Crypto when your balance is not zero.
-                            </p>
-                            <p className='extras'>
-                            Preferred when paying online
-                            Set as preferred
-                            We’ll use your available balance when you shop online or send Crypto for goods and services.
-                            If you don’t have enough Crypto in your balance, we’ll ask you to pick another payment method at checkout.
-                            More about payment preferences
-                            </p>
-                            <a href='/my/SendNrequest'>Send Crypto</a> 
-                        </div>
+                    <div className="currcoin__balance">balance
+                        <p className='amount'>{currCoin.coin === 'Bitcoin' ? bitcoinBalance + ' BitCoin available' : currCoin.coin === 'Ethereum' ? ethereumBalance + ' ETH available' : currCoin.coin === 'USD-Coin' ? usdCoinBalance + ' USD-Coin available' : currCoin === 'Loading...'}</p>
+                        <p className='extras'>
+                        CoinPal works with a balance
+                        No kidding! You can still use CoinPal to shop or send Crypto when your balance is not zero.
+                        </p>
+                        <p className='extras'>
+                        Preferred when paying online
+                        Set as preferred
+                        We’ll use your available balance when you shop online or send Crypto for goods and services.
+                        If you don’t have enough Crypto in your balance, we’ll ask you to pick another payment method at checkout.
+                        More about payment preferences
+                        </p>
+                        <a href='/my/SendNrequest'>Send Crypto</a> 
+                    </div>
                 </div>
             </div>
 

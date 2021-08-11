@@ -36,7 +36,7 @@
 }
 
 .wallet_leftbar--coinholder > .wallet_leftbar--coinselector{
-    height: 8vw;
+    height: 5vw;
     width: inherit;
     margin: 10px;
     border: #020202;
@@ -59,7 +59,6 @@
 .currentstats{
     display: flex;
     justify-content: center;
-    /* align-items: center; */
     position: absolute;
     margin-right: 16.8vw;
     font-size:20px;
@@ -72,18 +71,25 @@
     margin-top: 2vw;
     position: absolute;
     box-sizing: border-box;
-    height: 10vw;
+    height: 8vw;
     width: auto;
+    z-index: 10;
+    background-color: white;
 }
 
 .currcoin__balance{
     position: absolute;
     text-align: center;
-    margin: 10vw;
-    padding: 5vw;
-    align-self: center;
+    box-sizing: border-box;
+    /* align-self: center; */
+    height: 5vh;
+    width: auto;
     justify-self: center;
+    /* margin-top: 10vw; */
+    margin: 5vw 0vw 8vw 0vw;
+    padding: 5vw;
 }
+
 
 .amount{
     font-weight: 2;

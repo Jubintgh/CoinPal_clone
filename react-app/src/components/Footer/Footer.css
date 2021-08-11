@@ -1,6 +1,7 @@
 .main-footer {
     /* background-color: #169bd7; */
-    background-color: #169bd7;
+    background-image: linear-gradient(to right, #169bd7 , #0074DE);
+    background-color: #0074DE;
     padding-top: 1em;
     position: relative;
     bottom: 0;
@@ -27,7 +28,7 @@
 
 .footer-content-row-1 h3{
     font-size: .95em;
-    text-decoration: underline rgba(237, 37, 77, 0.199);
+    text-decoration: underline white;
 }
 
 .footer-col-row1 {
@@ -71,4 +72,8 @@
 
 .footer-col-link{
     align-self: center;
+}
+
+.footer-col-link > a{
+    color: white;
 }

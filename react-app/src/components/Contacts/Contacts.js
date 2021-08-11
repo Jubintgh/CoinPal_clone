@@ -73,14 +73,15 @@ const MyContacts = () => {
     return (
         <div id='contacts_page'>
             <div id='contact__navbar'>
-                <button onClick={e => setReqDisplay(!ReqDisplay)} className='friend_req_button'>friend requests</button>
-                {/* <button onClick={e => setSearchDisplay(!SearchDisplay)} className='friend_req_button'>search users</button> */}
+                <button onClick={e => setReqDisplay(!ReqDisplay)} className='friend_req_button'>Friend Requests</button>
             </div>
-            <div className='contacts_container'>
+            <div className='req_contacts_container'>
             {
                 ReqDisplay && <div className='contact_request_container'>
+                <h5 className='title'>Friend Requests</h5>
                 { friendReqList && friendReqList.map((user, idx) => {
-                        return (
+                    
+                    return (
                             <div className='req_profile__container' key={idx}>
 
                             <div className='req_signle_contact'>
@@ -105,7 +106,7 @@ const MyContacts = () => {
             </div>
 
             <div className='contacts_container'>
-            <h5>Contacts</h5>
+            <h5 className='title'>Contacts</h5>
             {
               friendsList && friendsList.map((friend, idx) => {
                 return (

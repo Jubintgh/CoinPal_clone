@@ -2,6 +2,12 @@ a {
     text-decoration: none;
 }
 
+.title{
+    justify-self: center;
+    align-self: center;
+    font-weight: bold;
+}
+
 #contacts_page {
     background-color: #F4F7FA;
     display: flex;
@@ -14,7 +20,6 @@ a {
     position: relative;
     background-color: white;
     height:5vw;
-    margin-bottom: 1vh;
 }
 
 .name_username_container{
@@ -26,10 +31,25 @@ a {
     flex-direction: column;
     position: relative;
     background-color: white;
+    border: solid thin gray;
+    border-radius: 10px;
     box-sizing: border-box;
     align-self: center;
-    margin: 1vh;
+    margin: 5vh;
 }
+
+.req_contacts_container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: white;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-right: 20vw;
+    /* margin: 5vh; */
+}
+
+
 
 .profile__container {
     display: flex;
@@ -41,9 +61,11 @@ a {
 
 .signle_contact{
     display: flex;
+    box-sizing: border-box;
     flex-direction: row;
     width: inherit;
-    padding: 1vw;
+    padding: 2vw;
+    border-bottom: gray;
 }
 
 #profile_pic {
@@ -80,6 +102,7 @@ a {
 .friend_req_button{
     align-self: flex-end;
     background-color: Transparent;
+    font-size: bold;
     border: none;
     cursor:pointer;
     align-self: center;
@@ -91,10 +114,11 @@ a {
 }
 
 .contact_request_container{
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-items: center;
 }
-
 
 
 

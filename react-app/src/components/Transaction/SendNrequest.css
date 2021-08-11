@@ -1,24 +1,35 @@
 .transaction__form{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: #F4F7FA;
+    font-weight: 800px;
 }
 .send-crypto{
     display: flex;
     align-self: center;
+    justify-content: center;
+    align-items: center;
     margin: 5vw;
-    width: 50vw;
-    height: 50vw;
+    width: 40vw;
+    height: 40vw;
     flex-direction: column;
     background-color: white;
+    border: thin solid rgb(109, 98, 98);
+    border-radius: 10px;
 }
 
 .user__name{
+    border: thin solid rgb(109, 98, 98);
     margin: 2vw;
     height: 2vw;
 }
 
 .fund__input{
+    border: thin solid rgb(109, 98, 98);
+    border-radius: 5px;
+    background-color: #2a8dbb65;
     margin: 2vw;
     height: 2vw;
 }

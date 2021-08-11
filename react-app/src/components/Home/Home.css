@@ -65,11 +65,14 @@ picture > p{
     height: 8vh;
     width: auto;
     margin-right: 100px;
+    animation: notification 200ms infinite;
+
 }
 
 .buttom_pic:hover{
-    margin-left: 40px;
-    transition: 999ms;
+    margin-left: 10px;
+    margin-top: 10px;
+    transition: 800ms;
 }
 /* For the cellphone on left column */
 #top_pic_phone{
@@ -81,6 +84,27 @@ picture > p{
 #buttom_pic_phone{
     height: 8vh;
     width: auto;
-    margin-right: 100px;
+    /* margin-right: 100px; */
+    animation: dollarSign 5s infinite;
+    animation-duration: 2s;
 }
 
+#buttom_pic_phone:hover{
+    margin-top: 20px;
+    transition: 800ms;
+}
+
+@keyframes dollarSign {
+    0%   {left:15px; top:0px;}
+    25%  {left:30px; top:0px;}
+    50%  {left:15px; top:0px;}
+    75%  {left:30px; top:0px;}
+    100% {left:15px; top:0px;}
+}
+
+@keyframes notification {
+    0%   {transform: rotate(1deg);}
+    30%  {transform: rotate(0deg);}
+    60% {transform: rotate(-1deg);}
+    90% {transform: rotate(0deg);}
+}

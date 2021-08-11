@@ -1,6 +1,7 @@
 .splash-page{
     display: flex;
-    margin-left: 5vw;
+    margin-top: 10vh;
+    margin-left: 12vw;
     justify-content: center;
     position: relative;
     width: 80vw;
@@ -26,10 +27,9 @@ picture{
 }
 
 picture > img{
-    height: 40vh;
+    height: 45vh;
     width: 40vh;
     padding: 5vw;
-
 }
 
 picture > p{
@@ -45,6 +45,8 @@ picture > p{
 .multi-image-container{
     position: relative;
     height: 50vh;
+    align-self: flex-start;
+    margin-left: 5vw;
     /* width: 45vw; */
 }
 
@@ -69,3 +71,16 @@ picture > p{
     margin-left: 40px;
     transition: 999ms;
 }
+/* For the cellphone on left column */
+#top_pic_phone{
+    height: 90%;
+    border-radius: 10px;
+    margin: 10px 15px;
+}
+
+#buttom_pic_phone{
+    height: 8vh;
+    width: auto;
+    margin-right: 100px;
+}
+

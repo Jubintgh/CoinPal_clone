@@ -1,10 +1,25 @@
 import './Home.css';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { login } from '../../store/session';
 import {useState, useEffect} from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import DemoUserButton from '../auth/DemoUserButton';
 
 
 const Home = () => {
 
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const email = 'demouser@mail.com';
+    const password = 'Password1!';
 
+    const onDemoSignIn = async (e) => {
+        e.preventDefault();
+        await dispatch(login(email, password));
+        history.push('/');
+    };
 
 
     return (
@@ -15,7 +30,7 @@ const Home = () => {
             <img id='top_pic_phone' src='https://images.ctfassets.net/gkyt4bl1j2fs/hVKddYw7KKDk1iNCMmDDx/fc9ecc28d15ae8e27049d7cac0484fc1/Homepage_Desktop_UI_Comp_01.png?w=1584&h=1751&q=50&fm=webp' alt='phone'/>
             <img id='buttom_pic_phone' className='pulse atoms-bits-bit__top-right' src='https://images.ctfassets.net/gkyt4bl1j2fs/7LkWsnq60LKKQdhEfOssFx/128192b4b693f6842bea2669c8965474/Homepage_Bit4.svg' alt='payment'/>
         </div>
-        <button className='demo-button'>Try Demo account!</button>
+        <button className='demo-button' onClick={onDemoSignIn}>Try Demo account!</button>
         <p>
             Sign up for PayPal and start checking out with crypto
             Get access to a new way to pay. Sign up for an account and checkout with crypto at millions of online stores with PayPal.
@@ -27,6 +42,7 @@ const Home = () => {
         <img className='top_pic' src='https://images.ctfassets.net/gkyt4bl1j2fs/1wFljDmY3Hs95mtTxhDDiB/caf4cd1a4be9643d519f6607922e58c0/Homepage_Desktop_Photo_03.png?w=811&h=1186&q=50&fm=webp' alt='shopping'/>
         <img className='buttom_pic' src='https://images.ctfassets.net/gkyt4bl1j2fs/20XuFiM31dZOXxGfQCLYuU/537ae7843c60d4540f9a0cca7bc3abb4/Group_4853__1_.png' alt='payment'/>
         </div>
+        <NavLink to='/login'><button className='demo-button'>Log in!</button></NavLink>
 
         <img src='https://www.paypalobjects.com/marketing/web/us/en/intro-offer1/Hero_illustration_1x.png' alt='high-five'/>
         <p>
@@ -50,6 +66,8 @@ const Home = () => {
             The main purpose of the app is to faciliate the transfer of crypto between the users without the need to include the wallet hash with each transaction(similar to Venmo). 
             This is a concept app and no real Crypto is being used.
         </p>
+        <NavLink to='/sign-up'><button className='demo-button'>Sign up!</button></NavLink>
+
         <img src='https://www.paypalobjects.com/marketing/web/us/en/home/PPYL_Onsite_Homepage_Crypto_V1_052621_Desktop_Illustration_2x.png' alt='shopping'/>
         <p>
             Coin Pal is inspired by paypal based on the idea of a Peer to Peer blockchain economy. 

@@ -39,7 +39,7 @@ nav {
     margin-left: 5px;
     width: 100%;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -53,7 +53,7 @@ nav {
 
 #navbar__logo{
     display: flex;
-    width: 1vh;
+    width: 3vh;
     height: 5vh;
     margin-right: 20px;
     justify-self: flex-start;

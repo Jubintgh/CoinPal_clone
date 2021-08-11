@@ -10,7 +10,7 @@ const DemoUserButton = () => {
   const email = 'demouser@mail.com';
   const password = 'Password1!';
 
-  const onDemoSignIn = async (e) => {
+   const onDemoSignIn = async (e) => {
     e.preventDefault();
     await dispatch(login(email, password));
     history.push('/');
@@ -18,5 +18,7 @@ const DemoUserButton = () => {
 
   return <button onClick={onDemoSignIn}>Demo User</button>;
 };
+
+
 
 export default DemoUserButton;

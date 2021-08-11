@@ -15,7 +15,7 @@ const Home = () => {
             <img id='top_pic_phone' src='https://images.ctfassets.net/gkyt4bl1j2fs/hVKddYw7KKDk1iNCMmDDx/fc9ecc28d15ae8e27049d7cac0484fc1/Homepage_Desktop_UI_Comp_01.png?w=1584&h=1751&q=50&fm=webp' alt='phone'/>
             <img id='buttom_pic_phone' className='pulse atoms-bits-bit__top-right' src='https://images.ctfassets.net/gkyt4bl1j2fs/7LkWsnq60LKKQdhEfOssFx/128192b4b693f6842bea2669c8965474/Homepage_Bit4.svg' alt='payment'/>
         </div>
-
+        <button className='demo-button'>Try Demo account!</button>
         <p>
             Sign up for PayPal and start checking out with crypto
             Get access to a new way to pay. Sign up for an account and checkout with crypto at millions of online stores with PayPal.

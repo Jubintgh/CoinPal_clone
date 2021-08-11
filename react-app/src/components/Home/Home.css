@@ -94,6 +94,29 @@ picture > p{
     transition: 800ms;
 }
 
+.demo-button{
+    background-color: #169bd7;
+    border-style: none;
+    height: 60px;
+    border-radius: 50px;
+    width: 200px;
+    box-shadow: 8px 8px 0px rgb(158, 233, 45);
+}
+
+.demo-button:hover {
+    cursor: pointer;
+    background-color: rgb(158, 233, 45);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    -webkit-transition: background-color 100ms ease-in;
+    -moz-transition: background-color 100ms ease-in;
+    -o-transition: background-color 100ms ease-in;
+    transition: background-color 100ms ease-in;
+}
+
+.demo-button:hover::after {
+    opacity: 1;
+}
+
 @keyframes dollarSign {
     0%   {left:15px; top:0px;}
     25%  {left:30px; top:0px;}

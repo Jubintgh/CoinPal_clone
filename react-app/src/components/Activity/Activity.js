@@ -15,6 +15,7 @@ const Activity = () => {
     //useStates
     const [errors, setErrors] = useState([]);
     const [switcher, setSwitcher] = useState(false);
+    const [displayTransactions, setDisplayTransactions] = useState(transactions)
 
     const cancelReq = async (id, transactionId) => {
       const result = await dispatch(deleteTransaction(id,transactionId))
@@ -33,6 +34,7 @@ const Activity = () => {
       await dispatch(rejectTransaction(id,transactionId))
       dispatch(getAllTransactions)
     }
+
 
     const numToMonth = (num) => {
 
@@ -75,6 +77,11 @@ const Activity = () => {
 
     return(
       <div className='parent_page'>
+        <div id='contact__navbar'>
+            <button  className='friend_req_button'>Sort By status</button>
+            <button  className='friend_req_button'>Incoming requests</button>
+            <button  className='friend_req_button'>Search Transactions</button>
+        </div>
         <div className='Activity_page'>
           {errors && errors.forEach(err => {
             <li className='errors__class'>{err}</li>

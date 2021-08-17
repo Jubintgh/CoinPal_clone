@@ -35,7 +35,7 @@ export const getWallet = (userId) => async (dispatch) => {
 
 export const reNewWallet = (userId, Balance) => async (dispatch) => {
 
-    const [bitcoinBalance, ethereumBalance, usdCoinBalance] = Balance
+    const [bitcoinBalance, ethereumBalance, usdCoinBalance] = Balance;
 
     const response = await fetch(`/api/wallet${userId}`, {
         headers: {

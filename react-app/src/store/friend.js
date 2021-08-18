@@ -5,6 +5,7 @@ const GET_PENDING_REQUESTS = 'friend/GET_PENDING_REQUESTS';
 const SET_FRIEND = 'friend/SET_FRIEND';
 const UPDATE_FRIEND = 'friend/UPDATE_FRIEND';
 const REMOVE_FRIEND = 'friend/REMOVE_FRIEND';
+const DROP_FRIENDS = 'friend/DROP_FRIENDS';
 
 const getFriends = (friends) => ({
     type: GET_FRIENDS,
@@ -34,6 +35,10 @@ const updateFriendship = (friend) => ({
 const deleteFriend = (friendId) => ({
     type: REMOVE_FRIEND,
     payload: friendId
+})
+
+const dropFriends = () => ({
+    type: DROP_FRIENDS
 })
 
 export const getAllFriends = () => async (dispatch) => {
@@ -111,6 +116,11 @@ export const removeFriend = (otherUserName) => async (dispatch) => {
     }
 }
 
+
+export const dropAllFriends = () => (dispatch) => {
+    dispatch(dropFriends())
+}
+
 const initialState = {
     "friendsList": [],
     "friendsReqs": [],
@@ -119,7 +129,6 @@ const initialState = {
 
 export default function reducer(state = initialState, action){
     let newState;
-    
     switch(action.type){
         case GET_FRIENDS:
             newState = {...state}
@@ -128,16 +137,13 @@ export default function reducer(state = initialState, action){
                 return friend;
             }, {})
             return newState
-
         case GET_FRIEND_REQUESTS:
             newState = {...state}
-
             newState.friendsReqs = action.payload.reduce((friend, el) => {
                 friend[el.user_name] = el;
                 return friend;
             }, {})
             return newState
-
         case GET_PENDING_REQUESTS:
             newState = {...state}
 
@@ -146,27 +152,23 @@ export default function reducer(state = initialState, action){
                 return friend;
             }, {})
             return newState
-
         case SET_FRIEND:
             newState = {
                 ...state
             }
             newState.friendsList[action.payload.user_name] = action.payload
             return newState
-   
         case UPDATE_FRIEND:
             newState = {}
             newState.friendsList[action.payload.user_name] = action.payload
             return newState
-
         case REMOVE_FRIEND:
             newState = initialState;
             newState = {...state }
-
             delete newState.friendsList[action.payload.username]
-
             return newState
-
+        case DROP_FRIENDS:
+            return initialState;
         default:
             return state
     }

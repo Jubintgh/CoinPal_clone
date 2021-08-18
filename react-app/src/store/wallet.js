@@ -34,9 +34,7 @@ export const getWallet = (userId) => async (dispatch) => {
 }
 
 export const dropWallet = () => (dispatch) => {
-
     dispatch(removeWallet())
-
 }
 
 export const reNewWallet = (userId, Balance) => async (dispatch) => {

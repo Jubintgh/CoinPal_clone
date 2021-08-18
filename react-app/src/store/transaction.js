@@ -1,8 +1,9 @@
 //constants
 const GET_TRANSACTIONS = 'transaction/GET_TRANSACTIONS';
 const SET_TRANSACTION = 'transaction/SET_TRANSACTION';
-const UPDATE_TRANSACTION = 'transaction/UPDATE_TRANSACTION'
+const UPDATE_TRANSACTION = 'transaction/UPDATE_TRANSACTION';
 const REMOVE_TRANSACTION = 'transaction/REMOVE_TRANSACTION';
+const DROP_TRANSACTIONS = 'transaction/DROP_TRANSACTIONS';
 
 const getTransactions = (transactions) => ({
     type: GET_TRANSACTIONS,
@@ -22,6 +23,10 @@ const updateTransaction = (transaction) => ({
 const removeTransaction = (transactionId) => ({
     type: REMOVE_TRANSACTION,
     payload: transactionId
+})
+
+const dropTransactions = () => ({
+    type: DROP_TRANSACTIONS
 })
 
 export const getAllTransactions = (userId) => async (dispatch) => {
@@ -105,6 +110,10 @@ export const deleteTransaction = (userId, transactionId) => async (dispatch) => 
     }
 }
 
+export const dropAllTransactions = () => (dispatch) => {
+    dispatch(dropTransactions())
+}
+
 const initialState = {}
 
 export default function reducer(state = initialState, action){
@@ -129,6 +138,8 @@ export default function reducer(state = initialState, action){
             newState = { ...state };
             delete newState[action.payload]
             return newState
+        case DROP_TRANSACTIONS:
+            return initialState
         default:
             return state
     }

@@ -1,4 +1,6 @@
 import { dropWallet } from "./wallet";
+import { dropAllFriends } from "./friend";
+import { dropAllTransactions } from "./transaction";
 
 // constants
 
@@ -66,7 +68,9 @@ export const logout = () => async (dispatch) => {
   });
 
   if (response.ok) {
-    dispatch(dropWallet())
+    dispatch(dropWallet());
+    dispatch(dropAllTransactions())
+    dispatch(dropAllFriends());
     dispatch(removeUser());
   }
 };

@@ -1,10 +1,65 @@
-.splash-page{
+.wallet_container{
+    box-sizing: border-box;
+    width: auto;
+    height: 25vh;
+    overflow: hidden;
+    padding-bottom: 55vh;
+    zoom: 70%;
+    padding-left: 5vw;
+    border: thin solid rgba(141, 134, 134, 0.281);
+    border-radius: 15px;
+}
+
+.activity_container{
+    box-sizing: border-box;
+    width: auto;
+    height: 55vh;
+    overflow: scroll;
+    padding-left: 5vw;
+    zoom: 70%;
+    overflow-x: hidden;
+    border: thin solid rgba(214, 61, 61, 0.281);
+    border-radius: 15px;
+}
+
+.contacts_container{
+    box-sizing: border-box;
+    width: 55vw;
+    height: 55vh;
+    overflow: scroll;
+    padding-left: 5vw;
+    zoom: 70%;
+    border-style: none;
+    overflow-x: hidden;
+    border: thin solid #169ad754;
+    border-radius: 15px;
+}
+
+#wallet{
+    width: 1vw;
+    height: inherit;
+}
+
+#activity{
+    width: 10vw;
+    height: 20vh;
+}
+
+#contacts{
+    width: 10vw;
+    height: 20vh;
+}
+
+.home_page{
     display: flex;
-    margin-top: 10vh;
+    box-sizing: border-box;
+    margin-top: 0vh;
     margin-left: 12vw;
     justify-content: center;
     position: relative;
     width: 80vw;
+    margin-bottom: 10vh;
+    padding: 5vh;
 }
 
 .left_column{
@@ -17,117 +72,4 @@
     width: 50%;
     align-items: center;
     justify-content: center;
-}
-
-picture{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-picture > img{
-    height: 45vh;
-    width: 40vh;
-    padding: 5vw;
-}
-
-picture > p{
-    font-weight: 0;
-    /* margin-top: 10vh; */
-    width: 30vw;
-    font-size: larger;
-    margin-left: 5vw;
-    margin-right: 8vw;
-    text-align: center;
-}
-
-.multi-image-container{
-    position: relative;
-    height: 50vh;
-    align-self: flex-start;
-    margin-left: 5vw;
-    /* width: 45vw; */
-}
-
-.multi-image-container > img{
-    position: absolute;
-}
-
-.top_pic{
-    height: 90%;
-    border-radius: 10px;
-    margin: 10px 15px;
-    box-shadow: 5px 5px 10px gray;
-}
-
-.buttom_pic{
-    height: 8vh;
-    width: auto;
-    margin-right: 100px;
-    animation: notification 200ms infinite;
-
-}
-
-.buttom_pic:hover{
-    margin-left: 10px;
-    margin-top: 10px;
-    transition: 800ms;
-}
-/* For the cellphone on left column */
-#top_pic_phone{
-    height: 90%;
-    border-radius: 10px;
-    margin: 10px 15px;
-}
-
-#buttom_pic_phone{
-    height: 8vh;
-    width: auto;
-    /* margin-right: 100px; */
-    animation: dollarSign 5s infinite;
-    animation-duration: 2s;
-}
-
-#buttom_pic_phone:hover{
-    margin-top: 20px;
-    transition: 800ms;
-}
-
-.demo-button{
-    background-color: #169bd7;
-    border-style: none;
-    height: 60px;
-    border-radius: 50px;
-    width: 200px;
-    box-shadow: 8px 8px 0px rgb(158, 233, 45);
-}
-
-.demo-button:hover {
-    cursor: pointer;
-    background-color: rgb(158, 233, 45);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-    -webkit-transition: background-color 100ms ease-in;
-    -moz-transition: background-color 100ms ease-in;
-    -o-transition: background-color 100ms ease-in;
-    transition: background-color 100ms ease-in;
-}
-
-.demo-button:hover::after {
-    opacity: 1;
-}
-
-@keyframes dollarSign {
-    0%   {left:15px; top:0px;}
-    25%  {left:30px; top:0px;}
-    50%  {left:15px; top:0px;}
-    75%  {left:30px; top:0px;}
-    100% {left:15px; top:0px;}
-}
-
-@keyframes notification {
-    0%   {transform: rotate(1deg);}
-    30%  {transform: rotate(0deg);}
-    60% {transform: rotate(-1deg);}
-    90% {transform: rotate(0deg);}
 }

@@ -3,7 +3,6 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
-import {useState, useEffect} from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 

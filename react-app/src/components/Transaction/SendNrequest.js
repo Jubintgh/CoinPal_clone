@@ -81,7 +81,6 @@ const MyWallet = () => {
                   <option value='request'>request</option>
                   <option value='pay'>pay</option>
               </select>
-              {console.log(errors)}
             <button className="fund__input" type='submit'>Send</button>
           </div>
           

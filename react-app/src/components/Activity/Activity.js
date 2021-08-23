@@ -6,7 +6,7 @@ import { getAllTransactions, deleteTransaction, rejectTransaction} from '../../s
 
 const Activity = () => {
     const { user } = useSelector((state) => state.session);
-    const transactions = useSelector(state => state.transactions['alltransactions'])
+    let transactions = useSelector(state => state.transactions['alltransactions'])
     const currUsername = useSelector(state => state.session.user.username) 
     const id = Number(user.id);
 
@@ -15,7 +15,8 @@ const Activity = () => {
     //useStates
     const [errors, setErrors] = useState([]);
     const [switcher, setSwitcher] = useState(false);
-    const [displayTransactions, setDisplayTransactions] = useState(transactions)
+    const [displayTransactions, setDisplayTransactions] = useState(() => transactions)
+
 
     const cancelReq = async (id, transactionId) => {
       const result = await dispatch(deleteTransaction(id,transactionId))
@@ -62,8 +63,42 @@ const Activity = () => {
 
     //useEffets
     useEffect(() => {
-      dispatch(getAllTransactions(id));
+      setDisplayTransactions(transactions)
+      dispatch(getAllTransactions(id))
     }, [dispatch, id, switcher])
+
+    const quickSort = (arr) => {
+      if(arr.length <= 1){
+        return arr
+      }
+
+      let pivot = arr.shift();
+      let left = arr.filter(el => el.transaction_status < pivot.transaction_status);
+      let right = arr.filter(el => el.transaction_status >= pivot.transaction_status);
+
+      let leftSorted = quickSort(left);
+      let rightSorted = quickSort(right);
+      return [...leftSorted, pivot, ...rightSorted];
+    }
+
+    const sortBy = (sort) => {
+
+      switch(sort){
+        case 'Incoming':
+          console.log(transactions)
+          transactions = transactions.filter(transaction => {
+            return transaction.transaction_status === 3
+          })
+          setDisplayTransactions(transactions)
+        break;
+        case 'Status':
+          transactions = quickSort(transactions)
+          setDisplayTransactions(transactions)
+        break;
+        default:
+          return
+      }
+    }
     
 
     const canCancel = (transaction) => {
@@ -78,15 +113,15 @@ const Activity = () => {
     return(
       <div className='parent_page'>
         <div id='contact__navbar'>
-            <button  className='friend_req_button'>Sort By status</button>
-            <button  className='friend_req_button'>Incoming requests</button>
-            <button  className='friend_req_button'>Search Transactions</button>
+            <button onClick={() => sortBy('Status')} className='friend_req_button'>Sort By status</button>
+            <button onClick={() => sortBy('Incoming')} className='friend_req_button'>Requests</button>
+            <button className='friend_req_button'>Search Transactions</button>
         </div>
         <div className='Activity_page'>
           {errors && errors.forEach(err => {
             <li className='errors__class'>{err}</li>
           })}
-            {transactions && transactions.map((transact, idx) => {
+            {displayTransactions && displayTransactions.map((transact, idx) => {
                   return (
                     <div key={idx} className="Activity__main">
                       <img className='transaction_logo' alt='logo' src={transactionStatLogo(transact.transaction_status)}/>

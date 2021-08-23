@@ -37,9 +37,11 @@ const MyWallet = () => {
       "amount": amount,
       "crypto_type": cryptoType
     }))
+
     if(!result){
-        setErrors('Balance Insufficient')
+      setErrors('Balance Insufficient')
     }
+
     if (result){
       if(result.errors){
         setErrors([])

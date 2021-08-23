@@ -2,7 +2,8 @@ import './Activity.css'
 import { useSelector, useDispatch } from 'react-redux';
 // import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getAllTransactions, deleteTransaction, rejectTransaction} from '../../store/transaction';
+import { getAllTransactions, postTransaction, deleteTransaction, rejectTransaction} from '../../store/transaction';
+
 
 const Activity = () => {
     const { user } = useSelector((state) => state.session);
@@ -32,6 +33,11 @@ const Activity = () => {
 
     const rejectReq = async (id, transactionId) => {
       await dispatch(rejectTransaction(id,transactionId))
+      dispatch(getAllTransactions)
+    }
+
+    const payReq = async (id, transactionId) => {
+      await dispatch(postTransaction(id,transactionId))
       dispatch(getAllTransactions)
     }
 

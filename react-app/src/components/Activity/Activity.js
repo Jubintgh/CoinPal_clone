@@ -32,22 +32,27 @@ const Activity = () => {
     }
 
     const rejectReq = async (id, transactionId) => {
-      await dispatch(rejectTransaction(id,transactionId))
-      dispatch(getAllTransactions)
+      let rejectedTransact = await dispatch(rejectTransaction(id,transactionId))
+
+      setDisplayTransactions([rejectedTransact])
+      setTimeout(async () => await dispatch(getAllTransactions(id)), 500)
+
     }
 
     const payReq = async(id, transactionId) => {
-      const result = await dispatch(payTransaction(id, transactionId))
+      const acceptedTransact = await dispatch(payTransaction(id, transactionId))
       
-      if (result){
-        if(result.errors){
+      if (acceptedTransact){
+        if(acceptedTransact.errors){
           setErrors([])
-          let errs = Object.values(result.errors)
+          let errs = Object.values(acceptedTransact.errors)
           setErrors(errs)
           return
         }
-        dispatch(getAllTransactions)
+        setDisplayTransactions([acceptedTransact])
+        setTimeout(async () => await dispatch(getAllTransactions(id)), 500)
       }
+
     }
 
 

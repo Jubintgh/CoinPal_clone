@@ -88,6 +88,7 @@ export const rejectTransaction = (userId, transactionId) => async (dispatch) => 
             return;
         }
         dispatch(updateTransaction(data))
+        return data
     }
 }
 
@@ -109,10 +110,7 @@ export const payTransaction = (userId, transactionId) => async (dispatch) => {
         }
         await dispatch(setTransaction(data))
         return data
-    } else {
-        const data = await response.json();
-        return data
-    }
+    } 
 }
 
 export const deleteTransaction = (userId, transactionId) => async (dispatch) => {

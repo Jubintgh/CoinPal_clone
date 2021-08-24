@@ -31,7 +31,12 @@ const MyWallet = () => {
     e.preventDefault();
 
     setFromUserId(id)
-
+    console.log({
+      "from_user_id": fromUserId,
+      "to_username": toUserName,
+      "amount": amount,
+      "crypto_type": cryptoType
+    })
     const result = await dispatch(postTransaction(type, id, {
       "from_user_id": fromUserId,
       "to_username": toUserName,
@@ -64,7 +69,7 @@ const MyWallet = () => {
         </div>
         <div className='send-crypto'>
             <h3 className='fund__field'><p>Send or Request Crypto!</p></h3>
-            <input type='text' className="user__name" onKeyPress={e => settoUserName(e.target.value)} placeholder='To @username' required/>
+            <input type='text' className="user__name" onKeyUp={e => settoUserName(e.target.value)} placeholder='To @username' required/>
             <input type='decimal' className="fund__input" onChange={e => setAmount(e.target.value)} placeholder='enter value' required/>
             <p className="fund__field">Select Crypto type</p>
             <select

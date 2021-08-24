@@ -1,4 +1,5 @@
 .wallet_container{
+    position: relative;
     box-sizing: border-box;
     width: auto;
     height: 25vh;
@@ -12,43 +13,47 @@
 
 .activity_container{
     box-sizing: border-box;
+    position: relative;
     width: auto;
     height: 55vh;
     overflow: scroll;
     padding-left: 5vw;
-    zoom: 70%;
+    zoom: 40%;
     overflow-x: hidden;
     border: thin solid rgba(214, 61, 61, 0.281);
     border-radius: 15px;
 }
 
-.contacts_container{
+.contacts_container_glance{
     box-sizing: border-box;
-    width: 55vw;
+    position: relative;
+    width: auto;
     height: 55vh;
     overflow: scroll;
     padding-left: 5vw;
     zoom: 70%;
     border-style: none;
     overflow-x: hidden;
-    border: thin solid #169ad754;
+    border: thin solid rgba(214, 61, 61, 0.281);
     border-radius: 15px;
 }
 
-#wallet{
-    width: 1vw;
+/* #wallet{
+    width: 10vw;
     height: inherit;
+    padding: 50px;
+    margin: 20px;
 }
 
 #activity{
     width: 10vw;
-    height: 20vh;
+    height: inherit;
 }
 
 #contacts{
-    width: 10vw;
-    height: 20vh;
-}
+    width: 100vw;
+    height: inherit;
+} */
 
 .home_page{
     display: flex;

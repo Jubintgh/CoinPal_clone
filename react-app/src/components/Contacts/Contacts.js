@@ -24,34 +24,8 @@ const MyContacts = () => {
     }, [dispatch, id])
 
     //useStates
-    // const [errors, setErrors] = useState([]);
     const [ReqDisplay, setReqDisplay] = useState(false)
     const [SearchDisplay, setSearchDisplay] = useState(false)
-    // const [amount, setAmount] = useState(null)
-    // const [fromUserId, setFromUserId] = useState(String(id))
-    // const [cryptoType, setCryptoType] = useState('Bitcoin')
-    
-    // const onTransaction = async (e) => {
-    //   e.preventDefault();
-
-    //   setFromUserId(id)
-
-    //   const result = await dispatch(postTransaction(id, {
-    //     "from_user_id": fromUserId,
-    //     "to_username": toUserName,
-    //     "amount": amount,
-    //     "crypto_type": cryptoType
-    //   }))
-      
-    //   if (result){
-    //     if(result.errors){
-    //       let errs = Object.keys(result.errors)
-    //       setErrors(errs)
-    //     } else {
-    //       history.push('/');
-    //     }
-    //   } 
-    // }
 
 
     const unFriend = async (otherUserId) => {
@@ -67,13 +41,12 @@ const MyContacts = () => {
     const rejectFriend = async (userName) => {
         await dispatch(removeFriend(userName))
         dispatch(getAllFriends(id))
-        // await dispatch(postFriendship(userName))
     }
 
     return (
         <div id='contacts_page'>
             <div id='contact__navbar'>
-                <button onClick={e => setReqDisplay(!ReqDisplay)} className='friend_req_button'>Friend Requests</button>
+                <button onClick={e => setReqDisplay(!ReqDisplay)} className='friend_req_button'>Friend Requests <i class="arrowdown"></i></button>
             </div>
             <div className='req_contacts_container'>
             {
@@ -96,7 +69,7 @@ const MyContacts = () => {
                             </div>
                         )
                     })
-                }
+                }{<div>No More Requests</div>}
                 </div>}  
                 {/* {
                     SearchDisplay && <div className='search__bar'>

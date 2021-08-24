@@ -4,13 +4,14 @@ a {
 
 #title_holder{
     display: flex;
-    width: inherit;
+    width: 25vw;
     width: 100%;
     border-bottom: solid thin rgb(136, 136, 161);
 }
 
 .title{
     justify-self: center;
+    width: 20vw;
     align-self: center;
     font-weight: bold;
     margin-left: 14vw;
@@ -39,7 +40,7 @@ a {
     flex-direction: column;
     position: relative;
     background-color: white;
-    border: solid thin gray;
+    border: solid thin rgba(204, 203, 203, 0.575);
     border-radius: 10px;
     box-sizing: border-box;
     align-self: center;

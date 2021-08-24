@@ -39,7 +39,7 @@ const Home = () => {
             </div>
             <div className='left_column'>
             <p>Contacts Glance</p>
-                <div className='contacts_container'>
+                <div className='contacts_container_glance'>
                     <Contacts id='contacts'/>
                 </div>
             </div>

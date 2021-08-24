@@ -1,8 +1,9 @@
 //constants
 const GET_TRANSACTIONS = 'transaction/GET_TRANSACTIONS';
 const SET_TRANSACTION = 'transaction/SET_TRANSACTION';
-const UPDATE_TRANSACTION = 'transaction/UPDATE_TRANSACTION'
+const UPDATE_TRANSACTION = 'transaction/UPDATE_TRANSACTION';
 const REMOVE_TRANSACTION = 'transaction/REMOVE_TRANSACTION';
+const DROP_TRANSACTIONS = 'transaction/DROP_TRANSACTIONS';
 
 const getTransactions = (transactions) => ({
     type: GET_TRANSACTIONS,
@@ -22,6 +23,10 @@ const updateTransaction = (transaction) => ({
 const removeTransaction = (transactionId) => ({
     type: REMOVE_TRANSACTION,
     payload: transactionId
+})
+
+const dropTransactions = () => ({
+    type: DROP_TRANSACTIONS
 })
 
 export const getAllTransactions = (userId) => async (dispatch) => {
@@ -62,7 +67,6 @@ export const postTransaction = (type ,userId, transaction) => async (dispatch) =
         return data
     } else {
         const data = await response.json();
-        console.log(data)
         return data
     }
 }
@@ -87,6 +91,30 @@ export const rejectTransaction = (userId, transactionId) => async (dispatch) => 
     }
 }
 
+export const payTransaction = (userId, transactionId) => async (dispatch) => {
+    const response = await fetch(`/api/transactions/${userId}/payrequest`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "user_id": userId,
+            "transaction_id": transactionId
+        })
+    });
+    if (response.ok){
+        const data = await response.json();
+        if(data.errors){
+            return data;
+        }
+        await dispatch(setTransaction(data))
+        return data
+    } else {
+        const data = await response.json();
+        return data
+    }
+}
+
 export const deleteTransaction = (userId, transactionId) => async (dispatch) => {
     const response = await fetch(`/api/transactions/${userId}/delete`, {
         method: 'DELETE',
@@ -104,6 +132,10 @@ export const deleteTransaction = (userId, transactionId) => async (dispatch) => 
         }
         dispatch(removeTransaction(data.success))
     }
+}
+
+export const dropAllTransactions = () => (dispatch) => {
+    dispatch(dropTransactions())
 }
 
 const initialState = {}
@@ -130,6 +162,8 @@ export default function reducer(state = initialState, action){
             newState = { ...state };
             delete newState[action.payload]
             return newState
+        case DROP_TRANSACTIONS:
+            return initialState
         default:
             return state
     }

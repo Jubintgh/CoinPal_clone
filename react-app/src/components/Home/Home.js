@@ -3,11 +3,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
-import {useState, useEffect} from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import MyWallet from '../DashBoard/MyWallet';
 import Activity from '../Activity/Activity';
 import Contacts from '../Contacts/Contacts'
+
 
 
 const Home = () => {

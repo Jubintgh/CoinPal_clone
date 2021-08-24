@@ -37,9 +37,11 @@ const MyWallet = () => {
       "amount": amount,
       "crypto_type": cryptoType
     }))
+
     if(!result){
-        setErrors('Balance Insufficient')
+      setErrors('Balance Insufficient')
     }
+
     if (result){
       if(result.errors){
         setErrors([])
@@ -81,7 +83,6 @@ const MyWallet = () => {
                   <option value='request'>request</option>
                   <option value='pay'>pay</option>
               </select>
-              {console.log(errors)}
             <button className="fund__input" type='submit'>Send</button>
           </div>
           

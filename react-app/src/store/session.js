@@ -1,7 +1,9 @@
 import { dropWallet } from "./wallet";
-
+import { dropAllFriends } from "./friend";
+import { dropAllTransactions } from "./transaction";
 
 // constants
+
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 
@@ -66,17 +68,16 @@ export const logout = () => async (dispatch) => {
   });
 
   if (response.ok) {
+    dispatch(dropWallet());
+    dispatch(dropAllTransactions())
+    dispatch(dropAllFriends());
     dispatch(removeUser());
-    dispatch(dropWallet()); //every time user logs out
   }
 };
 
 
 export const signUp = (username, email, password, first_name, last_name, img_url) => async (dispatch) => {
-  console.log({
-    first_name,
-    email,
-  }, 'asdasd')
+
   const response = await fetch('/api/auth/signup', {
     method: 'POST',
     headers: {

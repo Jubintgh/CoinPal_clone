@@ -131,7 +131,7 @@ def update_friendship(filter_t):
 
         friend_instance = Friend.query.filter(and_(Friend.from_user_id == addresser_user_id, 
                                                 Friend.to_user_id == addresee_user_id)).first()
-        friend_instance.status = 0
+        friend_instance.status = 2
 
     db.session.commit()
     return {'friend': friend_instance.to_dict()}

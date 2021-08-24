@@ -1,13 +1,15 @@
 import './Activity.css'
 import { useSelector, useDispatch } from 'react-redux';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getAllTransactions, deleteTransaction, rejectTransaction} from '../../store/transaction';
+import { getAllTransactions, deleteTransaction, rejectTransaction, payTransaction} from '../../store/transaction';
+
 
 const Activity = () => {
     const { user } = useSelector((state) => state.session);
-    const transactions = useSelector(state => state.transactions['alltransactions'])
+    let transactions = useSelector(state => state.transactions['alltransactions'])
     const currUsername = useSelector(state => state.session.user.username) 
+    const history = useHistory()
     const id = Number(user.id);
 
     const dispatch = useDispatch();
@@ -24,8 +26,7 @@ const Activity = () => {
 
       if (result){
         if(result.errors){
-          let errs = Object.keys(result.errors)
-          setErrors(errs)
+          setErrors(result.errors)
         } 
       } 
     }
@@ -33,6 +34,19 @@ const Activity = () => {
     const rejectReq = async (id, transactionId) => {
       await dispatch(rejectTransaction(id,transactionId))
       dispatch(getAllTransactions)
+    }
+
+    const payReq = async(id, transactionId) => {
+      const result = await dispatch(payTransaction(id, transactionId))
+      
+      if (result){
+        if(result.errors){
+          setErrors([])
+          let errs = Object.values(result.errors)
+          setErrors(errs)
+          return
+        }
+      }
     }
 
 
@@ -62,8 +76,42 @@ const Activity = () => {
 
     //useEffets
     useEffect(() => {
-      dispatch(getAllTransactions(id));
+      dispatch(getAllTransactions(id))
+      setDisplayTransactions(transactions)
     }, [dispatch, id, switcher])
+
+    const quickSort = (arr) => {
+      if(arr.length <= 1){
+        return arr
+      }
+
+      let pivot = arr.shift();
+      let left = arr.filter(el => el.transaction_status < pivot.transaction_status);
+      let right = arr.filter(el => el.transaction_status >= pivot.transaction_status);
+
+      let leftSorted = quickSort(left);
+      let rightSorted = quickSort(right);
+      return [...leftSorted, pivot, ...rightSorted];
+    }
+
+    const sortBy = (sort) => {
+
+      switch(sort){
+        case 'requested':
+          let requestedTransactions = transactions.filter(transaction => {
+            return transaction.transaction_status === 3
+          })
+          setDisplayTransactions(requestedTransactions)
+        break;
+        case 'status':
+          let transactionsByStats = JSON.parse(JSON.stringify(transactions));
+          transactionsByStats = quickSort(transactionsByStats)
+          setDisplayTransactions(transactionsByStats)
+        break;
+        default:
+          return
+      }
+    }
     
 
     const canCancel = (transaction) => {
@@ -78,24 +126,24 @@ const Activity = () => {
     return(
       <div className='parent_page'>
         <div id='contact__navbar'>
-            <button  className='friend_req_button'>Sort By status</button>
-            <button  className='friend_req_button'>Incoming requests</button>
-            <button  className='friend_req_button'>Search Transactions</button>
+          <button onClick={() => sortBy('status')} className='friend_req_button'>Sort By status</button>
+          <button onClick={() => sortBy('requested')} className='friend_req_button'>Requests</button>
+          <button className='friend_req_button' onClick={() => setDisplayTransactions(transactions)}>Sort by Date</button>
         </div>
         <div className='Activity_page'>
           {errors && errors.forEach(err => {
             <li className='errors__class'>{err}</li>
           })}
-            {transactions && transactions.map((transact, idx) => {
+            {displayTransactions && displayTransactions.map((transact, idx) => {
                   return (
                     <div key={idx} className="Activity__main">
                       <img className='transaction_logo' alt='logo' src={transactionStatLogo(transact.transaction_status)}/>
                       <p className='transaction__status'>{transact.transaction_status === 0 ? 'Pending': transact.transaction_status === 1 ? 'Completed' : transact.transaction_status === 2 ? 'Rejected' : transact.transaction_status === 3 ? 'Request' : 'Loading...'}</p>
                       <div className="transaction__container" value={transact.transaction_id}>
-                              <div>
-                                  <p className={'transact_from_user'}>From: {transact.from_username}</p>
-                                  <p className={'transact_to_user'}>To: {transact.to_username}</p>
-                              </div>
+                            <div>
+                              <p className={'transact_from_user'}>From: {transact.from_username}</p>
+                              <p className={'transact_to_user'}>To: {transact.to_username}</p>
+                            </div>
                           {
                             canCancel(transact) ? 
                             <div className='buttons_container'>
@@ -104,8 +152,9 @@ const Activity = () => {
                             :
                             canReject(transact) ? 
                             <div className='buttons_container'>
+                              {errors ? <div className='errors__class' >{errors}</div> : <p></p>}
                               <button className='Activity_button' style={{visibility: canReject(transact) ? 'visible': 'hidden'}} onClick={() => rejectReq(id, transact.transaction_id)}>Reject</button>
-                              <button className='Activity_button' style={{visibility: canReject(transact) ? 'visible': 'hidden'}} onClick={() => window.location.href='/my/SendNrequest'}>Pay</button> 
+                              <button className='Activity_button' style={{visibility: canReject(transact) ? 'visible': 'hidden'}} onClick={() => payReq(id, transact.transaction_id)}>Pay</button> 
                             </div>
                           : <p/>}
                       </div>

@@ -1,4 +1,4 @@
-import asyncio
+from datetime import datetime
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import User, Transaction, CryptoWallet, db
@@ -18,12 +18,13 @@ def db_errors_to_error_messages(errtype, error):
     return errorMessages
 
 # transaction algorithm
-async def transact(amount, crypto_type, from_wallet, to_wallet):
+def transact(amount, crypto_type, from_wallet, to_wallet):
     pending_amount = amount
-
+    # print(crypto_type, "FROM USER")
     if crypto_type == 'Bitcoin':
         if from_wallet.bitcoin_balance > pending_amount:
             from_wallet.bitcoin_balance = from_wallet.bitcoin_balance - pending_amount
+
             to_wallet.bitcoin_balance = to_wallet.bitcoin_balance + pending_amount
         else:
             return 2
@@ -66,12 +67,18 @@ def get_transactions(id):
 
     transactions_all = transactions_debit + transactions_credit
 
-    return {'transactions': [user_transaction.front_end_to_dict() for user_transaction in transactions_all]}
+    print(transactions_all[0].created_at, 'TEST')
+
+    sorted_transactions = sorted( transactions_all, 
+    key=lambda x: datetime.strptime(str(x.created_at), "%Y-%m-%d %H:%M:%S.%f")
+    )
+    sorted_transactions.reverse()
+    return {'transactions': [user_transaction.front_end_to_dict() for user_transaction in sorted_transactions]}
 
 
 @transaction_routes.route('/<int:id>/type/<filter_t>', methods=['POST'])
 # @login_required
-async def post_transactions(id, filter_t):
+def post_transactions(id, filter_t):
     """
     creates a new transaction record
     """
@@ -99,6 +106,7 @@ async def post_transactions(id, filter_t):
         elif transaction_type == 'request':
             transaction_status = 3                              #0:pending 1:accepted 2:rejected 3:requested
 
+
         else:
             return {'errors': db_errors_to_error_messages('Bad Request', 'Please try again')}, 400
 
@@ -121,7 +129,7 @@ async def post_transactions(id, filter_t):
             # processing transaction
             from_user_wallet = CryptoWallet.query.get(from_user_id)
             to_user_wallet = CryptoWallet.query.get(to_user_id)
-            status = await transact(amount, crypto_type, from_user_wallet, to_user_wallet)
+            status = transact(amount, crypto_type, from_user_wallet, to_user_wallet)
 
             if status == 1:
                 new_transaction.transaction_status = 1
@@ -139,21 +147,43 @@ async def post_transactions(id, filter_t):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@transaction_routes.route('/<int:id>/reject', methods=['PUT'])
+@transaction_routes.route('/<int:id>/<transaction_t>', methods=['PUT'])
 @login_required
-def update_transactions(id):
+def update_transactions(id, transaction_t):
     """
     updates transaction status to rejected for an existing transaction request that is for the current user
     """
     
-    user_id = int(request.json['user_id'])
-    transaction_id = int(request.json['transaction_id'])
+    if transaction_t == 'reject':
+        user_id = int(request.json['user_id'])
+        transaction_id = int(request.json['transaction_id'])
 
-    transaction = Transaction.query.get(transaction_id)
-    if user_id == transaction.to_user_id and transaction.transaction_status == 3:
-        transaction.transaction_status = 2
-        db.session.commit()
-        return transaction.front_end_to_dict()
+        transaction = Transaction.query.get(transaction_id)
+
+        if user_id == transaction.to_user_id and transaction.transaction_status == 3:
+            transaction.transaction_status = 2
+            db.session.commit()
+            return transaction.front_end_to_dict()
+
+    elif transaction_t == 'payrequest':
+        user_id = int(request.json['user_id'])
+        transaction_id = int(request.json['transaction_id'])
+
+        transaction = Transaction.query.get(transaction_id)
+
+        if user_id == transaction.to_user_id and transaction.transaction_status == 3:
+            from_user_wallet = CryptoWallet.query.get(transaction.from_user_id)
+            to_user_wallet = CryptoWallet.query.get(transaction.to_user_id)
+
+            status = transact(transaction.amount, transaction.crypto_type, from_user_wallet, to_user_wallet)
+
+            if status == 1:
+                transaction.transaction_status = 1
+                db.session.commit()
+                return transaction.front_end_to_dict()
+            elif status == 2:
+                return {'errors': 'Insufficient funds'}
+
     return {'errors': 'something went wrong'}
 
 

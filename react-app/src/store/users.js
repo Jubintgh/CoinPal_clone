@@ -14,10 +14,11 @@ const setOneUser = (user) => ({
 export const getUsers = () => async(dispatch) => {
   const res = await fetch('/api/users');
 
-  if (res.ok) {
-    const users = await res.json()
-    dispatch(setUsers(users))
-  }
+
+    if (res.ok) {
+      const users = await res.json()
+      dispatch(setUsers(users))
+    }
 }
 
 export const getOneUser = (userName) => async (dispatch) => {

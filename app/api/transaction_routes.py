@@ -1,4 +1,4 @@
-import asyncio
+from datetime import datetime
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import User, Transaction, CryptoWallet, db
@@ -66,7 +66,13 @@ def get_transactions(id):
 
     transactions_all = transactions_debit + transactions_credit
 
-    return {'transactions': [user_transaction.front_end_to_dict() for user_transaction in transactions_all]}
+    print(transactions_all[0].created_at, 'TEST')
+
+    sorted_transactions = sorted( transactions_all, 
+    key=lambda x: datetime.strptime(str(x.created_at), "%Y-%m-%d %H:%M:%S.%f")
+    )
+
+    return {'transactions': [user_transaction.front_end_to_dict() for user_transaction in sorted_transactions]}
 
 
 @transaction_routes.route('/<int:id>/type/<filter_t>', methods=['POST'])

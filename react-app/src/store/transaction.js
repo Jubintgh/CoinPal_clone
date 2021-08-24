@@ -91,6 +91,30 @@ export const rejectTransaction = (userId, transactionId) => async (dispatch) => 
     }
 }
 
+export const payTransaction = (userId, transactionId) => async (dispatch) => {
+    const response = await fetch(`/api/transactions/${userId}/payrequest`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "user_id": userId,
+            "transaction_id": transactionId
+        })
+    });
+    if (response.ok){
+        const data = await response.json();
+        if(data.errors){
+            return data;
+        }
+        await dispatch(setTransaction(data))
+        return data
+    } else {
+        const data = await response.json();
+        return data
+    }
+}
+
 export const deleteTransaction = (userId, transactionId) => async (dispatch) => {
     const response = await fetch(`/api/transactions/${userId}/delete`, {
         method: 'DELETE',

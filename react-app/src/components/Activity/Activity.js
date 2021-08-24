@@ -15,8 +15,8 @@ const Activity = () => {
     //useStates
     const [errors, setErrors] = useState([]);
     const [switcher, setSwitcher] = useState(false);
-    const [displayTransactions, setDisplayTransactions] = useState(() => transactions)
-
+    const [displayTransactions, setDisplayTransactions] = useState(transactions?.reverse())
+    console.log(displayTransactions)
 
     const cancelReq = async (id, transactionId) => {
       const result = await dispatch(deleteTransaction(id,transactionId))
@@ -63,8 +63,8 @@ const Activity = () => {
 
     //useEffets
     useEffect(() => {
-      setDisplayTransactions(transactions)
       dispatch(getAllTransactions(id))
+      setDisplayTransactions(transactions?.reverse())
     }, [dispatch, id, switcher])
 
     const quickSort = (arr) => {
@@ -115,7 +115,7 @@ const Activity = () => {
         <div id='contact__navbar'>
             <button onClick={() => sortBy('Status')} className='friend_req_button'>Sort By status</button>
             <button onClick={() => sortBy('Incoming')} className='friend_req_button'>Requests</button>
-            <button className='friend_req_button'>Search Transactions</button>
+            <button className='friend_req_button' onClick={() => setDisplayTransactions(transactions.reverse())}>Sort by Date</button>
         </div>
         <div className='Activity_page'>
           {errors && errors.forEach(err => {

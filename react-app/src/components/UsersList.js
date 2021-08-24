@@ -7,9 +7,9 @@ function UsersList() {
 
   useEffect(() => {
     async function fetchData() {
-      // const response = await fetch('/api/users/');
-      // const responseData = await response.json();
-      const responseData = await getUsers();
+      const response = await fetch('/api/users/');
+      const responseData = await response.json();
+      // const responseData = await getUsers();
       setUsers(responseData.users);
     }
     fetchData();

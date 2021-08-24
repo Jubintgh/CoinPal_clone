@@ -46,6 +46,7 @@ const Activity = () => {
           setErrors(errs)
           return
         }
+        dispatch(getAllTransactions)
       }
     }
 

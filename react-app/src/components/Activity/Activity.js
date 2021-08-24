@@ -7,7 +7,7 @@ import { getAllTransactions, deleteTransaction, rejectTransaction, payTransactio
 
 const Activity = () => {
     const { user } = useSelector((state) => state.session);
-    const transactions = useSelector(state => state.transactions['alltransactions'])
+    let transactions = useSelector(state => state.transactions['alltransactions'])
     const currUsername = useSelector(state => state.session.user.username) 
     const history = useHistory()
     const id = Number(user.id);
@@ -76,8 +76,42 @@ const Activity = () => {
 
     //useEffets
     useEffect(() => {
-      dispatch(getAllTransactions(id));
+      dispatch(getAllTransactions(id))
+      setDisplayTransactions(transactions)
     }, [dispatch, id, switcher])
+
+    const quickSort = (arr) => {
+      if(arr.length <= 1){
+        return arr
+      }
+
+      let pivot = arr.shift();
+      let left = arr.filter(el => el.transaction_status < pivot.transaction_status);
+      let right = arr.filter(el => el.transaction_status >= pivot.transaction_status);
+
+      let leftSorted = quickSort(left);
+      let rightSorted = quickSort(right);
+      return [...leftSorted, pivot, ...rightSorted];
+    }
+
+    const sortBy = (sort) => {
+
+      switch(sort){
+        case 'requested':
+          let requestedTransactions = transactions.filter(transaction => {
+            return transaction.transaction_status === 3
+          })
+          setDisplayTransactions(requestedTransactions)
+        break;
+        case 'status':
+          let transactionsByStats = JSON.parse(JSON.stringify(transactions));
+          transactionsByStats = quickSort(transactionsByStats)
+          setDisplayTransactions(transactionsByStats)
+        break;
+        default:
+          return
+      }
+    }
     
 
     const canCancel = (transaction) => {
@@ -92,12 +126,15 @@ const Activity = () => {
     return(
       <div className='parent_page'>
         <div id='contact__navbar'>
-            <button  className='friend_req_button'>Sort By status</button>
-            <button  className='friend_req_button'>Incoming requests</button>
-            <button  className='friend_req_button'>Search Transactions</button>
+          <button onClick={() => sortBy('status')} className='friend_req_button'>Sort By status</button>
+          <button onClick={() => sortBy('requested')} className='friend_req_button'>Requests</button>
+          <button className='friend_req_button' onClick={() => setDisplayTransactions(transactions)}>Sort by Date</button>
         </div>
         <div className='Activity_page'>
-            {transactions && transactions.map((transact, idx) => {
+          {errors && errors.forEach(err => {
+            <li className='errors__class'>{err}</li>
+          })}
+            {displayTransactions && displayTransactions.map((transact, idx) => {
                   return (
                     <div key={idx} className="Activity__main">
                       <img className='transaction_logo' alt='logo' src={transactionStatLogo(transact.transaction_status)}/>

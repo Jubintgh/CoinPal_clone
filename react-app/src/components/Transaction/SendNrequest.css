@@ -13,7 +13,9 @@
     align-items: center;
     margin: 5vw;
     width: 40vw;
-    height: 40vw;
+    min-width: 35vw;
+    height: 60vh;
+    min-height: 60vh;
     flex-direction: column;
     background-color: white;
     border: thin solid rgb(109, 98, 98);

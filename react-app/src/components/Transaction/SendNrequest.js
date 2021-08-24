@@ -55,37 +55,36 @@ const MyWallet = () => {
   }
 
   return (     
-        <form className='transaction__form' onSubmit={onTransaction}>
-          <div>
-          {errors.map((error, ind) => (
-            <div className='errors__class' key={ind}>{error}</div>
-          ))}
-          </div>
-          <div className='send-crypto'>
-              <h3 className='fund__field'><p>Send & Request Crypto!</p></h3>
-              <input type='text' className="user__name" onChange={e => settoUserName(e.target.value)} placeholder='To @username' required/>
-              <input type='decimal' className="fund__input" onChange={e => setAmount(e.target.value)} placeholder='enter value' required/>
-              <p className="fund__field">Select Crypto type</p>
-              <select
-                className="fund__input"
-                onChange={e => setCryptoType(e.target.value)}
-              >Select Crypto
-                  <option value='Bitcoin'>Bitcoin</option>
-                  <option value='Ethereum'>Ethereum</option>
-                  <option value='USDCoin'>USD coin</option>
-              </select>
-              <p className="fund__field">Transaction type</p>
-              <select
-                className="fund__input"
-                defaultValue={'pay'}
-                onChange={e => setType(e.target.value)}
-              >Select Transaction
-                  <option value='request'>request</option>
-                  <option value='pay'>pay</option>
-              </select>
-            <button className="fund__input" type='submit'>Send</button>
-          </div>
-          
+      <form className='transaction__form' onSubmit={onTransaction}>
+        <div>
+        {errors.map((error, ind) => (
+          <div className='errors__class' key={ind}>{error}</div>
+        ))}
+        </div>
+        <div className='send-crypto'>
+            <h3 className='fund__field'><p>Send or Request Crypto!</p></h3>
+            <input type='text' className="user__name" onChange={e => settoUserName(e.target.value)} placeholder='To @username' required/>
+            <input type='decimal' className="fund__input" onChange={e => setAmount(e.target.value)} placeholder='enter value' required/>
+            <p className="fund__field">Select Crypto type</p>
+            <select
+              className="fund__input"
+              onChange={e => setCryptoType(e.target.value)}
+            >Select Crypto
+                <option value='Bitcoin'>Bitcoin</option>
+                <option value='Ethereum'>Ethereum</option>
+                <option value='USDCoin'>USD coin</option>
+            </select>
+            <p className="fund__field">Transaction type</p>
+            <select
+              className="fund__input"
+              defaultValue={'pay'}
+              onChange={e => setType(e.target.value)}
+            >Select Transaction
+                <option value='request'>request</option>
+                <option value='pay'>pay</option>
+            </select>
+          <button className="fund__input" type='submit'>Send</button>
+        </div>
       </form>
   );
 }

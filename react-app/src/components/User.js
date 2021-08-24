@@ -37,9 +37,9 @@ function User() {
 
   const isSelf = (username) => {
     if(currUserName === username){
-      return true
+      return false
     }
-    return false
+    return true
   }
 
   const isFriend = (username) => {
@@ -82,13 +82,26 @@ function User() {
           <div className='errors__class' key={ind}>{error}</div>
         ))}
         </div>
-        <div className='signle_contact'>
+        { isSelf(user.username) &&
+          <div className='signle_contact'>
+              <img id='profile_pic' src={user.img} alt="profile_pic" className=""/>
+              <div className='name_username_container'>
+                  <p className={'req_real_name'}>{user.first_name} {user.last_name}</p>
+                  <p className={'req_user_name'}>@{user.username}</p>
+              </div>
+              {requestedFriend(user.username) ? <button disabled={true}>Pending request</button> : <button onClick={e => isFriend(user.username) ? unfriend(user.username) : addFriend(user.username)}>{isFriend(user.username) ? 'Remove friend' : 'Add as friend'}</button>}
+              {/* <button onClick={e => blockUser(user.username)}>block</button> */}
+          </div>
+        }
+        {
+          !isSelf(user.username) &&
+          <div className='name_username_container'>
+            <p>Your Profile</p>
             <img id='profile_pic' src={user.img} alt="profile_pic" className=""/>
-            <p className={'real_name'}>{user.first_name} {user.last_name}</p>
-            <p className={'user_name'}>{user.username}</p>
-            {requestedFriend(user.username) ? <button disabled={true}>Pending request</button> : <button onClick={e => isFriend(user.username) ? unfriend(user.username) : addFriend(user.username)}>{isFriend(user.username) ? 'Remove friend' : 'Add as friend'}</button>}
-            {/* <button onClick={e => blockUser(user.username)}>block</button> */}
-        </div>
+            <p className={'profile_text'}>Full Name:  {user.first_name} {user.last_name}</p>
+            <p className={'profile_text'}>Username:  @{user.username}</p>
+          </div>
+        }
     </div>
   );
 }

@@ -70,7 +70,6 @@ def get_transactions(id):
 
     sorted_transactions = sorted( transactions_all, 
     key=lambda x: datetime.strptime(str(x.created_at), "%Y-%m-%d %H:%M:%S.%f")
-    # key=lambda transaction: transaction.created_at, reverse=True
     )
 
     return {'transactions': [user_transaction.front_end_to_dict() for user_transaction in sorted_transactions]}

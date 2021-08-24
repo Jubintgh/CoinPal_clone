@@ -12,7 +12,8 @@ const setOneUser = (user) => ({
 });
 
 export const getUsers = () => async(dispatch) => {
-    const res = await fetch('/api/users');
+  const res = await fetch('/api/users');
+
 
     if (res.ok) {
       const users = await res.json()
@@ -75,25 +76,24 @@ export const editOneUser =
 
 const initialState = {}
 const usersReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case SET_USERS:
-            let allUsers = {};
-            action.users.forEach((user) => {
-                allUsers[user.id] = user;
-            }
-            );
-            return {
-                ...state,
-                ...allUsers
-            };
-        case GET_USER:
-            return {
-                ...state,
-                [action.user.id] : action.user
-            };
-        default:
-            return state
-    }
+  switch (action.type) {
+    case SET_USERS:
+      let allUsers = {};
+      action.users.forEach((user) => {
+        allUsers[user.id] = user;
+      });
+      return {
+        ...state,
+        ...allUsers
+      };
+    case GET_USER:
+      return {
+        ...state,
+        [action.user.id] : action.user
+      };
+    default:
+      return state
+  }
 }
 
 export default usersReducer;

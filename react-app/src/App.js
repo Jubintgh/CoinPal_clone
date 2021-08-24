@@ -11,9 +11,10 @@ import User from './components/User';
 import SendNrequestForm from './components/Transaction/SendNrequest'
 import Activity from './components/Activity/Activity'
 import MyContacts from './components/Contacts/Contacts';
-import Home from './components/Home/Home'
+import Splash from './components/Splash/Splash'
 import Footer from './components/Footer/Footer';
 import { authenticate } from './store/session';
+import Home from './components/Home/Home';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -44,8 +45,11 @@ function App() {
           <SignUpForm />
         </Route>
         <Route path='/' exact={true} >
-          <Home/>
+          <Splash/>
         </Route>
+        <ProtectedRoute path='/my/home' exact={true} >
+          <Home/>
+        </ProtectedRoute>
         <ProtectedRoute path='/my/wallet' exact={true}>
           <MyWallet />
         </ProtectedRoute>

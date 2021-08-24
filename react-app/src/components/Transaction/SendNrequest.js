@@ -24,7 +24,8 @@ const MyWallet = () => {
   const [fromUserId, setFromUserId] = useState(String(id))
   const [cryptoType, setCryptoType] = useState('Bitcoin')
   const [type, setType] = useState('pay')
-  const [status, setStatus] = useState(null) 
+  const [SearchDisplay, setSearchDisplay] = useState(false)
+
   
   const onTransaction = async (e) => {
     e.preventDefault();

@@ -76,12 +76,14 @@ def post_friend_req(is_accept=False):
     creates a new pending instance of friendship
     """
     addresser_user_id = current_user.id
-    # addresee_user_id = request.json['other_user_id']
 
     if is_accept == False:
         other_user = request.json['to_username']
         from_user_id = User.query.filter(User.username == other_user).first()
         addresee_user_id = from_user_id.id
+
+        if addresser_user_id == addresee_user_id:
+            return {'errors': 'sorry can\'t add yourself'}, 405
 
         new_friend_req = Friend(
             from_user_id = addresser_user_id,

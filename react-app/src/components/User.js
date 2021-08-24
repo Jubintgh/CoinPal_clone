@@ -5,6 +5,8 @@ import { getAllFriends, postFriendship, updateOneFriendship ,removeFriend} from 
 
 function User() {
   const [user, setUser] = useState({});
+  const [errors, setErrors] = useState([]);
+
   const { username }  = useParams();
   const dispatch = useDispatch();
 
@@ -13,6 +15,7 @@ function User() {
   let pendingReqs = useSelector(state => state.friends.friendsPends);
 
   const id = Number(currUser.id);
+  const currUserName = currUser.username
 
   useEffect(() => {
     if (!username) {
@@ -32,6 +35,13 @@ function User() {
     return null;
   }
 
+  const isSelf = (username) => {
+    if(currUserName === username){
+      return true
+    }
+    return false
+  }
+
   const isFriend = (username) => {
     if(friendsList[username]){
       return true
@@ -47,7 +57,12 @@ function User() {
   }
 
   const addFriend = async (userName) => {
-    await dispatch(postFriendship(userName))
+    const res = await dispatch(postFriendship(userName))
+    
+    if(res.errors){
+      setErrors([res.errors])
+      return
+    }
     dispatch(getAllFriends(id));
   }
 
@@ -62,6 +77,11 @@ function User() {
 
   return (
     <div className='profile__container'>
+      <div>
+        {errors.map((error, ind) => (
+          <div className='errors__class' key={ind}>{error}</div>
+        ))}
+        </div>
         <div className='signle_contact'>
             <img id='profile_pic' src={user.img} alt="profile_pic" className=""/>
             <p className={'real_name'}>{user.first_name} {user.last_name}</p>

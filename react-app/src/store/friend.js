@@ -70,10 +70,11 @@ export const postFriendship = (otherUserName) => async (dispatch) => {
     })
     if(response.ok){
         const data = await response.json();
-        if(data.error){
-            return;
-        }
-        dispatch(setFriendship(data))
+        dispatch(setFriendship(data.request))
+        return data
+    } else {
+        const error = await response.json();
+        return error 
     }
 }
 

@@ -175,7 +175,7 @@ def update_transactions(id, transaction_t):
             from_user_wallet = CryptoWallet.query.get(transaction.from_user_id)
             to_user_wallet = CryptoWallet.query.get(transaction.to_user_id)
 
-            status = transact(transaction.amount, transaction.crypto_type, from_user_wallet, to_user_wallet)
+            status = transact(transaction.amount, transaction.crypto_type, to_user_wallet, from_user_wallet)
 
             if status == 1:
                 transaction.transaction_status = 1

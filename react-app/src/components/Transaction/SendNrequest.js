@@ -23,6 +23,7 @@ const MyWallet = () => {
   const [cryptoType, setCryptoType] = useState('Bitcoin')
   const [type, setType] = useState('pay')
   const [searchedUsers, setSearchedUsers] = useState([])
+  const [toUserInputImg, settoUserInputImg] = useState('')
 
   let [toUserInputField, setToUserInputField] = useState('')
 
@@ -64,6 +65,8 @@ const MyWallet = () => {
       username = username.slice(1)
     }
     setToUserInputField()
+    settoUserInputImg('')
+    
     const res = await fetch(`/api/users/search?user=${username}`);
       if(res.ok){
         const response = await res.json();
@@ -74,6 +77,7 @@ const MyWallet = () => {
 
   const selectUser = function(user){
     setToUserInputField(user.username)
+    settoUserInputImg(user.img)
     setSearchedUsers([])
   }
 
@@ -86,7 +90,7 @@ const MyWallet = () => {
         ))}
         </div>
             <h3 className='fund__field'><p>Send or Request Crypto!</p></h3>
-            {/* <div>{searchedUsers && searchedUsers[0].username}</div> */}
+            {toUserInputImg && <img  id='seach_profile_pic' src={toUserInputImg} alt='userImg'/>}
             <ul className='search_result-holder'>
             <input type='text' className="user__name" onChange={e => searchQuery(e.target.value)} placeholder='To @username' value={toUserInputField}required/>
             {searchedUsers && searchedUsers.map((user, idx) => (

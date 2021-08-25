@@ -14,6 +14,7 @@
 .Activity__main{
     display : flex;
     box-sizing: border-box;
+    /* padding: 8vh; */
     justify-content: center;
     background-color: white;
     width: 50vw;
@@ -72,4 +73,15 @@
 
 .Activity_button:hover{
     background-color:rgba(165, 33, 33, 0.589);
+}
+
+.transaction__search_container{
+    align-self: flex-end;
+    background-color: Transparent;
+    font-size: bold;
+    border: thin solid gray;
+    width: 80%;
+    cursor:pointer;
+    align-self: center;
+    margin-left: 20vw;
 }

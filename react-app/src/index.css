@@ -11,6 +11,7 @@
 } */
 
 * {
+    box-sizing: border-box;
     font-family: PayPalSansSmall-Regular,sans-serif;
     font-weight: 300;
 }
@@ -25,7 +26,6 @@ nav {
     font-size: 1.4vw;
     background-image: linear-gradient(to right, #169bd7 , #0B67B4);
 }
-
 
 #navbar__container{
     display: flex;

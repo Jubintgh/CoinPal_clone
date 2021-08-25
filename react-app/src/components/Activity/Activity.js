@@ -1,6 +1,5 @@
 import './Activity.css'
 import { useSelector, useDispatch } from 'react-redux';
-import { Switch, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getAllTransactions, deleteTransaction, rejectTransaction, payTransaction} from '../../store/transaction';
 
@@ -20,10 +19,7 @@ const Activity = () => {
     const [switcher, setSwitcher] = useState(false);
 
 
-    // const [displayTransactions, setDisplayTransactions] = useState(transactions)
-    const [displayTransactions, setDisplayTransactions] = useState([])
-
-
+    const [displayTransactions, setDisplayTransactions] = useState(transactions)
 
     const cancelReq = async (transactionId) => {
       const result = await dispatch(deleteTransaction(id, transactionId))
@@ -44,7 +40,7 @@ const Activity = () => {
       let rejectedTransact = await dispatch(rejectTransaction(id,transactionId))
       
       setDisplayTransactions([rejectedTransact])
-      setTimeout(async () => await dispatch(getAllTransactions(id)), 500)
+      // setTimeout(async () => await dispatch(getAllTransactions(id)), 2000)
     }
 
     const payReq = async(id, transactionId) => {
@@ -58,7 +54,7 @@ const Activity = () => {
           return
         }
         setDisplayTransactions([acceptedTransact])
-        setTimeout(async () => await dispatch(getAllTransactions(id)), 500)
+        // setTimeout(async () => await dispatch(getAllTransactions(id)), 2000)
       }
 
     }
@@ -90,46 +86,8 @@ const Activity = () => {
 
     //useEffets
     useEffect(() => {
-
       dispatch(getAllTransactions(id))
-      setDisplayTransactions(transactions)
-
     }, [dispatch, id, switcher])
-
-
-    const quickSort = (arr) => {
-      if(arr.length <= 1){
-        return arr
-      }
-
-      let pivot = arr.shift();
-      let left = arr.filter(el => el.transaction_status < pivot.transaction_status);
-      let right = arr.filter(el => el.transaction_status >= pivot.transaction_status);
-
-      let leftSorted = quickSort(left);
-      let rightSorted = quickSort(right);
-      return [...leftSorted, pivot, ...rightSorted];
-    }
-
-    const sortBy = (sort) => {
-
-      switch(sort){
-        case 'requested':
-          let requestedTransactions = transactions.filter(transaction => {
-            return transaction.transaction_status === 3
-          })
-          setDisplayTransactions(requestedTransactions)
-        break;
-        case 'status':
-          let transactionsByStats = JSON.parse(JSON.stringify(transactions));
-          transactionsByStats = quickSort(transactionsByStats)
-          setDisplayTransactions(transactionsByStats)
-        break;
-        default:
-          return
-      }
-    }
-    
 
     const canCancel = (transaction) => {
       if((transaction.transaction_status === 3) && (transaction.from_username === currUsername)) return true
@@ -142,16 +100,14 @@ const Activity = () => {
 
     return(
       <div className='parent_page'>
-        <div id='contact__navbar'>
-          <button onClick={() => sortBy('status')} className='friend_req_button'>Sort By status</button>
-          <button onClick={() => sortBy('requested')} className='friend_req_button'>Requests</button>
-          <button className='friend_req_button' onClick={() => setDisplayTransactions(transactions)}>Sort by Date</button>
-        </div>
+        {/* <div id='contact__navbar'>
+          <input className='transaction__search_container' placeholder='search transactions...'></input>
+        </div> */}
         <div className='Activity_page'>
           {errors && errors.forEach(err => {
             <li className='errors__class'>{err}</li>
           })}
-            {displayTransactions && displayTransactions.map((transact, idx) => {
+            {transactions && transactions.map((transact, idx) => {
                   return (
                     <div key={idx} className="Activity__main">
                       <img className='transaction_logo' alt='logo' src={transactionStatLogo(transact.transaction_status)}/>

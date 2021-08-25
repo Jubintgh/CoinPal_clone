@@ -17,6 +17,8 @@ const Home = () => {
     const email = 'demouser@mail.com';
     const password = 'Password1!';
 
+    const sideBar = ['Search', 'Incomplete', 'Activity']
+
     const onDemoSignIn = async (e) => {
         e.preventDefault();
         await dispatch(login(email, password));
@@ -26,6 +28,15 @@ const Home = () => {
 
     return (
         <div className='home_page'>
+            {/* <div className='side_bar'>
+                {
+                    sideBar.map(item => (
+                        (<li>{item}</li>)
+                    ))
+                }
+            </div>
+            <div className='main_bar'>
+            </div> */}
             <div className='right_column'>
                 <p>Wallet Glance</p>
                 <div className='wallet_container'>

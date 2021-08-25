@@ -38,15 +38,6 @@ function App() {
         <ProtectedRoute path='/users/:username' exact={true} >
           <User />
         </ProtectedRoute>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
-        <Route path='/' exact={true} >
-          <Splash/>
-        </Route>
         <ProtectedRoute path='/my/home' exact={true} >
           <Home/>
         </ProtectedRoute>
@@ -65,6 +56,15 @@ function App() {
         <ProtectedRoute path='/users' exact={true} >
           <UsersList />
         </ProtectedRoute>
+        <Route path='/login' exact={true}>
+          <LoginForm />
+        </Route>
+        <Route path='/sign-up' exact={true}>
+          <SignUpForm />
+        </Route>
+        <Route path='/' exact={true} >
+          <Splash/>
+        </Route>
       </Switch>
       <Footer/>
     </BrowserRouter>

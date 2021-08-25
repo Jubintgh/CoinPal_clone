@@ -67,6 +67,12 @@
     padding: 5vh;
 }
 
+.side_bar{
+    display: flex;
+    flex-direction: column;
+    
+}
+
 .left_column{
     width: 50%;
     align-items: center;

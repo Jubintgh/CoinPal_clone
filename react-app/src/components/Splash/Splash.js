@@ -18,7 +18,7 @@ const Splash = () => {
     const onDemoSignIn = async (e) => {
         e.preventDefault();
         await dispatch(login(email, password));
-        history.push('/');
+        history.push('/my/home');
     };
 
 

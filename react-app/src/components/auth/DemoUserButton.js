@@ -13,7 +13,7 @@ const DemoUserButton = () => {
    const onDemoSignIn = async (e) => {
     e.preventDefault();
     await dispatch(login(email, password));
-    history.push('/');
+    history.push('/my/home');
   };
 
   return <button onClick={onDemoSignIn}>Demo User</button>;

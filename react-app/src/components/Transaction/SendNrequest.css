@@ -23,9 +23,41 @@
 }
 
 .user__name{
+    justify-self: center;
+    align-self: center;
+    margin-right: 10px;
+    margin-right: 40px;
     border: thin solid rgb(109, 98, 98);
-    margin: 2vw;
+    margin: 1vw 1vh 0.5vh vw;
     height: 2vw;
+}
+
+#seach_profile_pic{
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50px;
+}
+
+.search_result{
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    border-style: none;
+    list-style-type: none;
+    margin: 1px 1px 2px;
+    width: 22vw;
+    background-color: rgba(132, 167, 184, 0.5);
+    border-radius: 15px;
+}
+
+.search_result:hover{
+    background-color: rgba(45, 52, 56, 0.5);
+}
+
+.search_result-holder{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
 }
 
 .fund__input{

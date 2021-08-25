@@ -31,6 +31,15 @@ export const getOneUser = (userName) => async (dispatch) => {
   }
 };
 
+export const searchUsers = (userName) => async () => {
+  const res = await fetch(`/api/users/search?user=${userName}`);
+
+  if(res.ok){
+    const users = await res.json();
+    return users.users
+  }
+}
+
 export const editOneUser =
   (
     userId,

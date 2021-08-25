@@ -99,7 +99,6 @@ def post_transactions(id, filter_t):
 
         to_user_id = to_user.id
 
-        print(to_user_id, from_user_id, 'SADASDadsa')
         if to_user_id == from_user_id:
             return {'errors': db_errors_to_error_messages('Username', 'Looks like money loundry (can\'t send funds to yourself)')}, 406
 

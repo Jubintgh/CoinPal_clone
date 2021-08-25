@@ -22,6 +22,13 @@ def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
 
+@user_routes.route('/search')
+def search_users():
+    search = request.args.get('user')
+    users = User.query.filter(User.username.like(search+'%')).all()
+
+    # return {'users': users}
+    return {'users': [user.to_dict() for user in users]}
 
 @user_routes.route('/<username>')
 @login_required

@@ -11,11 +11,11 @@
     align-self: center;
     justify-content: center;
     align-items: center;
-    margin: 5vw;
+    margin: 2vw 2vh 2vw;
     width: 40vw;
     min-width: 35vw;
-    height: 60vh;
     min-height: 60vh;
+    max-height: 90vh;
     flex-direction: column;
     background-color: white;
     border: thin solid rgb(109, 98, 98);
@@ -47,7 +47,7 @@
     margin: 1px 1px 2px;
     width: 22vw;
     background-color: rgba(132, 167, 184, 0.5);
-    border-radius: 15px;
+    border-radius: 50px;
 }
 
 .search_result:hover{
@@ -64,8 +64,8 @@
     border: thin solid rgb(109, 98, 98);
     border-radius: 5px;
     background-color: #2a8dbb65;
-    margin: 2vw;
-    height: 2vw;
+    margin: 1vw;
+    height: 1vw;
 }
 
 .fund__field{

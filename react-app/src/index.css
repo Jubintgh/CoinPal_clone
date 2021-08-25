@@ -127,8 +127,8 @@ nav {
 
 .errors__class{
     margin-top: 5vh;
-    padding: 25px;
-    font-weight: 5;
+    padding: 5px;
+    font-weight: bold;
     color: red;
 }
 

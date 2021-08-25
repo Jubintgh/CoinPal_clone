@@ -24,8 +24,8 @@ const MyWallet = () => {
   const [type, setType] = useState('pay')
   const [searchedUsers, setSearchedUsers] = useState([])
 
-  const [toUserInputField, setToUserInputField] = useState('')
-  const [toUserProfPic, setToUserProfPic] = useState(null)
+  let [toUserInputField, setToUserInputField] = useState('')
+
 
   
   const onTransaction = async (e) => {
@@ -74,18 +74,17 @@ const MyWallet = () => {
 
   const selectUser = function(user){
     setToUserInputField(user.username)
-    setToUserProfPic(user.img)
     setSearchedUsers([])
   }
 
   return (     
       <form className='transaction__form' onSubmit={onTransaction}>
+        <div className='send-crypto'>
         <div>
         {errors.map((error, ind) => (
           <div className='errors__class' key={ind}>{error}</div>
         ))}
         </div>
-        <div className='send-crypto'>
             <h3 className='fund__field'><p>Send or Request Crypto!</p></h3>
             {/* <div>{searchedUsers && searchedUsers[0].username}</div> */}
             <ul className='search_result-holder'>

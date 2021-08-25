@@ -100,7 +100,7 @@ def post_transactions(id, filter_t):
         to_user_id = to_user.id
 
         if to_user_id == from_user_id:
-            return {'errors': db_errors_to_error_messages('Username', 'Looks like money loundry (can\'t send funds to yourself)')}, 406
+            return {'errors': db_errors_to_error_messages('Username', 'money loundry? (can\'t send funds to yourself)')}, 406
 
         if transaction_type == 'pay':
             transaction_status = 0                              #0:pending 1:accepted 2:rejected 3:requested

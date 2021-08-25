@@ -64,8 +64,17 @@
     border: thin solid rgb(109, 98, 98);
     border-radius: 5px;
     background-color: #2a8dbb65;
+    height: 20px;
     margin: 1vw;
-    height: 1vw;
+    height: 3vh;
+}
+
+.fund__input:hover{
+    background-color: #124d6865;
+}
+
+.fund__input:active{
+    background-color: #dfdfdfd0;
 }
 
 .fund__field{

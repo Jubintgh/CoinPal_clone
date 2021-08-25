@@ -36,6 +36,13 @@ const MyWallet = () => {
       toUserInputField = toUserInputField.slice(1)
     }
 
+    console.log({
+      "from_user_id": fromUserId,
+      "to_username": toUserInputField,
+      "amount": amount,
+      "crypto_type": cryptoType
+    })
+
     setFromUserId(id)
     const result = await dispatch(postTransaction(type, id, {
       "from_user_id": fromUserId,
@@ -66,7 +73,7 @@ const MyWallet = () => {
     }
     setToUserInputField()
     settoUserInputImg('')
-    
+
     const res = await fetch(`/api/users/search?user=${username}`);
       if(res.ok){
         const response = await res.json();

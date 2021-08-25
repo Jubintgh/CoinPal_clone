@@ -1,6 +1,6 @@
 import './Home.css';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
 import { NavLink } from 'react-router-dom';
@@ -17,42 +17,44 @@ const Home = () => {
     const email = 'demouser@mail.com';
     const password = 'Password1!';
 
-    const sideBar = ['Search', 'Incomplete', 'Activity']
+    const sideBarObjects = [{'Contacts': Contacts}, {'Incomplete': null}, {'Activity': Activity}]
+    const sideBarItems = sideBarObjects.map(item => Object.keys(item))
+    const sideBarVals = sideBarObjects.map(item => Object.values(item))
 
-    const onDemoSignIn = async (e) => {
-        e.preventDefault();
-        await dispatch(login(email, password));
-        history.push('/');
-    };
+    const { user } = useSelector((state) => state.session);
+
+    const id = Number(user.id);
 
 
     return (
         <div className='home_page'>
-            {/* <div className='side_bar'>
-                {
-                    sideBar.map(item => (
-                        (<li>{item}</li>)
-                    ))
-                }
+            <div className='side_bar'>
+                {sideBarItems.map(bar => 
+                    (<li className='home_navbar_items'>{bar}</li>)
+                )}
             </div>
+
+
             <div className='main_bar'>
-            </div> */}
-            <div className='right_column'>
-                <p>Wallet Glance</p>
-                <div className='wallet_container'>
-                    <MyWallet id='wallet'/>
+
+                <div>
+                    <p>Wallet Glance</p>
+                        <picture className='wallet_container'>
+                            <MyWallet />
+                        </picture>
+                    <p>Activity Glance</p>
+                        <div className='activity_container'>
+                            <Activity/>
+                        </div>
+
                 </div>
-                <p>Activity Glance</p>
-                <div className='activity_container'>
-                    <Activity id='activity'/>
+                <div className='left_column'>
+                <p>Contacts Glance</p>
+                    <div className='contacts_container_glance'>
+                        <Contacts id='contacts'/>
+                    </div>
                 </div>
 
-            </div>
-            <div className='left_column'>
-            <p>Contacts Glance</p>
-                <div className='contacts_container_glance'>
-                    <Contacts id='contacts'/>
-                </div>
             </div>
         </div>
     )

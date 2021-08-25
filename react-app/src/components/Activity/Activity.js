@@ -1,15 +1,16 @@
 import './Activity.css'
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Switch, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getAllTransactions, deleteTransaction, rejectTransaction, payTransaction} from '../../store/transaction';
 
 
 const Activity = () => {
     const { user } = useSelector((state) => state.session);
+
     let transactions = useSelector(state => state.transactions['alltransactions'])
+
     const currUsername = useSelector(state => state.session.user.username) 
-    const history = useHistory()
     const id = Number(user.id);
 
     const dispatch = useDispatch();
@@ -17,26 +18,32 @@ const Activity = () => {
     //useStates
     const [errors, setErrors] = useState([]);
     const [switcher, setSwitcher] = useState(false);
+
+
     const [displayTransactions, setDisplayTransactions] = useState(transactions)
 
-    const cancelReq = async (id, transactionId) => {
-      const result = await dispatch(deleteTransaction(id,transactionId))
 
-      setSwitcher((prev) => !prev)
+    
+    const cancelReq = async (transactionId) => {
+      const result = await dispatch(deleteTransaction(id, transactionId))
 
       if (result){
-        if(result.errors){
+        if(result.success){
+          await dispatch(getAllTransactions(id))
+          setDisplayTransactions(transactions)
+          return
+        }
+        else if(result.errors){
           setErrors(result.errors)
         } 
       } 
     }
-
+    
     const rejectReq = async (id, transactionId) => {
       let rejectedTransact = await dispatch(rejectTransaction(id,transactionId))
-
+      
       setDisplayTransactions([rejectedTransact])
       setTimeout(async () => await dispatch(getAllTransactions(id)), 500)
-
     }
 
     const payReq = async(id, transactionId) => {
@@ -82,9 +89,15 @@ const Activity = () => {
 
     //useEffets
     useEffect(() => {
-      dispatch(getAllTransactions(id))
-      setDisplayTransactions(transactions)
+
+      const fetchTrans = async() => {
+        await dispatch(getAllTransactions(id))
+        await setDisplayTransactions(transactions)
+      }
+
+      fetchTrans()
     }, [dispatch, id, switcher])
+
 
     const quickSort = (arr) => {
       if(arr.length <= 1){
@@ -153,7 +166,7 @@ const Activity = () => {
                           {
                             canCancel(transact) ? 
                             <div className='buttons_container'>
-                            <button className='Activity_button' style={{visibility: canCancel(transact) ? 'visible': 'hidden'}} onClick={() => cancelReq(id, transact.transaction_id)}>Cancel</button> 
+                            <button className='Activity_button' style={{visibility: canCancel(transact) ? 'visible': 'hidden'}} onClick={() => cancelReq(transact.transaction_id)}>Cancel</button> 
                             </div>
                             :
                             canReject(transact) ? 

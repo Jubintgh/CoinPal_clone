@@ -126,9 +126,10 @@ export const deleteTransaction = (userId, transactionId) => async (dispatch) => 
     if (response.ok){
         const data = await response.json();
         if(data.error){
-            return;
+            return data;
         }
-        dispatch(removeTransaction(data.success))
+        await dispatch(removeTransaction(data.success))
+        return data
     }
 }
 

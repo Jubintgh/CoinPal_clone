@@ -100,7 +100,7 @@ def post_transactions(id, filter_t):
         to_user_id = to_user.id
 
         if to_user_id == from_user_id:
-            return {'errors': db_errors_to_error_messages('Username', 'money loundry? (can\'t send funds to yourself)')}, 406
+            return {'errors': db_errors_to_error_messages('money laundering?', '(can\'t send funds to yourself)')}, 406
 
         if transaction_type == 'pay':
             transaction_status = 0                              #0:pending 1:accepted 2:rejected 3:requested
@@ -202,5 +202,5 @@ def delete_transaction(id):
     if transaction.from_user_id	== id and transaction.transaction_status == 3:
         db.session.delete(transaction)
         db.session.commit()
-        return {'success': transaction.id}
+        return { 'success': 'successfully cancelled'}
     return {'transaction': 'something went wrong'}

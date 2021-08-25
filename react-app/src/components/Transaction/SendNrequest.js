@@ -32,7 +32,7 @@ const MyWallet = () => {
   const onTransaction = async (e) => {
     e.preventDefault();
 
-    if(toUserInputField[0] === '@'){
+    if(toUserInputField && toUserInputField[0] === '@'){
       toUserInputField = toUserInputField.slice(1)
     }
 
@@ -68,7 +68,7 @@ const MyWallet = () => {
   }
 
   const searchQuery = async function(username) {
-    if(username[0] === '@'){
+    if(username && username[0] === '@'){
       username = username.slice(1)
     }
     setToUserInputField()

@@ -30,3 +30,5 @@
 - Send Friend Requests: 
     * Each authorized User is able to send or recieve Friend requests to/from other authorized users
     Accept/Reject Friend requests, in addition it also has the ability to accept or reject these requests made to it or remove existing friend(contact) relationships
+    
+    ***

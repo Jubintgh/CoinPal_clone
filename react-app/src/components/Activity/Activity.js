@@ -20,10 +20,11 @@ const Activity = () => {
     const [switcher, setSwitcher] = useState(false);
 
 
-    const [displayTransactions, setDisplayTransactions] = useState(transactions)
+    // const [displayTransactions, setDisplayTransactions] = useState(transactions)
+    const [displayTransactions, setDisplayTransactions] = useState([])
 
 
-    
+
     const cancelReq = async (transactionId) => {
       const result = await dispatch(deleteTransaction(id, transactionId))
 
@@ -90,12 +91,9 @@ const Activity = () => {
     //useEffets
     useEffect(() => {
 
-      const fetchTrans = async() => {
-        await dispatch(getAllTransactions(id))
-        await setDisplayTransactions(transactions)
-      }
+      dispatch(getAllTransactions(id))
+      setDisplayTransactions(transactions)
 
-      fetchTrans()
     }, [dispatch, id, switcher])
 
 

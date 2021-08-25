@@ -16,10 +16,8 @@ const Activity = () => {
 
     //useStates
     const [errors, setErrors] = useState([]);
-    const [switcher, setSwitcher] = useState(false);
+    const [switcher, setSwitcher] = useState('none');
 
-
-    const [displayTransactions, setDisplayTransactions] = useState(transactions)
 
     const cancelReq = async (transactionId) => {
       const result = await dispatch(deleteTransaction(id, transactionId))
@@ -27,7 +25,6 @@ const Activity = () => {
       if (result){
         if(result.success){
           await dispatch(getAllTransactions(id))
-          setDisplayTransactions(transactions)
           return
         }
         else if(result.errors){
@@ -39,7 +36,7 @@ const Activity = () => {
     const rejectReq = async (id, transactionId) => {
       let rejectedTransact = await dispatch(rejectTransaction(id,transactionId))
       
-      setDisplayTransactions([rejectedTransact])
+      setSwitcher('block')
       // setTimeout(async () => await dispatch(getAllTransactions(id)), 2000)
     }
 
@@ -53,7 +50,8 @@ const Activity = () => {
           setErrors(errs)
           return
         }
-        setDisplayTransactions([acceptedTransact])
+
+        setSwitcher('block')
         // setTimeout(async () => await dispatch(getAllTransactions(id)), 2000)
       }
 
@@ -84,10 +82,15 @@ const Activity = () => {
 
     }
 
+    const refreshPage = ()=>{
+      setSwitcher('none')
+      dispatch(getAllTransactions(id))
+    }
+
     //useEffets
     useEffect(() => {
       dispatch(getAllTransactions(id))
-    }, [dispatch, id, switcher])
+    }, [dispatch, id])
 
     const canCancel = (transaction) => {
       if((transaction.transaction_status === 3) && (transaction.from_username === currUsername)) return true
@@ -100,9 +103,10 @@ const Activity = () => {
 
     return(
       <div className='parent_page'>
-        {/* <div id='contact__navbar'>
-          <input className='transaction__search_container' placeholder='search transactions...'></input>
-        </div> */}
+        <div id='activity__navbar'>
+          {/* <input style={{display: (switcher === 'block' ? 'none' : 'block')}} className='transaction__search_container' placeholder='search transactions...'></input> */}
+          <button style={{display: switcher}} onClick={() => refreshPage()} className='activity_nav_button'>Back to all transactions</button>
+        </div>
         <div className='Activity_page'>
           {errors && errors.forEach(err => {
             <li className='errors__class'>{err}</li>

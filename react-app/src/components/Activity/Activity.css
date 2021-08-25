@@ -1,3 +1,27 @@
+#activity__navbar{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    background-color: white;
+    height:5vw;
+}
+
+.activity_nav_button{
+    font-weight: bold;
+    background-color: rgb(241, 249, 253);
+    border-style: none;
+    color: #169bd7;
+    width: 10vw;
+    margin: 10px;
+    padding: 4px;
+    border-radius: 20px;
+}
+
+.activity_nav_button:hover{
+    color: #0f7aac;
+    background-color: rgb(201, 230, 245);
+}
+
 .parent_page{
     display: flex;
     flex-direction: column;
@@ -76,7 +100,7 @@
 }
 
 .transaction__search_container{
-    align-self: flex-end;
+    align-self: flex-start;
     background-color: Transparent;
     font-size: bold;
     border: thin solid gray;

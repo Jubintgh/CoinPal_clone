@@ -108,7 +108,7 @@ export const payTransaction = (userId, transactionId) => async (dispatch) => {
         if(data.errors){
             return data;
         }
-        await dispatch(setTransaction(data))
+        await dispatch(updateTransaction(data))
         return data
     } 
 }

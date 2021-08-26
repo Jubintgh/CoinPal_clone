@@ -12,7 +12,7 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const [first_name, setFirstName] = useState('')
   const [last_name, setLastName] = useState('')
-  const [img_url, setImgUrl] = useState('')
+  const [img_url, setImgUrl] = useState('https://unwomen.org.au/wp-content/uploads/2020/09/Avitar_Image_Placeholder-1.png')
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 

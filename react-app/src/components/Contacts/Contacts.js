@@ -46,7 +46,7 @@ const MyContacts = () => {
     return (
         <div id='contacts_page'>
             <div id='contact__navbar'>
-                <button onClick={e => setReqDisplay(!ReqDisplay)} className='friend_req_button'>Friend Requests <i className="arrowdown"></i></button>
+                <button onClick={e => setReqDisplay(!ReqDisplay)} className='friend_req_button'>Friend Requests <span class={friendReqList.length ? "badge" : "notbadge"}>{friendReqList.length}</span></button>
             </div>
             <div className='req_contacts_container'>
             {
@@ -56,9 +56,8 @@ const MyContacts = () => {
                     
                     return (
                             <div className='req_profile__container' key={idx}>
-
                             <div className='req_signle_contact'>
-                            <img id='req_profile_pic' src={user.profile_img} alt="profile_pic" className=""/>
+                                <img id='req_profile_pic' src={user.profile_img} onError={(e) => {e.target.src = 'https://unwomen.org.au/wp-content/uploads/2020/09/Avitar_Image_Placeholder-1.png'}} alt="profile_pic" className=""/>
                                 <div className='name_username_container'>
                                     <p className={'req_real_name'}>{user.first_name} {user.last_name}</p>
                                     <p className={'req_user_name'}>@{user.user_name}</p>
@@ -86,12 +85,12 @@ const MyContacts = () => {
                     <div className='profile__container' key={idx}>
 
                         <div className='signle_contact'>
-                            <img id='profile_pic' src={friend.profile_img} alt="profile_pic" className=""/>
+                            <img id='profile_pic' src={friend.profile_img} onError={(e) => {e.target.src = 'https://unwomen.org.au/wp-content/uploads/2020/09/Avitar_Image_Placeholder-1.png'}} alt="profile_pic" className=""/>
                                 <div className='name_username_container'>
                                     <p className={'real_name'}>{friend.first_name} {friend.last_name}</p>
                                     <p className={'user_name'}>@{friend.user_name}</p>
                                 </div>
-                            <button className={'unfriend_button'} onClick={(e) => unFriend(friend.user_name)}>Remove this contact</button>
+                            <button className={'unfriend_button'} onClick={(e) => unFriend(friend.user_name)}>Remove Friend</button>
                         </div>
                     </div>
                 )

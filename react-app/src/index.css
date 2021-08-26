@@ -157,6 +157,26 @@ nav {
 }
 
 
-/* Wallet page selector side */
+/* users page */
+
+#users_page{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.single_user{
+    justify-content: flex-start;
+    list-style-type:none;
+}
+
+.user_holder{
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    box-sizing: border-box;
+    margin: 30px;
+}
 
 

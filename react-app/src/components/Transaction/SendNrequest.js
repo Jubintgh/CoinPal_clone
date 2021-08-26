@@ -96,15 +96,15 @@ const MyWallet = () => {
           <div className='errors__class' key={ind}>{error}</div>
         ))}
         </div>
-            <h3 className='fund__field'><p>Send or Request Crypto!</p></h3>
             {toUserInputImg && <img  id='seach_profile_pic' src={toUserInputImg} alt='userImg'/>}
-            <ul className='search_result-holder'>
+            <h3 className='fund__field'><p>Send or Request Crypto!</p></h3>
             <input type='text' className="fund__input" onChange={e => searchQuery(e.target.value)} placeholder='To @username' value={toUserInputField}required/>
+            {searchedUsers && <ul className='search_result-holder'>
             {searchedUsers && searchedUsers.map((user, idx) => (
               (<li onClick={e => selectUser(user)} className='search_result' key={idx}><img id='seach_profile_pic' src={user.img} alt='profile_pic'/>{user.username}</li>)
             ))}
+            </ul>}
             <input type='decimal' className="fund__input" onChange={e => setAmount(e.target.value)} placeholder='enter value' required/>
-            </ul>
             <p className="fund__field">Select Crypto type</p>
             <select
               className="fund__input"

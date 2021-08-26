@@ -104,7 +104,8 @@ const Activity = () => {
     return(
       <div className='parent_page'>
         <div id='activity__navbar'>
-          {/* <input style={{display: (switcher === 'block' ? 'none' : 'block')}} className='transaction__search_container' placeholder='search transactions...'></input> */}
+          <p>Search transactions:</p>
+          <input style={{display: (switcher === 'block' ? 'none' : 'block')}} className='transaction__search_container' placeholder='search transactions...'></input>
           <button style={{display: switcher}} onClick={() => refreshPage()} className='activity_nav_button'>Back to all transactions</button>
         </div>
         <div className='Activity_page'>
@@ -114,12 +115,15 @@ const Activity = () => {
             {transactions && transactions.map((transact, idx) => {
                   return (
                     <div key={idx} className="Activity__main">
-                      <img className='transaction_logo' alt='logo' src={transactionStatLogo(transact.transaction_status)}/>
-                      <p className='transaction__status'>{transact.transaction_status === 0 ? 'Pending': transact.transaction_status === 1 ? 'Completed' : transact.transaction_status === 2 ? 'Rejected' : transact.transaction_status === 3 ? 'Request' : 'Loading...'}</p>
+                      <div className='logo_status_activity'>
+                        <img className='transaction_logo' alt='logo' src={transactionStatLogo(transact.transaction_status)}/>
+                        <p className='transaction__status'>{transact.transaction_status === 0 ? 'Pending': transact.transaction_status === 1 ? 'Completed' : transact.transaction_status === 2 ? 'Rejected' : transact.transaction_status === 3 ? 'Request' : 'Loading...'}</p>
+                      </div>
                       <div className="transaction__container" value={transact.transaction_id}>
                             <div>
                               <p className={'transact_from_user'}>From: {transact.from_username}</p>
                               <p className={'transact_to_user'}>To: {transact.to_username}</p>
+                              <p className={'confirm_num'}>Confirmation Number: {transact.transaction_id}</p>
                             </div>
                           {
                             canCancel(transact) ? 
@@ -136,7 +140,7 @@ const Activity = () => {
                           : <p/>}
                       </div>
                       <div className='amount__container'>
-                            <p className={'transact_type'}>time: {`${numToMonth(transact.date.month)} ${transact.date.day} ${transact.date.year}` }</p>
+                            <p className={'transact_type'}>Date: {`${numToMonth(transact.date.month)} ${transact.date.day} ${transact.date.year}` }</p>
                             <p className={'transact_amount'}>Amount: {transact.amount}</p>
                             <p className={'transact_type'}>Crypto: {transact.crypto_type}</p>
                       </div>

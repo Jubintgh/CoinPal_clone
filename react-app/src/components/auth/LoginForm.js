@@ -39,29 +39,32 @@ const LoginForm = () => {
   }
 
   return (
-    <form className={"login_page"} onSubmit={onLogin}>
+      <div class='login_background_img'>
+    <form className="login_page" onSubmit={onLogin}>
+      <h1 className='Title_text'>Welcome to CoinPal</h1>
       <div >
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
 
-      <img id='navbar__logo' src='https://user-images.githubusercontent.com/73211975/127380259-8872d61e-851a-4aa5-8152-baec2618e00d.png' alt='logo' />
-
       <div className='login__container'>
       <div className='field_container'>
+        <div className='icon_container'>
+          <img id='login_icon' src='https://user-images.githubusercontent.com/73211975/127380259-8872d61e-851a-4aa5-8152-baec2618e00d.png' alt='logo' />
+        </div>
         <div className='label_container'>
           <label className='login_label' htmlFor='email'>Email</label>
         </div>
         <div className='input_container'>
-        <input
-          name='email'
-          type='text'
-          className='login_input'
-          placeholder='Email'
-          value={email}
-          onChange={updateEmail}
-        />
+          <input
+            name='email'
+            type='text'
+            className='login_input'
+            placeholder='Email'
+            value={email}
+            onChange={updateEmail}
+          />
         </div>
       </div>
       <div className='field_container'>
@@ -84,6 +87,7 @@ const LoginForm = () => {
         <button className="signup_btn" onClick={() => window.location.href='/sign-up'}>Sign Up </button>
       </div>
     </form>
+    </div>
   );
 };
 

@@ -1,6 +1,5 @@
 import './Wallet.css'
 import { useSelector, useDispatch } from 'react-redux';
-// import { useParams, useHistory, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getWallet } from '../../store/wallet';
 
@@ -11,7 +10,6 @@ const MyWallet = () => {
     const usdCoinBalance = useSelector((state) => state.wallet.wallet_balances.usd_coin_balance);
 
     const dispatch = useDispatch();
-    // const history = useHistory();
     const id = Number(user.id);
 
     //useStates
@@ -29,6 +27,7 @@ const MyWallet = () => {
 
             <div className="wallet-leftbar">
                 <ul className="wallet_leftbar--coinholder">
+                    <h3>Your wallet</h3>
                     <input className="wallet_leftbar--logo" type="image" alt="wallet_logo" src="https://user-images.githubusercontent.com/73211975/128096175-c7a6480a-8aec-45d8-bb2c-357c1f509976.png" value='Bitcoin'/>
                     <input className="wallet_leftbar--coinselector" type="image" alt="Bitcoin_logo" src="https://user-images.githubusercontent.com/73211975/127550815-431bd4d7-d17f-4740-8b83-2e0b07092dbe.png" value='Bitcoin' onClick={e => setCurrCoin({
                         "coin": e.target.value,

@@ -4,49 +4,45 @@
 }
 .login_page{
     width: 100%;
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
-    background-image: url('https://img.freepik.com/free-photo/abstract-connected-dots-lines-blue-background_34629-424.jpg?size=626&ext=jpg');
     background-size: cover;
+    background-image: url('https://cdn.cutshort.io/public/companies/5d495ba6e13c510d088f4840/cover-1565146205476-983b63592a42295d638b4b3120df9cc8.gif');
 }
 
 input {
     width: 200px;
-    padding: 1% 2%;
+    padding: 1vh 1vh;
     margin: 2%;
     float: center;
     flex-wrap: wrap;
 }
 
 .login_btn{
-    margin: 5%;
+    margin: 1%;
     background-color: #159CD7;
     height: 40px;
-    width: 45vw;
+    width: 25vw;
     border-radius: 5px;
     border-style: none;
 }
 
 .signup_btn{
-    margin: 5%;
+    margin: 1%;
     background-color: #E1E7EB;
     height: 40px;
-    width: 45vw;
+    width: 25vw;
     border-radius: 5px;
     border-style: none;
 }
 
 .signup_btn:hover{
-    margin: 5%;
+
     background-color: #b5b9bb;
-    height: 40px;
-    width: 45vw;
-    border-radius: 5px;
-    border-style: none;
 }
 
 .login_btn:hover{
@@ -57,22 +53,11 @@ input {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    width: 60vw;
-    height: 70vh;
-    background-color: #f9f9f9;
-    border: thin solid lightgray;
-    border-radius: 5px;
-}
-
-.login__container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 60vw;
-    height: 70vh;
-    background-color: #f9f9f9;
+    margin: 4vh 40vh 40vh;
+    width: 35vw;
+    height: 60vh;
+    background-color: #fffafa3d;
     border: thin solid lightgray;
     border-radius: 5px;
 }
@@ -85,14 +70,23 @@ input {
 }
 
 .login_label{
+    color: white;
     margin: 10px;
 }
 
 .login_input{
     justify-self: center;
-    height: 4vh;
+    height: 5vh;
     width: 30vw;
     border-radius: 5px;
     border-style: none;
     color: black;
+}
+
+.Title_text{
+    align-self: center;
+    font-weight: bolder;
+    margin: 5vw;
+    /* font-size: larger; */
+    color: white;
 }

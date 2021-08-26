@@ -12,8 +12,18 @@
 
 * {
     box-sizing: border-box;
-    font-family: PayPalSansSmall-Regular,sans-serif;
+    font-family: "Fira Sans", sans-serif;
     font-weight: 300;
+}
+
+#login_icon{
+    height: 4vw;
+    width: 5vw;
+}
+
+.icon_container{
+    display: flex;
+    justify-content: center;
 }
 
 nav {
@@ -42,7 +52,7 @@ nav {
     justify-content: space-between;
     margin-top: 0;
     margin-bottom: 0;
-    z-index: 11;
+    z-index: 1;
 }
 
 .nav-logo {

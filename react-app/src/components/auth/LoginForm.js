@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
+import './Login.css'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -49,7 +50,10 @@ const LoginForm = () => {
 
       <div className='login__container'>
       <div className='field_container'>
-        <label className='login_label' htmlFor='email'>Email</label>
+        <div className='label_container'>
+          <label className='login_label' htmlFor='email'>Email</label>
+        </div>
+        <div className='input_container'>
         <input
           name='email'
           type='text'
@@ -58,9 +62,13 @@ const LoginForm = () => {
           value={email}
           onChange={updateEmail}
         />
+        </div>
       </div>
       <div className='field_container'>
-        <label className='login_label' htmlFor='password'>Password</label>
+        <div className='label_container'>
+          <label className='login_label' htmlFor='password'>Password</label>
+        </div>
+        <div className='input_container'>
         <input
           name='password'
           type='password'
@@ -69,6 +77,7 @@ const LoginForm = () => {
           value={password}
           onChange={updatePassword}
         />
+        </div>
       </div>
         <button className="login_btn" type='submit'>Login</button>
         <span>or</span>

@@ -10,7 +10,8 @@
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
-    background: url('https://img.freepik.com/free-photo/abstract-connected-dots-lines-blue-background_34629-424.jpg?size=626&ext=jpg');
+    background-image: url('https://img.freepik.com/free-photo/abstract-connected-dots-lines-blue-background_34629-424.jpg?size=626&ext=jpg');
+    background-size: cover;
 }
 
 input {
@@ -77,11 +78,14 @@ input {
 }
 
 .field_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-bottom: 0.5vh;
 }
 
 .login_label{
-
+    margin: 10px;
 }
 
 .login_input{

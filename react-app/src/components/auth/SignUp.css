@@ -16,6 +16,10 @@
     align-items:flex-start;
 }
 
+.signup_info_container{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
 .signup_input{
     color: white;
 }
@@ -28,6 +32,7 @@ input {
     border-style: none;
     color: black;
 }
+
 .signup-btn{
     margin: 5%;
     background-color: #159CD7;

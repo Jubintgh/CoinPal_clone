@@ -63,7 +63,7 @@
     align-self: center;
     align-content: center;
     justify-content: center;
-    border: thin solid rgba(128, 128, 128, 0.349);
+    /* border: thin solid rgba(128, 128, 128, 0.349); */
     border-radius: 15px;
     padding: 1%;
     margin-top: 0%;

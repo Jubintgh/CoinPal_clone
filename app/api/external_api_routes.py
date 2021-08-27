@@ -1,3 +1,4 @@
+from logging import info
 from typing import DefaultDict
 from flask.blueprints import Blueprint
 import requests
@@ -35,8 +36,23 @@ def get_coins():
 
     all_info = response.json()
 
-    all_coins = [{info['symbol']: info['price'] for info in all_info['data']['coins']}]
+    all_coins = [ {
+        
+        info['symbol']: {
+            'id': info['id'],
+            'marketCap': info['marketCap'],
+            'rank': info['rank'],
+            'price': info['price'],
+            'circulatingSupply': info['circulatingSupply'],
+            'description': info['description'],
+            'history': info['history'],
+            'marketCap': info['marketCap'],
+            'name': info['name'],
+            'volume': info['volume'],
+            'color': info['color'],
+            'iconUrl': info['iconUrl'],
 
-    return {'asdas': all_coins}
 
-    print(response)
+        } for info in all_info['data']['coins']}]
+        
+    return {'allCoins': all_coins}

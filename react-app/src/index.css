@@ -46,10 +46,10 @@ nav {
     display: flex;
     list-style-type: none;
     float: right;
-    margin-left: 5px;
+    /* margin-left: 5px; */
     width: 100%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 0;
     margin-bottom: 0;
     z-index: 1;
@@ -66,7 +66,7 @@ nav {
     display: flex;
     width: 3vh;
     height: 5vh;
-    margin-right: 20px;
+    margin-right: 5vw;
     justify-self: flex-start;
     align-self: center;
 }
@@ -88,7 +88,7 @@ nav {
     color: #fff;
     text-decoration: none;
     border-radius: 2.8px;
-    margin: 1vh 4vw;
+    margin-left:7vw;
     cursor: pointer;
     line-height: 80px;
 }
@@ -112,13 +112,28 @@ nav {
 
 .navbar__button button {
     outline: none;
-    margin: 4vh;
     color: #ffffff;
     font-size: 1rem;
     font-weight: 300;
     border: none;
     background: none;
     cursor: pointer;
+    margin-left: 60vw;
+    justify-self: flex-end;
+    align-self: flex-end;
+}
+
+.navbar__logout_button button{
+    outline: none;
+    margin-left: 20vw;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 300;
+    border: none;
+    background: none;
+    cursor: pointer;
+    justify-self: flex-end;
+    align-self: flex-end;
 }
 
 .arrowdown{
@@ -131,8 +146,8 @@ nav {
 }
 
 .navbar__button button:hover {
-    background-color: #f3f3f3;
-    color: #0a95d6;
+    border: solid thin #f3f3f3;
+    border-radius: 15px;
 }
 
 .errors__class{

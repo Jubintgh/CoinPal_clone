@@ -1,4 +1,3 @@
-import requests
 from flask import Blueprint, request
 from sqlalchemy.sql.expression import null
 from flask_login import login_required, current_user

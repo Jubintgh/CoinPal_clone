@@ -14,15 +14,37 @@ response = requests.request("GET", url, headers=headers)
 
 external_market_routes = Blueprint('market', __name__)
 
-def db_errors_to_error_messages(errtype, error):
-    """
-    Simple function that turns the WTForms validation errors into a simple list
-    """
-    errorMessages = []
-    errorMessages.append(f'{errtype} : {error}')
-    return errorMessages
 
-@external_market_routes.route('/')
+@external_market_routes.route('/info')
+def get_markets():
+
+    url = "https://coinranking1.p.rapidapi.com/exchanges"
+
+    headers = {
+        'x-rapidapi-host': "coinranking1.p.rapidapi.com",
+        'x-rapidapi-key': "8ed4d1f157mshd202dc98f1ce45cp1c9d02jsn0b6784e75f03"
+        }
+
+    response = requests.request("GET", url, headers=headers)
+    all_info = response.json()
+
+    all_markets = [ {
+    
+    info['name']: {
+        'id': info['id'],
+        'marketShare': info['marketShare'],
+        'numberOfMarkets': info['numberOfMarkets'],
+        'rank': info['rank'],
+        'volume': info['volume'],
+        'description': info['description'],
+        'verified': info['verified'],
+        'iconUrl': info['iconUrl'],
+    } for info in all_info['data']['exchanges']}]
+
+    return {'allCoins': all_markets}
+
+
+@external_market_routes.route('/coins')
 def get_coins():
 
     url = "https://coinranking1.p.rapidapi.com/coins"
@@ -40,19 +62,20 @@ def get_coins():
         
         info['symbol']: {
             'id': info['id'],
-            'marketCap': info['marketCap'],
             'rank': info['rank'],
+            'name': info['name'],
             'price': info['price'],
             'circulatingSupply': info['circulatingSupply'],
+            'marketCap': info['marketCap'],
+            'volume': info['volume'],
             'description': info['description'],
             'history': info['history'],
-            'marketCap': info['marketCap'],
-            'name': info['name'],
-            'volume': info['volume'],
             'color': info['color'],
             'iconUrl': info['iconUrl'],
 
-
         } for info in all_info['data']['coins']}]
-        
-    return {'allCoins': all_coins}
+
+    if all_info['status'] == "success":
+        return {'allCoins': all_coins}
+    else:
+        return {'erros': 'something went wrong with the server'}, 500

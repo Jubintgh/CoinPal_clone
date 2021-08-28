@@ -41,7 +41,7 @@ def get_markets():
         'iconUrl': info['iconUrl'],
     } for info in all_info['data']['exchanges']}]
 
-    return {'allCoins': all_markets}
+    return {'allMarkets': all_markets}
 
 
 @external_market_routes.route('/coins')

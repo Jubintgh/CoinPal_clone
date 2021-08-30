@@ -34,6 +34,7 @@ const Activity = () => {
     }
     
     const rejectReq = async (id, transactionId) => {
+      console.log(transactionId, "IDDD TRANSACT")
       let rejectedTransact = await dispatch(rejectTransaction(id,transactionId))
       
       setSwitcher('block')

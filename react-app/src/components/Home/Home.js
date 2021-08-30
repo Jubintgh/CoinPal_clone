@@ -1,60 +1,132 @@
 import './Home.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { login } from '../../store/session';
-import { NavLink } from 'react-router-dom';
-import MyWallet from '../DashBoard/MyWallet';
-import Activity from '../Activity/Activity';
-import Contacts from '../Contacts/Contacts'
+import { getAllCoins, getAllMarkets, searchCoinQuery } from '../../store/marketInfo';
+import CoinsData from './CoinsMarketData'
+import MarketData from './MarketData';
+import SingleCoinInfo from './SingleCoinInfo';
 
 
 
 const Home = () => {
 
-    const history = useHistory();
+    let allCoins = useSelector((state) => state.marketInfo.allCoins)
+    let allMarkets = useSelector((state) => state?.marketInfo?.allMarkets)
+
+    const [switcher, setSwitcher] = useState(false)
+    const [display, setDisplay] = useState(1)
+    const [errors, setErrors] = useState([]);
+    const [suggestedCoins, setSuggestedCoins] = useState([])
+    const [searchTerm, setSearchCoinTerm] = useState('')
+    const [singleCoin, setSingleCoin] = useState('')
+
     const dispatch = useDispatch();
-    const email = 'demouser@mail.com';
-    const password = 'Password1!';
+    useEffect(() => {
+     
+        let waitRes = async()=>{
+            await setSwitcher(false)
 
-    const sideBarObjects = [{'Contacts': Contacts}, {'Incomplete': null}, {'Activity': Activity}]
-    const sideBarItems = sideBarObjects.map(item => Object.keys(item))
-    const sideBarVals = sideBarObjects.map(item => Object.values(item))
+            if(display ===  1){
+                const data = await dispatch(getAllCoins())
+                if (data) {
+                    setErrors(data);
+                } else {
+                    allMarkets = [];
+                }
+                setSuggestedCoins([])
+            }
+            
+            else if(display ===  2){
+                const data = await dispatch(getAllMarkets())  
+                if (data) {
+                    setErrors(data);
+                } else {
+                    allCoins = []; 
+                }
+                setSuggestedCoins([])
+            }
 
-    const { user } = useSelector((state) => state.session);
+            setSwitcher(true)
 
-    const id = Number(user.id);
+            setTimeout(async()=> {
+                if (!allCoins) setSwitcher(false)
+                else setSwitcher(true)
+            }, 5000)
+        }
 
+        waitRes()
+    }, [dispatch, display])
 
+    const lookUpCoin = async() => {
+        const res = await fetch(`/api/markets/search?crypto=${searchTerm}`,{
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if(res.ok){
+            const query = await res.json();
+            setSuggestedCoins(query.allMarkets.data.coins.splice(0,3))
+        }
+    }
+
+    const setSearchCoin = (coin) => {
+        const searchedCoin = {'info': allCoins[coin.symbol]}
+        allCoins = []
+        setSuggestedCoins([])
+        setSingleCoin(searchedCoin)
+        setDisplay(3)
+    }
+
+    const sideBarObjects = {
+        'Coins Market Data':1, 
+        'Market Data': 2, 
+        'Historical Data': 3
+    }
+    
     return (
         <div className='home_page'>
+            <div className='errors__class'>
+                {errors.map((error, ind) => (
+                <div key={ind}>{error}</div>
+                ))}
+            </div>
             <div className='side_bar'>
-                {sideBarItems.map(bar => 
-                    (<li className='home_navbar_items'>{bar}</li>)
+                {Object.keys(sideBarObjects).map(bar => 
+                    (<button className='home_navbar_btns' onClick={() => setDisplay(sideBarObjects[bar])}>{bar}</button>)
                 )}
             </div>
-
-
             <div className='main_bar'>
+                {
+                    <>
+                        {(display === 1) ? <input onChange={e => setSearchCoinTerm(e.target.value)} placeholder='Look up crypto...'/>: <></>}
+                        {suggestedCoins && suggestedCoins.map(coin => (
+                            <li onClick={e => setSearchCoin(coin)} key={coin.symbol} className='search_result'><img id='seach_profile_pic' src={coin.iconUrl} alt='profile_pic'/>{coin.name}</li>
+                        ))}
+                        {(display === 1) ?<button onClick={e => lookUpCoin(e.target.value)}>Search</button>: <></>}
+                    </>
+                }
+                {
+                    (display === 1) ? <CoinsData allCoins={allCoins}/>:
+                    (display === 2) ? <MarketData allMarkets={allMarkets}/>:
+                    (display === 3) ? <SingleCoinInfo targetCoin={singleCoin}/>:
+                    <p>Not available</p>
+                }
 
-                <div>
-                    <p>Wallet Glance</p>
-                        <picture className='wallet_container'>
-                            <MyWallet />
-                        </picture>
-                    <p>Activity Glance</p>
-                        <div className='activity_container'>
-                            <Activity/>
-                        </div>
-
-                </div>
-                <div className='left_column'>
-                <p>Contacts Glance</p>
-                    <div className='contacts_container_glance'>
-                        <Contacts id='contacts'/>
+                {
+                    !switcher &&
+                    <div className="loader_container">
+                    <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                    <p>Loading</p>
                     </div>
-                </div>
-
+                }
+                {
+                    (switcher && (!allCoins && !allMarkets)) &&
+                    (
+                        <div>
+                            <h5>Data not available due to request limit or deprecated API, please contact the administrators</h5>
+                        </div>
+                    )
+                }
             </div>
         </div>
     )

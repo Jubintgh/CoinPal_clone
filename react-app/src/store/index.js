@@ -5,13 +5,15 @@ import wallet from './wallet'
 import transactions from './transaction'
 import friends from './friend'
 import users from './users'
+import marketInfo from './marketInfo'
 
 const rootReducer = combineReducers({
   users,
   session,
   wallet,
   transactions,
-  friends
+  friends,
+  marketInfo
 });
 
 

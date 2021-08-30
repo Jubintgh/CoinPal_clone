@@ -42,7 +42,7 @@ const LoginForm = () => {
       <div class='login_background_img'>
     <form className="login_page" onSubmit={onLogin}>
       <h1 className='Title_text'>Welcome to CoinPal</h1>
-      <div >
+      <div className='errors__class'>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}

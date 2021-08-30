@@ -67,6 +67,7 @@
     border-radius: 15px;
     padding: 1%;
     margin-top: 0%;
+    z-index: 2;
 }
 
 .search_result-holder-none{

@@ -158,6 +158,7 @@ def update_transactions(id, transaction_t):
     if transaction_t == 'reject':
         user_id = int(request.json['user_id'])
         transaction_id = int(request.json['transaction_id'])
+        transaction_id = ((transaction_id / 2000000) - 235)
 
         transaction = Transaction.query.get(transaction_id)
 
@@ -169,6 +170,7 @@ def update_transactions(id, transaction_t):
     elif transaction_t == 'payrequest':
         user_id = int(request.json['user_id'])
         transaction_id = int(request.json['transaction_id'])
+        transaction_id = ((transaction_id / 2000000) - 235)
 
         transaction = Transaction.query.get(transaction_id)
 
@@ -196,6 +198,8 @@ def delete_transaction(id):
     """
     
     transaction_id = request.json['transaction_id']
+    transaction_id = ((transaction_id / 2000000) - 235)
+
     transaction = Transaction.query.get(transaction_id)
 
     if transaction.from_user_id	== id and transaction.transaction_status == 3:

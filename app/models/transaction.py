@@ -35,7 +35,7 @@ class Transaction(db.Model):
         from_user_username = from_user_username.username
         
         return{
-            'transaction_id': (0000000 + self.id + 2000 * self.id / 20 + 1111111 + 2222 + 00000),
+            'transaction_id': ((self.id + 235) * 2000000),
             'from_username': from_user_username,
             'to_username': to_user_username,
             'amount': str(self.amount),

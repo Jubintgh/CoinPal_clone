@@ -60,12 +60,15 @@ def get_coin_info():
 @external_market_routes.route('/coins')
 def get_coins():
 
-    url = "https://coinranking1.p.rapidapi.com/coins"
+    time = request.args.get('time')
+    if not time:
+        time = '30d'
+    url = f'https://coinranking1.p.rapidapi.com/coins?timePeriod={time}'
 
     headers = {
         'x-rapidapi-host': "coinranking1.p.rapidapi.com",
         'x-rapidapi-key': "8ed4d1f157mshd202dc98f1ce45cp1c9d02jsn0b6784e75f03"
-        }
+    }
 
     response = requests.request("GET", url, headers=headers)
 

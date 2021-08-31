@@ -85,11 +85,11 @@ const Home = () => {
     
     return (
         <div className='home_page'>
-            <div className='errors__class'>
+            {/* <div className='errors__class'>
                 {errors.map((error, ind) => (
                 <div key={ind}>{error}</div>
                 ))}
-            </div>
+            </div> */}
             <div className='side_bar'>
                 <img id='side_bar_logo' src='https://user-images.githubusercontent.com/73211975/127380259-8872d61e-851a-4aa5-8152-baec2618e00d.png' alt='logo'/>
                 <h4 id='side_bar_title'>Coin Pal</h4>

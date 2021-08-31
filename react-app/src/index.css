@@ -10,6 +10,12 @@
       }
 } */
 
+@media only screen and (max-width: 600px) {
+    div body ul li p h1 h2 h3 h4 h5 h6{
+      width: 20%;
+    }
+}
+
 * {
     box-sizing: border-box;
     font-family: "Fira Sans", sans-serif;
@@ -45,7 +51,8 @@ nav {
 .navbar {
     display: flex;
     list-style-type: none;
-    float: right;
+    flex-direction: row;
+    /* float: right; */
     /* margin-left: 5px; */
     width: 100%;
     align-items: center;
@@ -67,8 +74,14 @@ nav {
     width: 3vh;
     height: 5vh;
     margin-right: 5vw;
-    justify-self: flex-start;
-    align-self: center;
+    /* justify-self: flex-start; */
+    /* align-self: center; */
+}
+
+#navbar__img{
+    width: 4vw;
+    height: auto;
+    margin-right: 5vw;
 }
 
 .nav-logo a:active{

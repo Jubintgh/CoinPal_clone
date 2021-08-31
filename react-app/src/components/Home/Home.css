@@ -55,7 +55,8 @@
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
-  background-color: #7098c48e;
+  background-color: #4975c78e;
+  margin-left: 0;
   border-right: thick solid rgba(0, 0, 0, 0.151);
   width: 25vw;
 }

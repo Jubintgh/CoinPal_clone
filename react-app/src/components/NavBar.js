@@ -12,7 +12,7 @@ const NavBar = () => {
     navContent = (
       <ul className='navbar'>
         <NavLink id='navbar__logo' to='/'>
-          <img src='https://user-images.githubusercontent.com/73211975/127380259-8872d61e-851a-4aa5-8152-baec2618e00d.png' alt='logo' />
+          <img id='navbar__img' src='https://user-images.githubusercontent.com/73211975/127380259-8872d61e-851a-4aa5-8152-baec2618e00d.png' alt='logo' />
         </NavLink>
         <li className='navbar__link'>
           <NavLink to='/login' exact={true} activeClassName='active'>
@@ -34,7 +34,7 @@ const NavBar = () => {
         <ul className="navbar">
 
           <NavLink id='navbar__logo' to='/my/home'>
-            <img src='https://user-images.githubusercontent.com/73211975/127380259-8872d61e-851a-4aa5-8152-baec2618e00d.png' alt='logo'/>
+            <img  id='navbar__img' src='https://user-images.githubusercontent.com/73211975/127380259-8872d61e-851a-4aa5-8152-baec2618e00d.png' alt='logo'/>
           </NavLink>
           <li className="navbar__link">
             <NavLink to='/my/contacts' exact={true}  activeClassName='active'>

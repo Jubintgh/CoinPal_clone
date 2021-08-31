@@ -11,7 +11,26 @@
   justify-self: center;
   justify-content: center;
   align-items: center;
-  z-index: -1;
+  z-index: 1;
+}
+
+.crypto_search_bar{
+  width: 40vw;
+}
+
+#side_bar_logo{
+  height: 130px;
+  width: auto;
+  justify-self: center;
+  align-self: center;
+}
+
+#side_bar_title{
+  color: white;
+  font-weight: bolder;
+  font-size: larger;
+  justify-self: center;
+  align-self: center;
 }
 
 #profile-img{
@@ -36,9 +55,22 @@
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
-  background-color: #cae4ff8e;
+  background-color: #7098c48e;
   border-right: thick solid rgba(0, 0, 0, 0.151);
   width: 25vw;
+}
+
+.crypto_search_btn{
+  background-color: #169bd7;
+  border: none;
+  cursor:pointer;
+  margin: 5px;
+  font-weight: bold;
+  border-radius: 2px;
+  padding: 1px;
+  /* width: 10vw; */
+  width: 46%;
+  height: 4vh;
 }
 
 .home_navbar_btns{

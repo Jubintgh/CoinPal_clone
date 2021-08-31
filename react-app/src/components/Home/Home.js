@@ -1,7 +1,7 @@
 import './Home.css';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllCoins, getAllMarkets, searchCoinQuery } from '../../store/marketInfo';
+import { getAllCoins, getAllMarkets } from '../../store/marketInfo';
 import CoinsData from './CoinsMarketData'
 import MarketData from './MarketData';
 import SingleCoinInfo from './SingleCoinInfo';
@@ -91,6 +91,8 @@ const Home = () => {
                 ))}
             </div>
             <div className='side_bar'>
+                <img id='side_bar_logo' src='https://user-images.githubusercontent.com/73211975/127380259-8872d61e-851a-4aa5-8152-baec2618e00d.png' alt='logo'/>
+                <h4 id='side_bar_title'>Coin Pal</h4>
                 {Object.keys(sideBarObjects).map(bar => 
                     (<button className='home_navbar_btns' onClick={() => setDisplay(sideBarObjects[bar])}>{bar}</button>)
                 )}
@@ -98,11 +100,11 @@ const Home = () => {
             <div className='main_bar'>
                 {
                     <>
-                        {(display === 1) ? <input onChange={e => setSearchCoinTerm(e.target.value)} placeholder='Look up crypto...'/>: <></>}
+                        {(display === 1) ? <input className='crypto_search_bar' onChange={e => setSearchCoinTerm(e.target.value)} placeholder='Look up crypto...'/>: <></>}
                         {suggestedCoins && suggestedCoins.map(coin => (
                             <li onClick={e => setSearchCoin(coin)} key={coin.symbol} className='search_result'><img id='seach_profile_pic' src={coin.iconUrl} alt='profile_pic'/>{coin.name}</li>
                         ))}
-                        {(display === 1) ?<button onClick={e => lookUpCoin(e.target.value)}>Search</button>: <></>}
+                        {(display === 1) ?<button className='crypto_search_btn' onClick={e => lookUpCoin(e.target.value)}>Search</button>: <></>}
                     </>
                 }
                 {
@@ -121,10 +123,8 @@ const Home = () => {
                     </div>
                 }
                 {
-                    (switcher && (!allCoins && !allMarkets)) &&
-                    (
+                    (switcher && (!allCoins && !allMarkets) &&
                         <div>
-                            {console.log(display)}
                             <h5>Data not available due to request limit or deprecated API, please contact the administrators</h5>
                         </div>
                     )

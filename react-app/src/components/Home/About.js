@@ -17,7 +17,7 @@ const About = () => {
                     <p>Software engineer</p>
                     <h5>Jay</h5>
                     <p>As a Business Information Systems(MIS) undergraduate I've always been interested in the world of computers and its direct effect on the economy, society and culture. Throughout my experience Developing Software, I've had experience building dynamic web applications as well as Windows applications both in JavaScript, Node.js, PostgreSQL, React, Redux and HTML/CSS as well as C#, .NET, Windows Forms and Microsoft SQL Server. I mostly enjoy the thrill of solving a problems and bringing far fetched ideas to life and most importantly, my background in the financial/service industry has thought me the best results only come through when a problem has been tackled through teamwork and the insights of a diverse group of people.</p>
-                    <p><button className="button">Contact</button></p>
+                    {/* <p><button className="button">Contact</button></p> */}
                 </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@ import { getAllCoins, getAllMarkets, searchCoinQuery } from '../../store/marketI
 import CoinsData from './CoinsMarketData'
 import MarketData from './MarketData';
 import SingleCoinInfo from './SingleCoinInfo';
-
+import About from './About';
 
 
 const Home = () => {
@@ -109,6 +109,7 @@ const Home = () => {
                     (display === 1) ? <CoinsData allCoins={allCoins}/>:
                     (display === 2) ? <MarketData allMarkets={allMarkets}/>:
                     (display === 3) ? <SingleCoinInfo targetCoin={singleCoin}/>:
+                    (display === 4) ? <About/>:
                     <p>Not available</p>
                 }
 
@@ -123,6 +124,7 @@ const Home = () => {
                     (switcher && (!allCoins && !allMarkets)) &&
                     (
                         <div>
+                            {console.log(display)}
                             <h5>Data not available due to request limit or deprecated API, please contact the administrators</h5>
                         </div>
                     )

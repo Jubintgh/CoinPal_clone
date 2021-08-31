@@ -11,7 +11,18 @@
   justify-self: center;
   justify-content: center;
   align-items: center;
-  /* z-index: -1; */
+  z-index: -1;
+}
+
+#profile-img{
+  border-radius: 100px;
+  width: 150px;
+  height: auto;
+}
+
+.about-section{
+  margin: 20px;
+  padding: 20px;
 }
 
 .home_page{

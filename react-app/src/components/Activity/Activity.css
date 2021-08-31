@@ -9,10 +9,11 @@
 
 .activity_nav_button{
     font-weight: bold;
-    background-color: rgb(241, 249, 253);
+    background-color: #87c6e4;
     border-style: none;
     color: #169bd7;
     width: 10vw;
+    height: 42px;
     margin: 10px;
     padding: 4px;
     border-radius: 20px;

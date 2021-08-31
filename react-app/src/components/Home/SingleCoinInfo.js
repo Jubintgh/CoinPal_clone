@@ -1,18 +1,26 @@
+import { useHistory } from 'react-router-dom';
+import Charts from './Charts';
+
 const SingleCoinInfo = ({targetCoin})=> {
+
+    const history = useHistory()
 
     return (
 
-            targetCoin.info ? (<div id='coin_description_page'>
+        targetCoin.info ? (<div id='coin_description_page'>
+                <button onClick={() => window.location.reload(false)} className='activity_nav_button'>Back to Coin Market</button>
             <img id='search_crypto_logo' src={targetCoin.info?.iconUrl} alt='icon'/>
+                <Charts className='priceChart' coinData={targetCoin.info?.history} coinDataColor={targetCoin.info?.color}/>
+                {console.log(targetCoin.info?.history)}
             <table id='customers'>
                 <thead>
                     <tr>
                         <th style={{backgroundColor: targetCoin.info?.color}}>Name</th>
                         <th style={{backgroundColor: targetCoin.info?.color}}>Rank</th>
-                        <th style={{backgroundColor: targetCoin.info?.color}}>Symbol</th>
                         <th style={{backgroundColor: targetCoin.info?.color}}>Price</th>
                         <th style={{backgroundColor: targetCoin.info?.color}}>Circulating Supply</th>
                         <th style={{backgroundColor: targetCoin.info?.color}}>Market Cap</th>
+                        <th style={{backgroundColor: targetCoin.info?.color}}>Volume</th>
                     </tr>
                     <tr>
                         <td>{targetCoin.info?.name}</td>

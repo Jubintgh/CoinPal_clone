@@ -80,7 +80,7 @@ const Home = () => {
     const sideBarObjects = {
         'Coins Market Data':1, 
         'Market Data': 2, 
-        'Historical Data': 3
+        'About': 4
     }
     
     return (
